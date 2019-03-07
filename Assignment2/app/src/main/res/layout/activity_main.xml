@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/gradient_assignment"
+        android:orientation="vertical"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/image_logo"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/logo" />
+
+        <EditText
+            android:id="@+id/edit_username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/image_logo"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/rounded_edittext"
+            android:gravity="center"
+            android:hint="Email"
+            android:padding="20dp"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="16sp" />
+
+        <EditText
+            android:id="@+id/edit_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/edit_username"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_edittext"
+            android:gravity="center"
+            android:hint="Password"
+            android:padding="20dp"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="16sp" />
+
+        <CheckBox
+            android:id="@+id/checkbox_rememberme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_pass"
+            android:checked="true"
+            android:text="Remember me"
+            android:textColor="#fff"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_signin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/checkbox_rememberme"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/rounded_corner"
+            android:padding="20dp"
+            android:text="Sign in"
+            android:textAllCaps="true"
+            android:textColor="#0084C7"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tv_forgot_pass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_signin"
+            android:gravity="center"
+            android:text="Forgot Password?"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+
+
+        <TextView
+            android:id="@+id/tv_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_forgot_pass"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Sign Up"
+            android:textColor="#fff"
+            android:textSize="16sp" />
+    </RelativeLayout>
