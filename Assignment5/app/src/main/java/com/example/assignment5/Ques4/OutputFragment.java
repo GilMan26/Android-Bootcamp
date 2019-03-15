@@ -11,24 +11,25 @@ import android.widget.TextView;
 
 import com.example.assignment5.R;
 
-public class OutputFragment extends Fragment implements ListFragment.Communication {
+public class OutputFragment extends Fragment  {
     TextView textView;
+    Bundle bundle;
+
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.output_fragment, container, false);
-        textView=view.findViewById(R.id.textView);
-        return view;
+        return inflater.inflate(R.layout.output_fragment, container, false);
     }
-
-
-    public void getData(String string){
-        textView.setText(string);
-    }
-
 
     @Override
-    public void communicate(String string) {
-        getData(string);
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        textView=view.findViewById(R.id.textView);
+    }
+
+    public void getData(Bundle bundle){
+        int data=bundle.getInt("position");
+        textView.setText(data);
     }
 }

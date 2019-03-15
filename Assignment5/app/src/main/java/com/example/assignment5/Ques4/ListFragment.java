@@ -11,42 +11,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.example.assignment5.R;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class ListFragment extends Fragment {
     RecyclerView recyclerView;
-    List<String> list;
+    List<String> list=new ArrayList<>();
     ListAdapter adapter;
     Communication communication;
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.list_fragment_layout, container, false);
-        recyclerView=view.findViewById(R.id.recyclerView);
-        return view;
+       return  inflater.inflate(R.layout.list_fragment_layout, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        recyclerView=view.findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        populateData();
+        adapter=new ListAdapter(list, communication);
+        recyclerView.setAdapter(adapter);
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        communication = (Communication) context;
-        recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        populateData();
-        adapter = new ListAdapter(list);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-    }
 
     public void populateData() {
         for (int i = 1; i <= 20; i++) {
@@ -55,10 +46,7 @@ public class ListFragment extends Fragment {
     }
 
     interface Communication {
-        void communicate(String string);
+        void communicate(Bundle bundle);
     }
 
-    public void sendData() {
-        communication.communicate("hello");
-    }
 }

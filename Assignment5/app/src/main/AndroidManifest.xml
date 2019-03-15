@@ -20,7 +20,10 @@
         <activity android:name=".Ques1.FragmentLifeCycle1">
 
         </activity>
-        <activity android:name=".Ques4.MainActivity" />
+        <activity android:name=".Ques4.MainActivity" >
+
+        </activity>
+
     </application>
 
 </manifest>

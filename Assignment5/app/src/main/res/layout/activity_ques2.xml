@@ -6,4 +6,93 @@
     android:layout_height="match_parent"
     tools:context=".Ques2.ActivityQues2">
 
+    <Button
+        android:id="@+id/add1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Add 1"
+        app:layout_constraintEnd_toStartOf="@+id/replace1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/replace1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Replace 1"
+        app:layout_constraintEnd_toStartOf="@+id/remove1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/add1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/remove1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove 1"
+        app:layout_constraintBottom_toBottomOf="@+id/replace1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/replace1"
+        app:layout_constraintTop_toTopOf="@+id/replace1" />
+
+    <Button
+        android:id="@+id/add2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="208dp"
+        android:text="Add 2"
+        app:layout_constraintEnd_toStartOf="@+id/replace2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add1" />
+
+    <Button
+        android:id="@+id/replace2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Replace 2"
+        app:layout_constraintBottom_toBottomOf="@+id/add2"
+        app:layout_constraintEnd_toStartOf="@+id/remove2"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/add2"
+        app:layout_constraintTop_toTopOf="@+id/add2" />
+
+    <Button
+        android:id="@+id/remove2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Remove 2"
+        app:layout_constraintBottom_toBottomOf="@+id/replace2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/replace2"
+        app:layout_constraintTop_toTopOf="@+id/replace2" />
+
+    <FrameLayout
+        android:id="@+id/fragment1"
+        android:layout_width="190dp"
+        android:layout_height="359dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fragment2">
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment2"
+        android:layout_width="197dp"
+        android:layout_height="359dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

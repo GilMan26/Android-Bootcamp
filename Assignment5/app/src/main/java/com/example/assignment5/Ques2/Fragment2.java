@@ -12,10 +12,7 @@ import android.view.ViewGroup;
 
 import com.example.assignment5.R;
 
-public class Fragment1 extends Fragment {
-
-    public Fragment1() {
-    }
+public class Fragment2 extends Fragment {
 
     @Override
     public void onAttach(Context context) {
@@ -91,4 +88,5 @@ public class Fragment1 extends Fragment {
         Log.d("Lifecycle", "In onDetach");
 
     }
+
 }

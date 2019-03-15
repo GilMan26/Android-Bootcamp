@@ -1,5 +1,6 @@
 package com.example.assignment5.Ques4;
 
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,9 +15,11 @@ import java.util.List;
 
 public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> {
     private List<String> list;
+    ListFragment.Communication communication;
 
-    public ListAdapter(List<String> list) {
+    public ListAdapter(List<String> list, ListFragment.Communication communication) {
         this.list = list;
+        this.communication=communication;
     }
 
     @NonNull
@@ -29,10 +32,13 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder myViewHolder, final int position) {
         String data=list.get(position);
+        myViewHolder.textView.setText(data);
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                sendData(position);
+                Bundle bundle=new Bundle();
+                bundle.putInt("position", position);
+                communication.communicate(bundle);
             }
         });
     }
@@ -53,5 +59,9 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
             super(itemView);
             textView=itemView.findViewById(R.id.fragmentRow);
         }
+    }
+
+    interface Communicator{
+        public void communicate();
     }
 }

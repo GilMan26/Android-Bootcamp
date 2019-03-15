@@ -7,7 +7,6 @@
     tools:context=".Ques4.MainActivity">
 
     <FrameLayout
-        android:background="#FF0000"
         android:id="@+id/listFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

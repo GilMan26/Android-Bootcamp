@@ -26,7 +26,7 @@ public class ActivityQues3 extends AppCompatActivity {
     public void showPreference(View view){
         PrefFragment prefFragment=new PrefFragment();
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.frameLayout, prefFragment, "Preference Fragment");
+//        fragmentTransaction.add(R.id.frameLayout, prefFragment, "Preference Fragment");
         fragmentTransaction.commit();
     }
 }
