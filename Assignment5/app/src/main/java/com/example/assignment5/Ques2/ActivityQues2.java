@@ -30,6 +30,7 @@ public class ActivityQues2 extends AppCompatActivity {
         add1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fragment1=new Fragment1();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
                 fragmentTransaction.add(fragment1, "fragment1");
             }
@@ -38,6 +39,7 @@ public class ActivityQues2 extends AppCompatActivity {
         add2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                fragment2=new Fragment2();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
                 fragmentTransaction.add(fragment2, "fragment2");
             }

@@ -3,6 +3,7 @@ package com.example.assignment5.Ques4;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,8 +37,10 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         myViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("test", "clicked");
                 Bundle bundle=new Bundle();
                 bundle.putInt("position", position);
+                if(communication!=null)
                 communication.communicate(bundle);
             }
         });
@@ -48,9 +51,6 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         return list.size();
     }
 
-    public void sendData(int data){
-
-    }
 
     class MyViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
@@ -61,7 +61,5 @@ public class ListAdapter extends RecyclerView.Adapter<ListAdapter.MyViewHolder> 
         }
     }
 
-    interface Communicator{
-        public void communicate();
-    }
+
 }

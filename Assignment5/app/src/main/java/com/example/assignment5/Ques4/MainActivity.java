@@ -20,15 +20,17 @@ public class MainActivity extends AppCompatActivity implements ListFragment.Comm
         FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.listFragment, listFragment, null);
         fragmentTransaction.commit();
+        outputFragment=new OutputFragment();
+        FragmentTransaction fragmentTransaction1=fragmentManager.beginTransaction();
+        fragmentTransaction1.add(R.id.outputFragment, outputFragment, null);
+        fragmentTransaction1.commit();
 
     }
 
 
     @Override
     public void communicate(Bundle  bundle) {
-        outputFragment=new OutputFragment();
-        outputFragment.getData(bundle);
-        FragmentTransaction fragmentTransaction1=fragmentManager.beginTransaction();
-        fragmentTransaction1.add(R.id.outputFragment, outputFragment, null);
+        OutputFragment outputFragment1= (OutputFragment) fragmentManager.findFragmentById(R.id.outputFragment);
+        outputFragment1.getData(bundle);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.assignment5.Ques3;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -17,6 +18,10 @@ public class DialogFragmentExample extends DialogFragment {
 
     EditText nameET, phoneET;
     Button button;
+
+    public DialogFragmentExample() {
+    }
+
 
     @Nullable
     @Override

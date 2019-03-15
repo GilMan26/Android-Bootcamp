@@ -13,7 +13,6 @@
         android:layout_weight="0.5" />
 
     <FrameLayout
-        android:background="#00FF00"
         android:id="@+id/outputFragment"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"

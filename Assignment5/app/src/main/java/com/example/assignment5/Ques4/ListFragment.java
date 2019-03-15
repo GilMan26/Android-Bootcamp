@@ -36,14 +36,21 @@ public class ListFragment extends Fragment {
         populateData();
         adapter=new ListAdapter(list, communication);
         recyclerView.setAdapter(adapter);
+
     }
 
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        communication= (Communication) context;
+    }
 
     public void populateData() {
         for (int i = 1; i <= 20; i++) {
             list.add("Element : " + i);
         }
     }
+
 
     interface Communication {
         void communicate(Bundle bundle);
