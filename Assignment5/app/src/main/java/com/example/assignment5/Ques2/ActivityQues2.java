@@ -1,5 +1,6 @@
 package com.example.assignment5.Ques2;
 
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +33,9 @@ public class ActivityQues2 extends AppCompatActivity {
             public void onClick(View v) {
                 fragment1=new Fragment1();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.add(fragment1, "fragment1");
+                fragmentTransaction.add(R.id.fragment_container, fragment1);
+                fragmentTransaction.addToBackStack("Fragment1");
+                fragmentTransaction.commit();
             }
         });
 
@@ -41,23 +44,39 @@ public class ActivityQues2 extends AppCompatActivity {
             public void onClick(View v) {
                 fragment2=new Fragment2();
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.add(fragment2, "fragment2");
+                fragmentTransaction.add(R.id.fragment_container, fragment2);
+                fragmentTransaction.addToBackStack("Fragment2");
+                fragmentTransaction.commit();
             }
         });
 
         replace1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Fragment fragment=fragmentManager.findFragmentById(R.id.fragment_container);
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment2, fragment1);
+                fragmentTransaction = fragmentManager.beginTransaction();
+
+                Fragment1 frg1 = new Fragment1();
+                Fragment2 frg2 = new Fragment2();
+
+                if(fragment instanceof Fragment1){
+                    fragmentTransaction.replace(R.id.fragment_container,frg2);
+                    fragmentTransaction.commit();
+                }
+                else if (fragment instanceof Fragment2){
+                    fragmentTransaction.replace(R.id.fragment_container, frg1);
+                    fragmentTransaction.commit();
+                }
             }
         });
 
         replace2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.fragment1, fragment2);
+                Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
+                fragmentManager.beginTransaction().setCustomAnimations(android.R.animator.fade_out, android.R.animator.fade_in)
+                        .hide(fragment).commit();
             }
         });
 
@@ -65,15 +84,18 @@ public class ActivityQues2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.remove(fragment1);
+                Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
+                fragmentTransaction.remove(fragment);
+                fragmentTransaction.commit();
             }
         });
 
         remove2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
-                fragmentTransaction.remove(fragment1);
+                Fragment fragment = fragmentManager.findFragmentById(R.id.fragment_container);
+                fragmentManager.beginTransaction().setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
+                        .show(fragment).commit();
             }
         });
     }
