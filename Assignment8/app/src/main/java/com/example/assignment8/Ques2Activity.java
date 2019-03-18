@@ -23,7 +23,7 @@ public class Ques2Activity extends AppCompatActivity {
     NotificationManager notificationManager;
     Button buttonHigh;
     NotificationCompat.Builder lowBuilder, highBuilder;
-    boolean loop=false;
+    boolean loop=false;             //boolean to switch between notifications every minute
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +31,9 @@ public class Ques2Activity extends AppCompatActivity {
         setContentView(R.layout.activity_ques2);
         buttonHigh=findViewById(R.id.buttonHIgh);
         notificationManager=getSystemService(NotificationManager.class);
+
+//        checking to see if the version on the device is greater than 26(Oreo)
+
         if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
             NotificationChannel channelLow=new NotificationChannel(CHANNEL_LOW, "Channel Low", NotificationManager.IMPORTANCE_LOW);
             channelLow.setDescription("Channel for Low priority notificaions");
@@ -38,6 +41,8 @@ public class Ques2Activity extends AppCompatActivity {
             NotificationChannel channelHigh=new NotificationChannel(CHANNEL_HIGH, "Channel High", NotificationManager.IMPORTANCE_HIGH);
             channelHigh.setDescription("Channel for High priority notifications ");
             channelHigh.setVibrationPattern(new long[] {100, 200, 300, 400, 500});
+
+            //created two notification channels -  one with high priority and other with low
 
             notificationManager.createNotificationChannel(channelHigh);
             notificationManager.createNotificationChannel(channelLow);
@@ -65,16 +70,18 @@ public class Ques2Activity extends AppCompatActivity {
         TimerTask minuteTask = new TimerTask () {
             @Override
             public void run () {
-//                StatusBarNotification[] notifications = notificationManager.getActiveNotifications();
-//                for (StatusBarNotification notification : notifications) {
-//                    if (notification.getId() == 101) {
-//                        notificationManager.cancel(101);
-//                        notificationManager.notify(102, highBuilder.build());
-//                    } else {
-//                        notificationManager.cancel(102);
-//                        notificationManager.notify(101, lowBuilder.build());
-//                    }
-//                }
+                /*Might help in the future
+
+                StatusBarNotification[] notifications = notificationManager.getActiveNotifications();
+                for (StatusBarNotification notification : notifications) {
+                    if (notification.getId() == 101) {
+                        notificationManager.cancel(101);
+                        notificationManager.notify(102, highBuilder.build());
+                    } else {
+                        notificationManager.cancel(102);
+                        notificationManager.notify(101, lowBuilder.build());
+                    }
+                }*/
                 if(loop==true){
                     notificationManager.notify(102,highBuilder.build());
                     loop=false;
@@ -85,9 +92,11 @@ public class Ques2Activity extends AppCompatActivity {
                 }
             }
         };
-        timer.schedule (minuteTask,0 , 1000*60);
+        timer.schedule (minuteTask,0 , 1000*60);    //call every 60 seconds
 
     }
+
+    //created threads for both high priority and low priority notifications
 
     Thread highThread=new Thread(new Runnable() {
         @Override
@@ -104,6 +113,8 @@ public class Ques2Activity extends AppCompatActivity {
     });
 
     public void createNotifications(){
+        //method to create notificaions can directyl call notify when needed
+
         lowBuilder=new NotificationCompat.Builder(Ques2Activity.this, CHANNEL_HIGH)
                 .setPriority(Notification.PRIORITY_HIGH)
                 .setContentTitle("High Priority")

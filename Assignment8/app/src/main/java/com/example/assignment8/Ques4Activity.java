@@ -17,7 +17,6 @@ import androidx.work.WorkManager;
 
 public class Ques4Activity extends AppCompatActivity {
     Constraints constraints;
-    WorkManager workManager;
     TextView textView;
     PeriodicWorkRequest periodicWorkRequest;
     @Override
@@ -25,8 +24,11 @@ public class Ques4Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ques4);
         textView=findViewById(R.id.textView);
+        //constraints set to be used with work manager
         constraints=new Constraints.Builder().setRequiredNetworkType(NetworkType.CONNECTED)
                 .setRequiresCharging(true).build();
+
+        //periodicworkrequest calls the same thing every period (5 seconds) in this case
         periodicWorkRequest=new PeriodicWorkRequest.Builder(WorkerClass.class,5, TimeUnit.SECONDS)
                 .setConstraints(constraints)
                 .build();
