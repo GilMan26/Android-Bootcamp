@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.apply();
                     loginBtn.setEnabled(false);
                 }
-                Toast.makeText(v.getContext(), "User details stored!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "User Details Saved", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -52,7 +52,7 @@ public class LoginActivity extends AppCompatActivity {
                 editor = sharedPreferences.edit();
                 editor.clear();
                 editor.apply();
-                Toast.makeText(v.getContext(), "Logged Out! User details cleared!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(v.getContext(), "Cleared User Details", Toast.LENGTH_SHORT).show();
                 loginBtn.setEnabled(true);
             }
         });
