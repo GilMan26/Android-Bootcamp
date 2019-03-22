@@ -17,7 +17,7 @@
     <Button
         android:id="@+id/asyncButton"
         android:layout_margin="30dp"
-        android:onClick="mUseAsyncTask"
+        android:onClick="startAsync"
         android:text="Download using AsyncTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
@@ -25,7 +25,7 @@
     <Button
         android:id="@+id/serviceButton"
         android:layout_margin="30dp"
-        android:onClick="mUseService"
+        android:onClick="startService"
         android:text="Download using Service"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

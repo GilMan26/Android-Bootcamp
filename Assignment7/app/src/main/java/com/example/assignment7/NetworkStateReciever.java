@@ -16,23 +16,20 @@ public class NetworkStateReciever extends BroadcastReceiver {
         NetworkInfo networkInfo = connectivityManager.getActiveNetworkInfo();
 
         if (networkInfo != null && networkInfo.isConnectedOrConnecting()) {
-            Toast.makeText(context, "Internet is connected.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Network Available", Toast.LENGTH_SHORT).show();
             iNetStateChange.mOnNetStateChangeListener(true);
         } else {
-            Toast.makeText(context, "Internet is disconnected.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "No Internet Connection", Toast.LENGTH_SHORT).show();
             iNetStateChange.mOnNetStateChangeListener(false);
         }
     }
 
 
     public static void setConnectivityListener(NetworkStateReciever.INetStateChange iNetStateChangeOb) {
-        //this method is used to instantiate connectivity listener
         iNetStateChange = iNetStateChangeOb;
     }
 
-    //using interface as bridge to communicate
     public interface INetStateChange {
-        //customized method to listen network connectivity events
         void mOnNetStateChangeListener(boolean isConnected);
     }
 }

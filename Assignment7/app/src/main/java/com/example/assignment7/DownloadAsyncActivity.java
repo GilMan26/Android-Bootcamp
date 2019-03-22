@@ -97,9 +97,9 @@ public class DownloadAsyncActivity extends AppCompatActivity implements NetworkS
 
         @Override
         protected Bitmap doInBackground(String... strings) {
-            HttpURLConnection urlConnection=null;
-            InputStream inputStream=null;
-            OutputStream outputStream=null;
+            HttpURLConnection urlConnection;
+            InputStream inputStream;
+            OutputStream outputStream;
             Bitmap bitmap=null;
             int progress=0;
 
@@ -173,14 +173,13 @@ public class DownloadAsyncActivity extends AppCompatActivity implements NetworkS
         @Override
         protected void onCancelled(Bitmap bitmap) {
             super.onCancelled(bitmap);
-            Toast.makeText(DownloadAsyncActivity.this, "Download cancelled.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(DownloadAsyncActivity.this, "Download cancelled.", Toast.LENGTH_LONG).show();
         }
 
         @Override
         protected void onPostExecute(Bitmap bitmap) {
             super.onPostExecute(bitmap);
             imageView.setImageBitmap(bitmap);
-            if(progressDialog.isShowing())
                 progressDialog.dismiss();
         }
     }
