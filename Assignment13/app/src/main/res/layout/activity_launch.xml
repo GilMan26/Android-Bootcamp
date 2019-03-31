@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    tools:context=".LaunchActivity">
+
+    <Button
+        android:id="@+id/dataBinding"
+        android:layout_margin="40dp"
+        android:layout_gravity="center"
+        android:onClick="startQues1"
+        android:text="Ques 1 . Data Binding"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/viewModel"
+        android:layout_margin="40dp"
+        android:layout_gravity="center"
+        android:onClick="startQues2"
+        android:text="Ques 2 . ViewModel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.example.assignment13;
 
 import android.content.Context;
+import android.databinding.BindingAdapter;
 import android.databinding.DataBindingUtil;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -49,25 +50,18 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHol
 
 
     class RowViewHolder extends RecyclerView.ViewHolder{
-        ImageView imageView;
         ItemRowBinding binding;
 
 
         public RowViewHolder(@NonNull View itemView) {
             super(itemView);
             binding = DataBindingUtil.bind(itemView);
-            imageView=itemView.findViewById(R.id.imageView);
         }
+
 
         public void bind(Post post) {
             binding.setPost(post);
-//            Context context = imageView.getContext();
-//            if (context != null) {
-//                Glide.with(context)
-//                        .load(post.getProfileImage())
-//                        .into(imageView);
-//            }
+            }
         }
 
     }
-}
