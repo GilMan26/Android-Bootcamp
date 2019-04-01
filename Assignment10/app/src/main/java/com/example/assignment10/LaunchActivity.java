@@ -32,6 +32,13 @@ public class LaunchActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        binding.fileSharing.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LaunchActivity.this, ShareImageActivity.class);
+                startActivity(intent);
+            }
+        });
         askPermissions();
 
     }

@@ -1,15 +1,20 @@
 package com.example.assignment10;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.MimeTypeMap;
 
 import com.example.assignment10.databinding.RowItemBinding;
 
+import java.io.File;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
@@ -55,7 +60,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
             customViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    File file = new File(model.getPath());
+                    String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(
+                            MimeTypeMap.getFileExtensionFromUrl(model.getPath())
+                    );
 
+                    //using content provider to open file
+                    Uri uri = FileProvider.getUriForFile(context, BuildConfig.APPLICATION_ID + ".provider", file);
+                    Intent intent = new Intent(android.content.Intent.ACTION_VIEW);
+                    intent.putExtra("PATH", model.getPath());
+                    intent.putExtra("MIMETYPE", mimeType);
+                    intent.setType(mimeType);
+                    intent.setDataAndType(uri, mimeType);
+                    intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                    context.startActivity(Intent.createChooser(intent, "Open using"));
                 }
             });
         }

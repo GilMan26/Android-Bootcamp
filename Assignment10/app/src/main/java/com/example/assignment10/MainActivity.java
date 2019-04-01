@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
+import android.view.View;
 
 import com.example.assignment10.databinding.ActivityMainBinding;
 
@@ -44,6 +45,15 @@ public class MainActivity extends AppCompatActivity {
 //            list.add(model);
 //        }
 //    }
+
+    public void mMoveToParent(View view) {
+        if (!parentPath.equals(rootPath)) {
+            //obtaining parent directory
+            File currentParent = new File(parentPath);
+            populateData(currentParent.getParent());
+        }
+    }
+
 
     public void populateData(String selectedPath) {
         File currentDir = new File(selectedPath);

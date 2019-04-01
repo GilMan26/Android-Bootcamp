@@ -7,13 +7,22 @@
     </data>
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".LaunchActivity">
 
         <Button
             android:id="@+id/fileDirectory"
-            android:onClick="startDirectory"
+            android:layout_margin="20dp"
+            android:text="File Directory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/fileSharing"
+            android:layout_margin="20dp"
+            android:text="Sharing File"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
