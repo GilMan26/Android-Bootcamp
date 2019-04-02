@@ -22,17 +22,19 @@ public class MainActivity extends AppCompatActivity {
     MyViewModel viewModel;
     ActivityMainBinding binding;
     UserDatabase database;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        binding= DataBindingUtil.setContentView(MainActivity.this, R.layout.activity_main);
-        database=UserDatabase.getInstance(getApplicationContext());
+        MyViewModel.MyViewModelFactory factory = new MyViewModel.MyViewModelFactory(this.getApplication());
+        binding = DataBindingUtil.setContentView(MainActivity.this, R.layout.activity_main);
+        viewModel = ViewModelProviders.of(this, factory).get(MyViewModel.class);
+        database = UserDatabase.getInstance(getApplicationContext());
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        handleButtons();
 
 
-
-        viewModel = ViewModelProviders.of(this).get(MyViewModel.class);
-        viewModel.getAllNotes().observe(this, new Observer<List<User>>() {
+        viewModel.getAllUsers().observe(this, new Observer<List<User>>() {
             @Override
             public void onChanged(List<User> users) {
                 // update recyclerview
@@ -43,20 +45,20 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void handleButtons(){
+    public void handleButtons() {
         binding.addUser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setView(R.layout.add_dialog);
-                final AddDialogBinding dialogBinding=DataBindingUtil.setContentView(MainActivity.this, R.layout.add_dialog);
+                final AddDialogBinding dialogBinding = DataBindingUtil.setContentView(MainActivity.this, R.layout.add_dialog);
                 builder.setTitle("Add User");
                 builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        String name=dialogBinding.nameET.getText().toString();
-                        String email=dialogBinding.emailET.getText().toString();
-                        User user=new User(name, email);
+                        String name = dialogBinding.nameET.getText().toString();
+                        String email = dialogBinding.emailET.getText().toString();
+                        User user = new User(name, email);
                         database.userDao.addUser(user);
                     }
                 });
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         binding.clearDb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder builder=new AlertDialog.Builder(MainActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Are you s ure you want to delete Database ?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override

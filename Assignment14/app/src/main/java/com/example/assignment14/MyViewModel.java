@@ -1,11 +1,13 @@
 package com.example.assignment14;
 
 import android.app.Application;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.List;
 
@@ -15,21 +17,43 @@ public class MyViewModel extends AndroidViewModel {
 
     public MyViewModel(@NonNull Application application) {
         super(application);
-        dataManager=new DataManager(application);
-        list=dataManager.getAllNote();
-
+        dataManager = new DataManager(application);
+        list = dataManager.getAll();
     }
-    public void insert(User user){
+
+    public void insert(User user) {
         dataManager.insert(user);
-    }public void update(User user){
-        dataManager.update(user);
-    }public void delete(User user){
-        dataManager.delete(user);
-    }public void deleteAll(){
-        dataManager.deleteAllNotes();
     }
 
-    public LiveData<List<User>> getAllNotes() {
+    public void update(User user) {
+        dataManager.update(user);
+    }
+
+    public void delete(User user) {
+        dataManager.delete(user);
+    }
+
+    public void deleteAllUser() {
+        dataManager.deleteAll();
+    }
+
+    public LiveData<List<User>> getAllUsers() {
+        list = dataManager.getAll();
         return list;
+    }
+
+    public static class MyViewModelFactory implements ViewModelProvider.Factory {
+        private Application mApplication;
+
+
+        public MyViewModelFactory(Application application) {
+            mApplication = application;
+        }
+
+
+        @Override
+        public <T extends ViewModel> T create(Class<T> modelClass) {
+            return (T) new MyViewModel(mApplication);
+        }
     }
 }

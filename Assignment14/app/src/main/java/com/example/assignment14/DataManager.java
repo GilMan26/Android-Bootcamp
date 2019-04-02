@@ -27,11 +27,11 @@ public class DataManager {
         new DeleteUserAsyncTask(daoInterface).execute(user);
 
     }
-    public void deleteAllNotes(){
+    public void deleteAll(){
         new DeleteAllUserAsyncTask(daoInterface).execute();
     }
 
-    public LiveData<List<User>> getAllNote() {
+    public LiveData<List<User>> getAll() {
         return list;
     }
 
