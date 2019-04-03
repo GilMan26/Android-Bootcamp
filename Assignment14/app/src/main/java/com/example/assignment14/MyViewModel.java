@@ -18,20 +18,35 @@ public class MyViewModel extends AndroidViewModel {
     public MyViewModel(@NonNull Application application) {
         super(application);
         dataManager = new DataManager(application);
-        list = dataManager.getAll();
+
+        list = dataManager.getAll();/*
+
+    private static class PopulateAsync extends AsyncTask<Void, Void, Void> {
+        private DaoInterface daoInterface;
+
+        public PopulateAsync(UserDatabase userDatabase) {
+            this.daoInterface = userDatabase.userDao();
+        }
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            daoInterface.addUser(new User("Mandeep", "mandeep.gill@tothenew.com"));
+            return null;
+        }
+    }*/
     }
 
     public void insert(User user) {
         dataManager.insert(user);
     }
 
-    public void update(User user) {
-        dataManager.update(user);
-    }
-
-    public void delete(User user) {
-        dataManager.delete(user);
-    }
+//    public void update(User user) {
+//        dataManager.update(user);
+//    }
+//
+//    public void delete(User user) {
+//        dataManager.delete(user);
+//    }
 
     public void deleteAllUser() {
         dataManager.deleteAll();
@@ -42,18 +57,18 @@ public class MyViewModel extends AndroidViewModel {
         return list;
     }
 
-    public static class MyViewModelFactory implements ViewModelProvider.Factory {
-        private Application mApplication;
-
-
-        public MyViewModelFactory(Application application) {
-            mApplication = application;
-        }
-
-
-        @Override
-        public <T extends ViewModel> T create(Class<T> modelClass) {
-            return (T) new MyViewModel(mApplication);
-        }
-    }
+//    public static class MyViewModelFactory implements ViewModelProvider.Factory {
+//        private Application mApplication;
+//
+//
+//        public MyViewModelFactory(Application application) {
+//            mApplication = application;
+//        }
+//
+//
+//        @Override
+//        public <T extends ViewModel> T create(Class<T> modelClass) {
+//            return (T) new MyViewModel(mApplication);
+//        }
+//    }
 }

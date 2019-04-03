@@ -9,11 +9,11 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = User.class , version = 1)
+@Database(entities = User.class , version = 1, exportSchema = false)
 
 public abstract class UserDatabase extends RoomDatabase {
     private static UserDatabase instance;
-    DaoInterface userDao;
+    public abstract DaoInterface userDao();
 
 
     public static synchronized UserDatabase getInstance(Context context){
@@ -30,24 +30,23 @@ public abstract class UserDatabase extends RoomDatabase {
         @Override
         public void onCreate(@NonNull SupportSQLiteDatabase db) {
             super.onCreate(db);
-            new PopulateAsync(instance).execute();
         }
     };
+
+/*
 
     private static class PopulateAsync extends AsyncTask<Void, Void, Void> {
         private DaoInterface daoInterface;
 
         public PopulateAsync(UserDatabase userDatabase) {
-            this.daoInterface = userDatabase.userDao;
+            this.daoInterface = userDatabase.userDao();
         }
 
         @Override
         protected Void doInBackground(Void... voids) {
-            daoInterface.addUser(new User("Name 1", "Email 1"));
-            daoInterface.addUser(new User("Name 2", "Email 2"));
-            daoInterface.addUser(new User("Name 3", "Email 3"));
+            daoInterface.addUser(new User("Mandeep", "mandeep.gill@tothenew.com"));
             return null;
         }
-    }
+    }*/
 
 }

@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.assignment14.databinding.ItemRowBinding;
 
@@ -23,7 +24,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHol
     @NonNull
     @Override
     public CustomAdapter.RowViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new RowViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.item_row,parent,false));
+        binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_row, parent, false);
+        return new RowViewHolder(binding);
     }
 
     public void setUsers(List<User> users){
@@ -34,7 +36,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHol
     @Override
     public void onBindViewHolder(@NonNull CustomAdapter.RowViewHolder holder, int position) {
         User user=list.get(position);
-        binding.setUser(user);
+        binding.nameTV.setText(user.getName());
+        binding.emailTV.setText(user.getEmail());
     }
 
 
@@ -44,12 +47,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHol
     }
 
     class RowViewHolder extends RecyclerView.ViewHolder{
-        public RowViewHolder(@NonNull View itemView) {
-            super(itemView);
-            binding= DataBindingUtil.bind(itemView);
-        }
-        public void bind(User user){
-            binding.setUser(user);
+        public RowViewHolder(ItemRowBinding itemRowBinding) {
+            super(itemRowBinding.getRoot());
         }
     }
 }

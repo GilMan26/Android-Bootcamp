@@ -18,16 +18,8 @@ public interface DaoInterface {
     @Query("SELECT * FROM User")
     LiveData<List<User>> getAll();
 
-    @Update
-    void updateUser(User user);
-
-    @Delete
-    void deleteUser(User user);
 
     @Query("DELETE FROM User")
     void deleteAll();
-
-    @Query("DROP DATABASE "+Contract.DATABASSE_NAME)
-    void dropDb();
 
 }
