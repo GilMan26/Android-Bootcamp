@@ -3,4 +3,10 @@
     <external-path
         name="external_files"
         path="." />
+    <files-path
+        name="internal_storage_area"
+        path="Image1/" />
+    <external-path
+        name="external_storage_area"
+        path="dumy_images/" />
 </paths>
