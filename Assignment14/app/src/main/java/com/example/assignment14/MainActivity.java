@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         clearbtn = findViewById(R.id.clearDb);
         database = UserDatabase.getInstance(getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(adapter);
         handleButtons();
 
     }
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
 //                        String name = dialogBinding.nameET.getText().toString();
 //                        String email = dialogBinding.emailET.getText().toString();
 //                        User user = new User(name, email);
+//                        viewModel.insert(user);
 //                        database.userDao().addUser(user);
 //                    }
 //                });
