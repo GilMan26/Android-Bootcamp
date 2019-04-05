@@ -16,7 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaginationActivity extends AppCompatActivity {
-    List<String> paginList = new ArrayList<>();
+    List<String> paginList;
     PaginationAdapter adapter;
     private boolean isScrolling = false;
     LinearLayoutManager linearLayoutManager;
@@ -29,9 +29,8 @@ public class PaginationActivity extends AppCompatActivity {
         RecyclerView pagingRecycler = findViewById(R.id.pagingRecycler);
         linearLayoutManager = new LinearLayoutManager(this);
         pagingRecycler.setLayoutManager(linearLayoutManager);
-
+        paginList = new ArrayList<>();
         initializeData(paginList);
-
         adapter = new PaginationAdapter(paginList);
         pagingRecycler.setAdapter(adapter);
 
@@ -45,7 +44,7 @@ public class PaginationActivity extends AppCompatActivity {
         @Override
         public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             super.onScrollStateChanged(recyclerView, newState);
-            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL){
+            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
                 Log.d("isScrolling", "Hello there");
                 isScrolling = true;
 
@@ -59,13 +58,13 @@ public class PaginationActivity extends AppCompatActivity {
             int totalItems = linearLayoutManager.getItemCount();
             int visibleItems = linearLayoutManager.getChildCount();
             int scrolledOutItems = linearLayoutManager.findFirstVisibleItemPosition();
-            Log.d("shit", totalItems+""+ visibleItems+""+ scrolledOutItems);
+            Log.d("shit", totalItems + "" + visibleItems + "" + scrolledOutItems);
             if (isScrolling && (visibleItems + scrolledOutItems) == totalItems) {
                 Log.d("test", "im here");
                 Toast.makeText(PaginationActivity.this, "loading more...", Toast.LENGTH_SHORT).show();
                 isScrolling = false;
                 createData();
-                adapter.notifyDataSetChanged();
+//                adapter.notifyDataSetChanged();
                 Log.d("test2", "still here");
             }
         }
@@ -82,14 +81,17 @@ public class PaginationActivity extends AppCompatActivity {
     public void createData() {
 //        for(int i=0;i<20;i++){
 //            paginList.add("Lucky Number : "+ Math.floor(Math.random()*100));
-//        }
+//        }ni
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
                 for (int i = 0; i < 5; i++) {
                     paginList.add(Math.floor(Math.random() * 100) + "");
+                    adapter.setList(paginList);
+//                    adapter.notifyDataSetChanged();
+
                 }
             }
-        }, 2000);
+        }, 500);
     }
 }

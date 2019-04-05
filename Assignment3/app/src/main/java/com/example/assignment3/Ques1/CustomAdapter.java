@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomViewHolder> {
-    List<RowPojo> list=new ArrayList<>();
+    List<RowPojo> list = new ArrayList<>();
 
     public void addDataToList(List<RowPojo> list){
         this.list.addAll(list);

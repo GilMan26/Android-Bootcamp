@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.PaginationViewHolder> {
-    List<String> list=new ArrayList<>();
+    List<String> list;
 
     public PaginationAdapter(List<String> list) {
         this.list = list;
@@ -44,5 +44,10 @@ public class PaginationAdapter extends RecyclerView.Adapter<PaginationAdapter.Pa
             super(itemView);
             textView=itemView.findViewById(R.id.textView);
         }
+    }
+
+    public void setList(List<String> list) {
+        this.list = list;
+        notifyDataSetChanged();
     }
 }
