@@ -1,0 +1,7 @@
+Exercise 14 - Introduction to Kotlin (Part 1) 
+       (14.a) Write a program to replace a substring inside a string with other string.
+       (14.b) Write a program to find the number of occurrences of the duplicate words in a string and print them.
+       (14.c) Write a program to find the number of occurrences of a character in a string without using loop.
+       (14.d) Calculate the number & Percentage Of Lowercase Letters,Uppercase Letters, Digits And Other Special Characters In A String.
+       (14.e) Find common elements between two arrays.
+       (14.f) Check letter in string which do not have pair.
