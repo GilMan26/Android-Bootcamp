@@ -31,6 +31,6 @@ public interface APIInterface {
     Call<CreateResponse> createUser(@Body CreateRequest request);
 
     @DELETE("users/{id}")
-    Call<Response> deleteUser(@Path("id") long id);
+    Call<Void> deleteUser(@Path("id") long id);
 
 }

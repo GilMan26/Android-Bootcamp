@@ -10,19 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Ques3.ActivityQues3">
-
-        </activity>
-        <activity android:name=".Ques2.ActivityQues2" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Ques1.FragmentLifeCycle1">
+        <activity android:name=".Ques2.ActivityQues2" >
 
         </activity>
+        <activity android:name=".Ques1.FragmentLifeCycle1">
+        </activity>
         <activity android:name=".Ques4.MainActivity" >
+
 
         </activity>
 

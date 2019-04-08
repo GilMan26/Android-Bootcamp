@@ -20,13 +20,13 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/name_path"
+                android:id="@+id/namePath"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" />
 
             <TextView
-                android:id="@+id/absolute_path"
+                android:id="@+id/absolutePath"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp" />

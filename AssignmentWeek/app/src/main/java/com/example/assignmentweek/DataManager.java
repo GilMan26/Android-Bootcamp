@@ -33,8 +33,8 @@ public class DataManager {
         reponseListener = instance;
     }
 
-    public void setInstance(LoginActivityListener listener){
-        loginListener=listener;
+    public void setInstance(LoginActivityListener listener) {
+        loginListener = listener;
     }
 
     APIInterface apiInterface = RetrofitClient.getRetrofitInstance().create(APIInterface.class);
@@ -61,18 +61,18 @@ public class DataManager {
         });
     }
 
-    public void loginUseer(LoginRequest loginRequest){
-        Call<LoginResponse> call=apiInterface.login(loginRequest);
+    public void loginUseer(LoginRequest loginRequest) {
+        Call<LoginResponse> call = apiInterface.login(loginRequest);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 Log.d("test", "in onrsesponse");
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Log.d("test", "response not successf");
                     Toast.makeText(context, response.code() + "", Toast.LENGTH_LONG).show();
                 }
-                LoginResponse loginResponse=response.body();
-                if(loginListener!=null)
+                LoginResponse loginResponse = response.body();
+                if (loginListener != null)
                     loginListener.login(loginResponse);
 
             }
@@ -84,16 +84,16 @@ public class DataManager {
         });
     }
 
-    public void registerUser(LoginRequest request){
-        Call<Register> call=apiInterface.register(request);
+    public void registerUser(LoginRequest request) {
+        Call<Register> call = apiInterface.register(request);
         call.enqueue(new Callback<Register>() {
             @Override
             public void onResponse(Call<Register> call, Response<Register> response) {
-                if(!response.isSuccessful()){
+                if (!response.isSuccessful()) {
                     Toast.makeText(context, response.code() + "", Toast.LENGTH_LONG).show();
                 }
-                Register registerResponse=response.body();
-                if(loginListener!=null)
+                Register registerResponse = response.body();
+                if (loginListener != null)
                     loginListener.register(registerResponse);
 
             }
@@ -127,9 +127,23 @@ public class DataManager {
         });
     }
 
-    public void deleteUser(long id){
-        Call<Response> call=apiInterface.deleteUser(id);
-        call.enqueue(new Callback<Response>() {
+    public void deleteUser(long id) {
+        Call<Void> call = apiInterface.deleteUser(id);
+
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful())
+                    Toast.makeText(context, "Delete Successful", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+
+        /*call.enqueue(new Callback<Response>() {
             @Override
             public void onResponse(Call call, Response response) {
                 Log.d("delete", response.body().toString());
@@ -146,7 +160,7 @@ public class DataManager {
             public void onFailure(Call call, Throwable t) {
 
             }
-        });
+        });*/
     }
 }
 

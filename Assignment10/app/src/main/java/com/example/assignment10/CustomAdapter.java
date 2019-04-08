@@ -4,6 +4,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
@@ -57,8 +58,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.CustomView
     public void onBindViewHolder(@NonNull CustomViewHolder customViewHolder, int i) {
         final Model model = list.get(i);
         customViewHolder.binding.namePath.setText(model.getName());
+        customViewHolder.binding.absolutePath.setText(model.getPath());
 
         if (model.getType() == Model.TYPE_DIRECTORY) {
+//            binding.namePath.setCompoundDrawables(Drawable.createFromPath("/home/ttn/AndroidStudioProjects/Assignment10/app/src/main/res/drawable/ic_folder_black_24dp.xml/"), null, null, null);
             binding.namePath.setCompoundDrawablesRelativeWithIntrinsicBounds(R.drawable.ic_folder_black_24dp, 0, 0, 0);
             customViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
