@@ -1,4 +1,4 @@
-package com.example.assignmentweek;
+package com.example.assignmentweek.Retrofit;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

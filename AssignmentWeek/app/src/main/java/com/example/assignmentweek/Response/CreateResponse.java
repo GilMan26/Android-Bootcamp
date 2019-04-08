@@ -4,7 +4,7 @@ package com.example.assignmentweek.Response;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class Create {
+public class CreateResponse {
 
     @SerializedName("createdAt")
     private String mCreatedAt;

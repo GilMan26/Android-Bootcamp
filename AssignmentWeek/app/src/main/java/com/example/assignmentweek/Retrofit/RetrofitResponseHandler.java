@@ -1,4 +1,4 @@
-package com.example.assignmentweek;
+package com.example.assignmentweek.Retrofit;
 
 import android.content.Context;
 import android.util.Log;
@@ -9,7 +9,7 @@ import java.net.UnknownHostException;
 import retrofit2.Call;
 import retrofit2.Response;
 
-public class RetrofitResponseHandler <T extends BaseResponseModel> implements retrofit2.Callback<T> {
+public class RetrofitResponseHandler <T> implements retrofit2.Callback<T> {
     private SuccessfulAPICallback successfulAPICallback = null;
     private FailureAPICallback failureAPICallback = null;
     Context context;

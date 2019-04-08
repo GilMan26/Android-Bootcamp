@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.assignmentweek.Constants.Contract;
+
 public class DBHandler extends SQLiteOpenHelper {
 
     private static DBHandler instance;

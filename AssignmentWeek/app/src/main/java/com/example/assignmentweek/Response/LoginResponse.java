@@ -4,7 +4,7 @@ package com.example.assignmentweek.Response;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class Login {
+public class LoginResponse {
 
     @SerializedName("token")
     private String mToken;

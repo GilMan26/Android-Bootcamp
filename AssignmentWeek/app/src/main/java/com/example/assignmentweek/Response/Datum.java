@@ -18,6 +18,13 @@ public class Datum {
     @SerializedName("last_name")
     private String mLastName;
 
+    public Datum(String mAvatar, String mFirstName, Long mId, String mLastName) {
+        this.mAvatar = mAvatar;
+        this.mFirstName = mFirstName;
+        this.mId = mId;
+        this.mLastName = mLastName;
+    }
+
     public String getAvatar() {
         return mAvatar;
     }

@@ -1,4 +1,4 @@
-package com.example.assignmentweek;
+package com.example.assignmentweek.Retrofit;
 
 public interface SuccessfulAPICallback<T> {
     void onResponse(T t);

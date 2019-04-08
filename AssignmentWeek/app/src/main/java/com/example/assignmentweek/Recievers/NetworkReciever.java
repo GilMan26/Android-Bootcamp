@@ -1,4 +1,4 @@
-package com.example.assignmentweek;
+package com.example.assignmentweek.Recievers;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

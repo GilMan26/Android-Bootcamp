@@ -4,14 +4,14 @@ package com.example.assignmentweek.Request;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class Login {
+public class LoginRequest {
 
     @SerializedName("email")
     private String mEmail;
     @SerializedName("password")
     private String mPassword;
 
-    public Login(String mEmail, String mPassword) {
+    public LoginRequest(String mEmail, String mPassword) {
         this.mEmail = mEmail;
         this.mPassword = mPassword;
     }

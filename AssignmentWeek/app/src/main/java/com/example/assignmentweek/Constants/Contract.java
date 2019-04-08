@@ -1,4 +1,4 @@
-package com.example.assignmentweek;
+package com.example.assignmentweek.Constants;
 
 public class Contract {
 

@@ -1,11 +1,10 @@
 
 package com.example.assignmentweek.Response;
 
-import com.example.assignmentweek.BaseResponseModel;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class Register extends BaseResponseModel {
+public class Register {
 
     @SerializedName("token")
     private String mToken;

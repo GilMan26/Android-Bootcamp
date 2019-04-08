@@ -1,7 +1,8 @@
-package com.example.assignmentweek;
+package com.example.assignmentweek.Adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
-import android.os.Bundle;
+import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.example.assignmentweek.Interfaces.IUserTouchListener;
+import com.example.assignmentweek.R;
 import com.example.assignmentweek.Response.Datum;
 
 import java.util.List;
@@ -18,10 +21,14 @@ import java.util.List;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHolder> {
 
     List<Datum> list;
-
+    IUserTouchListener listener;
 
     public CustomAdapter(List<Datum> list) {
         this.list = list;
+    }
+
+    public void setTouchListener(IUserTouchListener instance){
+        listener=instance;
     }
 
     @NonNull
@@ -36,7 +43,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHol
         final Datum data=list.get(i);
         rowViewHolder.firstTV.setText(data.getFirstName());
         rowViewHolder.lastTv.setText(data.getLastName());
-        Context context = rowViewHolder.imageView.getContext();
+        final Context context = rowViewHolder.imageView.getContext();
         if (context != null) {
             Glide.with(context)
                     .load(data.getAvatar())
@@ -45,12 +52,28 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHol
         rowViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Bundle bundle=new Bundle();
-                bundle.putString("fname", data.getFirstName());
-                bundle.putString("lname",data.getLastName());
-                bundle.putString("avatar", data.getAvatar());
-                bundle.putLong("id", data.getId());
+                listener.getClickedUser(data);
+            }
+        });
+        rowViewHolder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                AlertDialog.Builder builder= new AlertDialog.Builder(context);
+                builder.setTitle("Are you sure you want to delete ?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        listener.deleteUser(data.getId());
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
+                });
+                builder.show();
+                return true;
             }
         });
     }
