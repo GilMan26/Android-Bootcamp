@@ -4,14 +4,14 @@ package com.example.assignmentweek.Request;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
-public class CreateRequest {
+public class UserRequest {
 
     @SerializedName("job")
     private String mJob;
     @SerializedName("name")
     private String mName;
 
-    public CreateRequest(String mJob, String mName) {
+    public UserRequest(String mJob, String mName) {
         this.mJob = mJob;
         this.mName = mName;
     }
