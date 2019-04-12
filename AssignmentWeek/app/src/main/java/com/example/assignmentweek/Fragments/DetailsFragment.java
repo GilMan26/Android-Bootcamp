@@ -27,6 +27,7 @@ public class DetailsFragment extends Fragment {
         return view;
     }
 
+    
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -38,6 +39,12 @@ public class DetailsFragment extends Fragment {
                     .load(data.getAvatar())
                     .into(binding.imageView);
         }
+        binding.shareBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     @Override

@@ -1,20 +1,25 @@
 
 package com.example.assignmentweek.Response;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.assignmentweek.Constants.Contract;
 import com.google.gson.annotations.SerializedName;
 
 @SuppressWarnings("unused")
+@Entity(tableName = Contract.TABLE_NAME)
 public class Datum {
 
+    @SerializedName("id")
+    @PrimaryKey(autoGenerate = true)
+    private Long mId;
     @SerializedName("avatar")
     private String mAvatar;
     @SerializedName("first_name")
     private String mFirstName;
-    @SerializedName("id")
-    private Long mId;
     @SerializedName("last_name")
     private String mLastName;
 

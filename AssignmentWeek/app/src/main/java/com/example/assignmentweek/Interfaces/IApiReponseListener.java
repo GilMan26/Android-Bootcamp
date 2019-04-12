@@ -11,6 +11,4 @@ public interface IApiReponseListener {
 
     void addUsserResponse(CreateResponse createResponse);
 
-    void deleteUserResponse(String string);
-
 }

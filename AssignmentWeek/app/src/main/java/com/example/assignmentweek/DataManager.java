@@ -7,8 +7,8 @@ import android.widget.Toast;
 
 import com.example.assignmentweek.Interfaces.IApiReponseListener;
 import com.example.assignmentweek.Interfaces.LoginActivityListener;
-import com.example.assignmentweek.Request.CreateRequest;
-import com.example.assignmentweek.Request.LoginRequest;
+import com.example.assignmentweek.Request.UserRequest;
+import com.example.assignmentweek.Request.SignRequest;
 import com.example.assignmentweek.Response.CreateResponse;
 import com.example.assignmentweek.Response.ListReponse;
 import com.example.assignmentweek.Response.LoginResponse;
@@ -29,11 +29,11 @@ public class DataManager {
         this.context = context;
     }
 
-    public void setInstance(IApiReponseListener instance) {
-        reponseListener = instance;
+    public void setReponseListener(IApiReponseListener reponseListener) {
+        this.reponseListener = reponseListener;
     }
 
-    public void setInstance(LoginActivityListener listener) {
+    public void setLoginListener(LoginActivityListener listener) {
         loginListener = listener;
     }
 
@@ -61,8 +61,8 @@ public class DataManager {
         });
     }
 
-    public void loginUseer(LoginRequest loginRequest) {
-        Call<LoginResponse> call = apiInterface.login(loginRequest);
+    public void loginUseer(SignRequest signRequest) {
+        Call<LoginResponse> call = apiInterface.login(signRequest);
         call.enqueue(new Callback<LoginResponse>() {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
@@ -84,7 +84,7 @@ public class DataManager {
         });
     }
 
-    public void registerUser(LoginRequest request) {
+    public void registerUser(SignRequest request) {
         Call<Register> call = apiInterface.register(request);
         call.enqueue(new Callback<Register>() {
             @Override
@@ -105,7 +105,7 @@ public class DataManager {
         });
     }
 
-    public void addUsser(CreateRequest request) {
+    public void addUsser(UserRequest request) {
         Call<CreateResponse> call = apiInterface.createUser(request);
         call.enqueue(new Callback<CreateResponse>() {
             @Override
@@ -115,7 +115,6 @@ public class DataManager {
                     Toast.makeText(context, response.code() + "", Toast.LENGTH_LONG).show();
                 }
                 CreateResponse createResponse = response.body();
-                if (reponseListener != null)
                     reponseListener.addUsserResponse(createResponse);
 
             }
@@ -134,7 +133,7 @@ public class DataManager {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful())
-                    Toast.makeText(context, "Delete Successful", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Delete Successful" + response.code(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -142,25 +141,24 @@ public class DataManager {
 
             }
         });
+    }
 
-        /*call.enqueue(new Callback<Response>() {
+    public void updateUser(long id, UserRequest request) {
+        Call<CreateResponse> call = apiInterface.updateUser(id, request);
+        call.enqueue(new Callback<CreateResponse>() {
             @Override
-            public void onResponse(Call call, Response response) {
-                Log.d("delete", response.body().toString());
-                if (!response.isSuccessful()) {
-                    Toast.makeText(context, response.code() + "", Toast.LENGTH_LONG).show();
+            public void onResponse(Call<CreateResponse> call, Response<CreateResponse> response) {
+                if (response.isSuccessful()) {
+                    CreateResponse createResponse = response.body();
+                    Toast.makeText(context, createResponse.getCreatedAt(), Toast.LENGTH_LONG).show();
                 }
-                String responseCode = response.body().toString();
-                if (reponseListener != null)
-                    reponseListener.deleteUserResponse(responseCode);
-
             }
 
             @Override
-            public void onFailure(Call call, Throwable t) {
-
+            public void onFailure(Call<CreateResponse> call, Throwable t) {
+                Log.d("shit", "shit");
             }
-        });*/
+        });
     }
 }
 
