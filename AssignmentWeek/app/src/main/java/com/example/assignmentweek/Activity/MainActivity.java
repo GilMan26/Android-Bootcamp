@@ -20,7 +20,10 @@ import com.example.assignmentweek.Adapter.CustomAdapter;
 import com.example.assignmentweek.DataManager;
 import com.example.assignmentweek.Fragments.AddDialog;
 import com.example.assignmentweek.Fragments.DetailsFragment;
+import com.example.assignmentweek.Fragments.UpdateDialog;
+import com.example.assignmentweek.Interfaces.IAddUser;
 import com.example.assignmentweek.Interfaces.IApiReponseListener;
+import com.example.assignmentweek.Interfaces.IUpdateUser;
 import com.example.assignmentweek.Interfaces.IUserTouchListener;
 import com.example.assignmentweek.R;
 import com.example.assignmentweek.Request.UserRequest;
@@ -31,8 +34,8 @@ import com.example.assignmentweek.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements IApiReponseListener, IUserTouchListener {
-    private static int page = 1;
+public class MainActivity extends AppCompatActivity implements IApiReponseListener, IUserTouchListener, IAddUser, IUpdateUser {
+    static int page = 1;
     ActivityMainBinding binding;
     CustomAdapter adapter;
     DataManager dataManager;
@@ -144,6 +147,7 @@ public class MainActivity extends AppCompatActivity implements IApiReponseListen
 
     @Override
     public void addUsserResponse(CreateResponse createResponse) {
+        Toast.makeText(this, createResponse.getCreatedAt(),Toast.LENGTH_LONG).show();
         Log.d("addUser", createResponse.getCreatedAt() + createResponse.getJob());
     }
 
@@ -154,6 +158,7 @@ public class MainActivity extends AppCompatActivity implements IApiReponseListen
         int id = item.getItemId();
         if (id == R.id.addMenu) {
             AddDialog dialog = new AddDialog();
+            dialog.setInstance(this);
 //            FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
 //            fragmentTransaction.add(R.id.mainFrame, dialog);
 //            fragmentTransaction.addToBackStack("dialog");
@@ -161,6 +166,9 @@ public class MainActivity extends AppCompatActivity implements IApiReponseListen
 //            UserRequest request=new UserRequest("job" , "name");
 //            dataManager.addUsser(request);
             dialog.show(getSupportFragmentManager(), null);
+        }
+        if(id==R.id.updateMenu){
+
         }
         return super.onOptionsItemSelected(item);
 
@@ -188,6 +196,28 @@ public class MainActivity extends AppCompatActivity implements IApiReponseListen
         new DeleteTask().execute(id);
 //        UserRequest request=new UserRequest("job" , "name");
 //        new UpdateTask(request).execute(id);
+    }
+
+    @Override
+    public void updateUser(long id) {
+        UpdateDialog dialog=new UpdateDialog();
+        Bundle bundle=new Bundle();
+        bundle.putLong("id", id);
+        dialog.setArguments(bundle);
+        dialog.setInstance(this);
+        dialog.show(getSupportFragmentManager(), null );
+
+    }
+
+    @Override
+    public void addUser(UserRequest request) {
+        dataManager.addUsser(request);
+
+    }
+
+    @Override
+    public void updateUser(long id, UserRequest request) {
+        dataManager.updateUser(id, request);
     }
 
 

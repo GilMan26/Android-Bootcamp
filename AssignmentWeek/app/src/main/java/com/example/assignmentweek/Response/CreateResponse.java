@@ -14,6 +14,15 @@ public class CreateResponse {
     private String mJob;
     @SerializedName("name")
     private String mName;
+    private String updatedAt;
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
 
     public String getCreatedAt() {
         return mCreatedAt;

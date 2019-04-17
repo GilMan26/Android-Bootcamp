@@ -13,16 +13,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.assignmentweek.Interfaces.IAddUser;
+import com.example.assignmentweek.Interfaces.IUpdateUser;
 import com.example.assignmentweek.R;
 import com.example.assignmentweek.Request.UserRequest;
 import com.example.assignmentweek.databinding.AddDialogFragmentBinding;
 
-public class AddDialog extends DialogFragment {
-    IAddUser iAddUser;
+public class UpdateDialog extends DialogFragment {
     AddDialogFragmentBinding binding;
+    IUpdateUser iUpdateUser;
+    long id;
 
-    public void setInstance(IAddUser instance){
-        iAddUser=instance;
+    public void setInstance(IUpdateUser instance){
+        iUpdateUser=instance;
     }
 
 
@@ -30,13 +32,13 @@ public class AddDialog extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder=new AlertDialog.Builder(getActivity());
-        builder.setTitle("Add User");
-        builder.setView(R.layout.add_dialog_fragment);
-        builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+        builder.setTitle("Update User");
+        builder.setView(R.layout.update_dialog_fragment);
+        builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 UserRequest request=new UserRequest(binding.jobET.getText().toString(), binding.nameET.getText().toString());
-                iAddUser.addUser(request);
+                iUpdateUser.updateUser(id, request);
             }
         });
         builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -48,6 +50,12 @@ public class AddDialog extends DialogFragment {
         return builder.create();
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        id=getArguments().getLong("id");
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,21 +63,4 @@ public class AddDialog extends DialogFragment {
         View view = binding.getRoot();
         return view;
     }
-//
-//    @Override
-//    public void onCreate(@Nullable Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//
-//    }
-//
-//    @Override
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-//        super.onViewCreated(view, savedInstanceState);
-//        binding.addBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
-//    }
 }

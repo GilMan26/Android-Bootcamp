@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,6 +44,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHol
         final Datum data=list.get(i);
         rowViewHolder.firstTV.setText(data.getFirstName());
         rowViewHolder.lastTv.setText(data.getLastName());
+        rowViewHolder.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.updateUser(data.getId());
+            }
+        });
         final Context context = rowViewHolder.imageView.getContext();
         if (context != null) {
             Glide.with(context)
@@ -78,6 +85,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHol
         });
     }
 
+
+
     @Override
     public int getItemCount() {
         return list.size();
@@ -86,11 +95,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.RowViewHol
     class RowViewHolder extends RecyclerView.ViewHolder{
         TextView idTV, firstTV, lastTv;
         ImageView imageView;
+        Button button;
 
         public RowViewHolder(@NonNull View itemView) {
             super(itemView);
             imageView=itemView.findViewById(R.id.imageView);
             firstTV=itemView.findViewById(R.id.first);
+            button=itemView.findViewById(R.id.editBtn);
             lastTv=itemView.findViewById(R.id.last);
         }
     }

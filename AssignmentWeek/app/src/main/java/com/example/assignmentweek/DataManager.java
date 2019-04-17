@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.assignmentweek.Activity.MainActivity;
 import com.example.assignmentweek.Interfaces.IApiReponseListener;
 import com.example.assignmentweek.Interfaces.LoginActivityListener;
 import com.example.assignmentweek.Request.UserRequest;
@@ -150,7 +151,9 @@ public class DataManager {
             public void onResponse(Call<CreateResponse> call, Response<CreateResponse> response) {
                 if (response.isSuccessful()) {
                     CreateResponse createResponse = response.body();
-                    Toast.makeText(context, createResponse.getCreatedAt(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, createResponse.getUpdatedAt(), Toast.LENGTH_LONG).show();
+                    Log.d("TAG",createResponse.getUpdatedAt());
+//                    String s=createResponse.getUpdatedAt();
                 }
             }
 
