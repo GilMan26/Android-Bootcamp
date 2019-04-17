@@ -5,8 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.widget.Toast;
+
+import com.example.assignmentweek.R;
 
 public class NetworkReciever extends BroadcastReceiver {
     @Override

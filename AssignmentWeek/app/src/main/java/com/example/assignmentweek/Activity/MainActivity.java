@@ -167,9 +167,6 @@ public class MainActivity extends AppCompatActivity implements IApiReponseListen
 //            dataManager.addUsser(request);
             dialog.show(getSupportFragmentManager(), null);
         }
-        if(id==R.id.updateMenu){
-
-        }
         return super.onOptionsItemSelected(item);
 
     }
