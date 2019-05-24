@@ -33,5 +33,4 @@ class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupCont
     }
 
 
-
 }

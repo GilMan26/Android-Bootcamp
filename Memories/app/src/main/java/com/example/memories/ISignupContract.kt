@@ -1,6 +1,6 @@
 package com.example.memories
 
-interface ISignupContract{
+interface ISignupContract {
 
 
     interface ISignUpView {
@@ -13,16 +13,12 @@ interface ISignupContract{
 
         fun loginSuccessful()
 
-        fun hideProgress(){
-
-        }
+        fun hideProgress()
     }
 
 
-    interface ISignupPresenter{
-
+    interface ISignupPresenter {
         fun requestSignup(username: String, password: String)
-
     }
 
 

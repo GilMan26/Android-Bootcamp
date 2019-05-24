@@ -11,30 +11,31 @@ import com.example.memories.databinding.FragmentLoginBinding
 import com.example.memories.databinding.FragmentSignUpBinding
 
 
-class LoginFragment : Fragment(), ILoginContract.ILoginView{
+class LoginFragment : Fragment(), ILoginContract.ILoginView {
 
     lateinit var loginPresenter: LoginPresenter
     lateinit var binding: FragmentLoginBinding
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding= FragmentLoginBinding.inflate(inflater, container, false)
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        loginPresenter= LoginPresenter(this)
-        binding.btnLogin.setOnClickListener{
+        loginPresenter = LoginPresenter(this)
+        binding.btnLogin.setOnClickListener {
             loginPresenter.requestLogin(binding.userLoginET.text.toString(), binding.passLoginET.text.toString())
         }
     }
+
     override fun showProgress() {
-        binding.progressCircular.visibility=View.VISIBLE
+        binding.progressCircular.visibility = View.VISIBLE
     }
 
     override fun hideProgress() {
-        binding.progressCircular.visibility=View.GONE
+        binding.progressCircular.visibility = View.GONE
     }
 
     override fun showValidationError(error: String) {
@@ -48,8 +49,6 @@ class LoginFragment : Fragment(), ILoginContract.ILoginView{
     override fun loginSuccessful() {
         Toast.makeText(context, "Login Successful", Toast.LENGTH_LONG).show()
     }
-
-
 
 
 }

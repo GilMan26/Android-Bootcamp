@@ -1,50 +1,48 @@
 package com.example.memories.Firebase
 
-import android.util.Log
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
 object LoginHelper {
 
-    lateinit var auth:FirebaseAuth
+    lateinit var auth: FirebaseAuth
+    lateinit var gso: GoogleSignInOptions
 
-    interface OnSignupListener{
+    interface OnSignupListener {
         fun onSignupSuccess(user: FirebaseUser?)
         fun onSignupFaliure()
     }
 
-    interface OnLoginListener{
-        fun onLoginSuccess(user:FirebaseUser?)
+    interface OnLoginListener {
+        fun onLoginSuccess(user: FirebaseUser?)
         fun onLoginFailure()
     }
 
-    fun signUp(username:String, password:String, signupListener: OnSignupListener){
+    fun signUp(username: String, password: String, signupListener: OnSignupListener) {
         auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(OnCompleteListener {
-                    if (it.isSuccessful){
-                        Log.d("auth", "signup successful")
+                    if (it.isSuccessful) {
                         signupListener.onSignupSuccess(auth.currentUser)
                         it.result?.user?.sendEmailVerification()
-                    }else{
+                    } else {
                         signupListener.onSignupFaliure()
-                        Log.d("auth", "signup not successful")
                     }
                 })
     }
 
-    fun login(username:String, password: String, loginListener: OnLoginListener){
+    fun login(username: String, password: String, loginListener: OnLoginListener) {
         auth.signInWithEmailAndPassword(username, password)
                 .addOnCompleteListener(OnCompleteListener {
-                    if(it.isSuccessful){
-                        Log.d("auth", "login successful")
+                    if (it.isSuccessful) {
                         loginListener.onLoginSuccess(auth.currentUser)
-                        Log.d("auth", auth.currentUser.toString())
-                    }else{
-                        Log.d("auth", "login not successful")
+
+                    } else {
                         loginListener.onLoginFailure()
                     }
                 })
     }
+
 
 }
