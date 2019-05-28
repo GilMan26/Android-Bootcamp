@@ -1,14 +1,10 @@
-package com.example.memories
+package com.example.memories.Login
 
-import android.support.design.widget.Snackbar
 import android.text.TextUtils
-import android.util.Log
 import android.util.Patterns
 import com.example.memories.Firebase.LoginHelper
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
 
 class LoginPresenter(val loginView: ILoginContract.ILoginView) : ILoginContract.ILoginPresenter {
 
@@ -41,7 +37,4 @@ class LoginPresenter(val loginView: ILoginContract.ILoginView) : ILoginContract.
         LoginHelper.firebaseAuthWithGoogle(googleSignInAccount)
     }
 
-    override fun startGoogleLogin():GoogleSignInClient {
-        return LoginHelper.googleSignInClient
-    }
 }

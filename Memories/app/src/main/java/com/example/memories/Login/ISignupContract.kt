@@ -1,4 +1,4 @@
-package com.example.memories
+package com.example.memories.Login
 
 interface ISignupContract {
 

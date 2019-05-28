@@ -1,4 +1,4 @@
-package com.example.memories
+package com.example.memories.Login
 
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -28,8 +28,6 @@ interface ILoginContract {
         fun requestLogin(username: String, password: String)
 
         fun requstGoogleLogin(googleSignInAccount: GoogleSignInAccount?)
-
-        fun startGoogleLogin():GoogleSignInClient
 
     }
 }

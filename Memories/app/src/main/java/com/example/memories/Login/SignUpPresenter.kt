@@ -1,4 +1,4 @@
-package com.example.memories
+package com.example.memories.Login
 
 import android.text.TextUtils
 import android.util.Patterns

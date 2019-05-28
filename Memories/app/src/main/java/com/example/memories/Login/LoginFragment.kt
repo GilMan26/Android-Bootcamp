@@ -1,20 +1,17 @@
-package com.example.memories
+package com.example.memories.Login
 
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.constraint.Constraints.TAG
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.memories.Firebase.LoginHelper
+import com.example.memories.App
 import com.example.memories.databinding.FragmentLoginBinding
-import com.example.memories.databinding.FragmentSignUpBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 
 
@@ -63,8 +60,9 @@ class LoginFragment : Fragment(), ILoginContract.ILoginView {
     }
 
     override fun googleLogin() {
-        val signInIntent=loginPresenter.startGoogleLogin().signInIntent
-        startActivityForResult(signInIntent, REQUEST_CODE_GOOGLE)
+        val app=activity?.application as App
+        val intent=app.getIntent()
+        startActivityForResult(intent, REQUEST_CODE_GOOGLE)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
