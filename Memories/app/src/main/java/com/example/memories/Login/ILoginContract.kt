@@ -1,15 +1,16 @@
 package com.example.memories.Login
 
+import com.example.memories.IBaseView
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 
 interface ILoginContract {
 
-    interface ILoginView {
+    interface ILoginView:IBaseView {
 
-        fun showProgress()
+        override fun hideProgress()
 
-        fun hideProgress()
+        override fun showProgress()
 
         fun showValidationError(error:String)
 

@@ -4,7 +4,7 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
-import com.example.memories.Firebase.UPhoto
+import com.example.memories.Repository.UPhoto
 
 class TImelineAdapter(val list: List<UPhoto>, val context:Context) : RecyclerView.Adapter<TImelineAdapter.TimeLineViewHolder>() {
 

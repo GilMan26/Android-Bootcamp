@@ -1,13 +1,14 @@
 package com.example.memories
 
 import android.app.Application
-import android.content.Intent
-import com.example.memories.Firebase.LoginHelper
+import com.example.memories.Repository.DataManager
+import com.example.memories.Repository.LoginHelper
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.storage.FirebaseStorage
 
 class App : Application() {
 
@@ -15,6 +16,7 @@ class App : Application() {
     lateinit var gso: GoogleSignInOptions
     lateinit var googleSignInClient: GoogleSignInClient
     lateinit var database :FirebaseDatabase
+    lateinit var storage:FirebaseStorage
 
     override fun onCreate() {
         super.onCreate()
@@ -24,11 +26,14 @@ class App : Application() {
                 .requestEmail()
                 .build()
         database= FirebaseDatabase.getInstance()
+        storage= FirebaseStorage.getInstance()
         googleSignInClient=GoogleSignIn.getClient(this, gso)
 
         LoginHelper.auth = auth
         LoginHelper.gso = gso
         LoginHelper.database=database
+        DataManager.database=database
+        DataManager.storage=storage
 
     }
 

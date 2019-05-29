@@ -2,8 +2,8 @@ package com.example.memories.Login
 
 import android.text.TextUtils
 import android.util.Patterns
-import com.example.memories.Firebase.LoginHelper
-import com.example.memories.Firebase.User
+import com.example.memories.Repository.LoginHelper
+import com.example.memories.Repository.User
 import com.google.firebase.auth.FirebaseUser
 
 class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupContract.ISignupPresenter {

@@ -1,11 +1,15 @@
 package com.example.memories.Login
 
+import com.example.memories.IBaseView
+
 interface ISignupContract {
 
 
-    interface ISignUpView {
+    interface ISignUpView:IBaseView {
 
-        fun showProgress()
+        override fun hideProgress()
+
+        override fun showProgress()
 
         fun showValidationError(error: String)
 
@@ -13,7 +17,6 @@ interface ISignupContract {
 
         fun loginSuccessful()
 
-        fun hideProgress()
     }
 
 

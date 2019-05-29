@@ -2,7 +2,7 @@ package com.example.memories.Login
 
 import android.text.TextUtils
 import android.util.Patterns
-import com.example.memories.Firebase.LoginHelper
+import com.example.memories.Repository.LoginHelper
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 

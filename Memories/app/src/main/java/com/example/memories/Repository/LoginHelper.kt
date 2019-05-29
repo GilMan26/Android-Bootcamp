@@ -1,4 +1,4 @@
-package com.example.memories.Firebase
+package com.example.memories.Repository
 
 import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -29,7 +29,7 @@ object LoginHelper {
         auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {
-                        signupListener.onSignupSuccess(user=User(username), firebaseuser = auth.currentUser)
+//                        signupListener.onSignupSuccess(user=User(username), firebaseuser = auth.currentUser)
                         it.result?.user?.sendEmailVerification()
 
 
