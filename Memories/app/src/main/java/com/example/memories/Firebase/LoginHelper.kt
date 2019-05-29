@@ -1,24 +1,22 @@
 package com.example.memories.Firebase
 
-import android.support.design.widget.Snackbar
 import android.util.Log
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import java.util.concurrent.Executor
+import com.google.firebase.database.FirebaseDatabase
 
 object LoginHelper {
 
     lateinit var auth: FirebaseAuth
     lateinit var gso: GoogleSignInOptions
-//    lateinit var googleSignInClient: GoogleSignInClient
+    lateinit var database: FirebaseDatabase
 
     interface OnSignupListener {
-        fun onSignupSuccess(user: FirebaseUser?)
+        fun onSignupSuccess(user:User, firebaseuser: FirebaseUser?)
         fun onSignupFaliure()
     }
 
@@ -31,8 +29,10 @@ object LoginHelper {
         auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {
-                        signupListener.onSignupSuccess(auth.currentUser)
+                        signupListener.onSignupSuccess(user=User(username), firebaseuser = auth.currentUser)
                         it.result?.user?.sendEmailVerification()
+
+
                     } else {
                         signupListener.onSignupFaliure()
                     }
@@ -70,5 +70,12 @@ object LoginHelper {
 
     }
 
+    fun saveUserDb(user:User, firebaseUser: FirebaseUser?){
+        if (firebaseUser != null) {
+            Log.d("db", firebaseUser.uid)
+            val userRef= database.getReference("/users")
+            userRef.child(firebaseUser.uid).setValue(user)
+        }
+    }
 
 }

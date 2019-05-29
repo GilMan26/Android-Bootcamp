@@ -3,6 +3,7 @@ package com.example.memories.Login
 import android.text.TextUtils
 import android.util.Patterns
 import com.example.memories.Firebase.LoginHelper
+import com.example.memories.Firebase.User
 import com.google.firebase.auth.FirebaseUser
 
 class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupContract.ISignupPresenter {
@@ -19,7 +20,8 @@ class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupCont
         } else {
             signUpView.showProgress()
             LoginHelper.signUp(username, password, object : LoginHelper.OnSignupListener {
-                override fun onSignupSuccess(user: FirebaseUser?) {
+                override fun onSignupSuccess(user: User, firebasseUser: FirebaseUser?) {
+                    LoginHelper.saveUserDb(user, firebasseUser)
                     signUpView.hideProgress()
                     signUpView.loginSuccessful()
                 }

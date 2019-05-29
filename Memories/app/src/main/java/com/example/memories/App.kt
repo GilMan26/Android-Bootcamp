@@ -28,12 +28,10 @@ class App : Application() {
 
         LoginHelper.auth = auth
         LoginHelper.gso = gso
+        LoginHelper.database=database
 
     }
 
-    fun getIntent():Intent{
-        return googleSignInClient.signInIntent
-    }
 
 
 }

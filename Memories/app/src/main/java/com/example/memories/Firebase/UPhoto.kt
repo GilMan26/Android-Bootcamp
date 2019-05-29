@@ -2,7 +2,7 @@ package com.example.memories.Firebase
 
 import java.sql.Timestamp
 
-class Photo(
+class UPhoto(
         pId:Long,
         title:String,
         albumId:Long,

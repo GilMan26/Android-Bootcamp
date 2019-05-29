@@ -1,8 +1,7 @@
 package com.example.memories.Firebase
 
 import java.sql.Timestamp
-
-class Album (
+ class Album (
         aId:Long,
         title:String,
         timestamp: Timestamp,

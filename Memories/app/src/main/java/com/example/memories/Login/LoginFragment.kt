@@ -61,7 +61,7 @@ class LoginFragment : Fragment(), ILoginContract.ILoginView {
 
     override fun googleLogin() {
         val app=activity?.application as App
-        val intent=app.getIntent()
+        val intent=app.googleSignInClient.signInIntent
         startActivityForResult(intent, REQUEST_CODE_GOOGLE)
     }
 
