@@ -1,4 +1,4 @@
-package com.example.memories.AfterLogin
+package com.example.memories.AfterLogin.TimelineTab
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

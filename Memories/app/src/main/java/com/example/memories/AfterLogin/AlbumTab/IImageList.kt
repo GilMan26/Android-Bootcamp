@@ -1,6 +1,6 @@
-package com.example.memories.AfterLogin
+package com.example.memories.AfterLogin.AlbumTab
 
-interface ICategoryDetailFragment {
+interface IImageList {
 
     interface ICategoryDetailView{
 

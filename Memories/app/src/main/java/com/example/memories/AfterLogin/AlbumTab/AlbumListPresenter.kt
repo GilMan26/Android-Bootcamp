@@ -1,9 +1,9 @@
-package com.example.memories.AfterLogin
+package com.example.memories.AfterLogin.AlbumTab
 
 import com.example.memories.Repository.Album
 import com.example.memories.Repository.DataManager
 
-class CategoryListPresenter(val iCategoryListView: ICategoryListContract.ICategoryListView) :ICategoryListContract.ICategoryListPresenter{
+class AlbumListPresenter(val iAlbumListView: IAlbumList.IAlbumListView) : IAlbumList.IAlbumListPresenter {
 
 
     override fun addAlbum(album:Album) {
@@ -11,9 +11,9 @@ class CategoryListPresenter(val iCategoryListView: ICategoryListContract.ICatego
     }
 
 
-    override fun getAlbums() {
-
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun getAlbums( ) {
+        var albums=DataManager.loadAlbums()
+        iAlbumListView.loadAlbums(albums)
     }
 
     override fun getImages() {

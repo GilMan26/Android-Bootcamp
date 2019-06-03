@@ -1,18 +1,20 @@
-package com.example.memories.AfterLogin
+package com.example.memories.AfterLogin.AlbumTab
 
 import com.example.memories.IBaseView
 import com.example.memories.Repository.Album
 
-interface ICategoryListContract {
+interface IAlbumList {
 
-    interface ICategoryListView: IBaseView {
+    interface IAlbumListView: IBaseView {
         fun addRequest(album: Album)
 
         fun categorySelect()
 
+        fun loadAlbums(albums:ArrayList<Album>)
+
     }
 
-    interface ICategoryListPresenter{
+    interface IAlbumListPresenter{
 
         fun getAlbums()
 

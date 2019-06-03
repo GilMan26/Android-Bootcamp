@@ -1,13 +1,12 @@
-package com.example.memories.AfterLogin
+package com.example.memories.AfterLogin.AlbumTab
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 
-class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class ImageAdapter : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
-
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CategoryViewHolder {
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ImageViewHolder {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -15,12 +14,12 @@ class CategoryAdapter : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onBindViewHolder(p0: CategoryViewHolder, p1: Int) {
+    override fun onBindViewHolder(p0: ImageViewHolder, p1: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 
-    class CategoryViewHolder(view:View):RecyclerView.ViewHolder(view){
+    class ImageViewHolder(view:View): RecyclerView.ViewHolder(view) {
 
     }
 }

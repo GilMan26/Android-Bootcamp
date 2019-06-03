@@ -1,4 +1,4 @@
-package com.example.memories.AfterLogin
+package com.example.memories.AfterLogin.ProfileTab
 
 import com.example.memories.IBaseView
 

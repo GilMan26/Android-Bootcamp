@@ -14,6 +14,7 @@ object LoginHelper {
     lateinit var auth: FirebaseAuth
     lateinit var gso: GoogleSignInOptions
     lateinit var database: FirebaseDatabase
+    lateinit var firebaseUser: FirebaseUser
 
     interface OnSignupListener {
         fun onSignupSuccess(user:User, firebaseuser: FirebaseUser?)
