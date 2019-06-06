@@ -9,6 +9,7 @@ interface IImageList {
 
     interface ICategoryPresenter{
 
+        fun getImages()
 
     }
 

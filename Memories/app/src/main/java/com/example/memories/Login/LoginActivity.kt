@@ -20,7 +20,9 @@ class LoginActivity : AppCompatActivity(), SignUpFragment.ISwitchView {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
+        val splashFragment=SplashFragment()
         val signUpFragment = SignUpFragment()
+//        supportFragmentManager.beginTransaction()
         signUpFragment.setSwitchInstance(this)
         supportFragmentManager.beginTransaction().add(R.id.loginFrame, signUpFragment).commit()
     }
@@ -28,7 +30,6 @@ class LoginActivity : AppCompatActivity(), SignUpFragment.ISwitchView {
     override fun replaceFragment() {
         Log.d("click", "activity")
         val loginFragment = LoginFragment()
-
         supportFragmentManager.beginTransaction().replace(R.id.loginFrame, loginFragment).commit()
     }
 

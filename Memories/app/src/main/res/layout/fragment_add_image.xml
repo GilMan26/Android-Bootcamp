@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:background="#FFFFFF"
         android:layout_height="match_parent"
-        tools:context=".AfterLogin.AlbumTab.AddAlbumFragment">
+        tools:context=".AfterLogin.AlbumTab.AddImageFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView
@@ -33,7 +33,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <EditText
-                android:id="@+id/albumName"
+                android:id="@+id/imageName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
@@ -54,7 +54,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
             <EditText
-                android:id="@+id/albumMessage"
+                android:id="@+id/imageMessage"
                 android:layout_width="match_parent"
                 android:hint="Message"
                 android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/addImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="44dp"
@@ -74,17 +74,15 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="96dp"
-            android:layout_marginEnd="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
             android:clickable="true"
             android:src="@drawable/blank_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
+            app:layout_constraintTop_toBottomOf="@+id/addImage"
             tools:srcCompat="@tools:sample/avatars" />
 
     </android.support.constraint.ConstraintLayout>

@@ -1,26 +1,47 @@
 package com.example.memories.AfterLogin.AlbumTab
 
 import android.support.v7.widget.RecyclerView
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import com.example.memories.R
+import com.example.memories.Repository.Album
 
-class AlbumAdapter : RecyclerView.Adapter<AlbumAdapter.CategoryViewHolder>() {
+class AlbumAdapter(var albums:ArrayList<Album>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CategoryViewHolder {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.album_row_layout, parent, false)
+        return AlbumViewHolder(itemView)
     }
+
+
 
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return albums.size
     }
 
-    override fun onBindViewHolder(p0: CategoryViewHolder, p1: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    fun addList(albums: ArrayList<Album>){
+        this.albums=albums
+        notifyDataSetChanged()
+    }
+
+    override fun onBindViewHolder(viewHolder: AlbumViewHolder, positon: Int) {
+        var data=albums[positon]
+        viewHolder.bindItems(data)
+        viewHolder.itemView.setOnClickListener{
+
+        }
     }
 
 
-    class CategoryViewHolder(view:View):RecyclerView.ViewHolder(view){
-
+    class AlbumViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
+        fun bindItems(album: Album) {
+            val textViewTitle = itemView.findViewById(R.id.titleTV) as TextView
+            val textViewTime  = itemView.findViewById(R.id.timeTV) as TextView
+            textViewTitle.text = album.title
+            textViewTime.text = album.time
+        }
     }
 }

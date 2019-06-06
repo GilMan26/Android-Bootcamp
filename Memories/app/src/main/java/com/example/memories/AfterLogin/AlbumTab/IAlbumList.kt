@@ -20,7 +20,6 @@ interface IAlbumList {
 
         fun getImages()
 
-        fun addAlbum(album: Album)
 
     }
 }

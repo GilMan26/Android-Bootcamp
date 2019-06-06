@@ -67,7 +67,6 @@ object LoginHelper {
                         Log.w("google", "signInWithCredential:failure")
                     }
                 })
-//                .addOnFailureListener(Executor {  })
 
     }
 
