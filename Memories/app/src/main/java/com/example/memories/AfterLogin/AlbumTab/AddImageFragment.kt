@@ -21,18 +21,18 @@ import com.example.memories.databinding.FragmentAddImageBinding
 class AddImageFragment : Fragment(), IAddImage.IAddImageView {
 
 
-    lateinit var presenter :AddImagePresenter
+    lateinit var presenter: AddImagePresenter
     lateinit var bitmap: Bitmap
+    lateinit var albumRef: String
     lateinit var binding: FragmentAddImageBinding
 
     companion object {
-        private val ARG_TITLE = "title"
+        private val ALBUM_REF = "ref"
 
-        fun getInstance(title: String): AddImageFragment
-        {
+        fun getInstance(ref: String): AddImageFragment {
             var fragment = AddImageFragment()
             var bundle = Bundle()
-            bundle.putString(ARG_TITLE, title)
+            bundle.putString(ALBUM_REF, ref)
 
             fragment.arguments = bundle
 
@@ -43,20 +43,23 @@ class AddImageFragment : Fragment(), IAddImage.IAddImageView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
-
-        binding=DataBindingUtil.inflate(inflater, R.layout.fragment_add_image, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_image, container, false)
+        if (arguments != null) {
+            albumRef = arguments!!.getString(ALBUM_REF)
+        }
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        presenter=AddImagePresenter(this)
-        binding.addImage.setOnClickListener{
+        presenter = AddImagePresenter(this)
+        binding.addImage.setOnClickListener {
             Log.d("test", "button click")
-            presenter.uploadImage(binding.imageName.text.toString(), bitmap)
+
+            presenter.uploadImage(binding.imageName.text.toString(), bitmap, albumRef)
         }
 
-        binding.imageView.setOnClickListener{
+        binding.imageView.setOnClickListener {
             Log.d("test", "image click")
             imageExtractor()
         }

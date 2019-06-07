@@ -16,51 +16,63 @@ object DataManager {
     lateinit var storage: FirebaseStorage
 
     fun createAlbum(album: Album, iAlbumCreateListener: IAlbumCreateListener) {
-        val albumRef = database.getReference("/users/"+LoginHelper.firebaseUser.uid+"/albums")
+        val albumRef = database.getReference("/users/" + LoginHelper.firebaseUser.uid + "/albums")
         var key = albumRef.push().key
         if (key != null) {
             album.id = key
             albumRef.child(key).setValue(album).addOnSuccessListener {
                 iAlbumCreateListener.onCreateSuccess("Album Created Successfully")
             }
-                    .addOnFailureListener{
+                    .addOnFailureListener {
                         iAlbumCreateListener.onCreateFailure("Album Creation Failed")
                     }
         }
     }
 
-    fun addImage(image: Photo, albumRef:String,  iImageUploadCallback: IImageUploadCallback){
-        val imageRef= database.getReference("/users/"+LoginHelper.firebaseUser.uid+"/albums/"+albumRef+"/photos")
-        var key=imageRef.push().key
-        if(key!=null){
-            image.id=key
+    fun addImage(image: Photo, albumRef: String, iAddImageCallBack: IAddImageCallBack) {
+        Log.d("test", albumRef)
+        val imageRef = database.getReference("/users/" + LoginHelper.firebaseUser.uid + "/albums/" + albumRef + "/photos")
+        var key = imageRef.push().key
+        if (key != null) {
+            image.id = key
             imageRef.child(key).setValue(image).addOnSuccessListener {
-                iImageUploadCallback.onSuccess("Image Added")
-            }.addOnFailureListener{
-                iImageUploadCallback.onFailure("failed")
+                iAddImageCallBack.onSuccess("Image Added")
+                updateTimeline(image, object : ITimelineUpdateListener{
+
+                    override fun onUpdateSuccess(ack: String) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onUpdateFailure(ack: String) {
+                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                })
+            }.addOnFailureListener {
+                iAddImageCallBack.onFailure("failed")
             }
         }
     }
 
 
-    fun updateTimeline(image:Photo, iImelineUpdateListener: ITimelineUpdateListener){
-        val timelineRef= database.getReference("users/"+LoginHelper.firebaseUser.uid+"/timeline")
-        val key=timelineRef.push().key
-        if(key!=null){
-            image.id=key
+    fun updateTimeline(image: Photo, iImelineUpdateListener: ITimelineUpdateListener) {
+        val timelineRef = database.getReference("/users/" + LoginHelper.firebaseUser.uid + "/timeline")
+        val key = timelineRef.push().key
+        if (key != null) {
+            image.id = key
             timelineRef.child(key).setValue(image).addOnSuccessListener {
                 iImelineUpdateListener.onUpdateSuccess("success")
             }
-                    .addOnFailureListener{
+                    .addOnFailureListener {
                         iImelineUpdateListener.onUpdateFailure("failure")
                     }
         }
     }
 
-    fun uploadImage(title:String, image:Bitmap, iImageUploadCallback: IImageUploadCallback){
-        val storageReference= storage.reference
-        val imageReference=storageReference.child("images/"+title)
-        var downloadUri =""
+    fun uploadImage(title: String, image: Bitmap, iImageUploadCallback: IImageUploadCallback) {
+        val storageReference = storage.reference
+        val imageReference = storageReference.child("images/" + title)
+        var downloadUri = ""
         val baos = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.JPEG, 100, baos)
         val data = baos.toByteArray()
@@ -87,7 +99,7 @@ object DataManager {
 
 
     fun loadAlbums(iLoadAlbumCallback: ILoadAlbumCallback) {
-        val albumRef = database.getReference("users/"+LoginHelper.firebaseUser.uid+"/albums")
+        val albumRef = database.getReference("users/" + LoginHelper.firebaseUser.uid + "/albums")
         var albums = ArrayList<Album>()
         albumRef.addValueEventListener(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
@@ -98,26 +110,26 @@ object DataManager {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (albumSnapshot in dataSnapshot.children) {
                     Log.d("tag", dataSnapshot.toString())
+//                    albums.add(albumSnapshot.getValue(Album::class.java)!!)
                     var album = albumSnapshot.getValue(Album::class.java)
-                    if (album != null){
+                    if (album != null) {
                         albums.add(album)
-                        Log.d("tag","size : "+ albums.size.toString())
+                        Log.d("tag", "size : " + albums.size.toString())
                     }
-
                 }
                 iLoadAlbumCallback.onSuccess(albums)
             }
         })
     }
 
-    fun loadImages(albumRef: String, iLoadImageCallback: ILoadImageCallback){
-        val photosRef= database.getReference("users/"+LoginHelper.firebaseUser.uid+"/albums"+albumRef+"/photos")
-        var images=ArrayList<Photo>()
-        photosRef.addValueEventListener(object : ValueEventListener{
+    fun loadImages(albumRef: String, iLoadImageCallback: ILoadImageCallback) {
+        val photosRef = database.getReference("users/" + LoginHelper.firebaseUser.uid + "/albums" + albumRef + "/photos")
+        var images = ArrayList<Photo>()
+        photosRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for(photoSnapshot in dataSnapshot.children){
-                    var photo=photoSnapshot.getValue(Photo::class.java)
-                    if(photo!=null){
+                for (photoSnapshot in dataSnapshot.children) {
+                    var photo = photoSnapshot.getValue(Photo::class.java)
+                    if (photo != null) {
                         images.add(photo)
                     }
                 }
@@ -130,15 +142,15 @@ object DataManager {
         })
     }
 
-    fun loadTimeline(iTimelineCallback: ITimelineCallback){
-        val imageRef= database.getReference("users/"+LoginHelper.firebaseUser.uid+"/timeline")
-        var timeline=ArrayList<Photo>()
-        imageRef.addValueEventListener(object : ValueEventListener{
+    fun loadTimeline(iTimelineCallback: ITimelineCallback) {
+        val imageRef = database.getReference("users/" + LoginHelper.firebaseUser.uid + "/timeline")
+        var timeline = ArrayList<Photo>()
+        imageRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for(photoSnapshot in dataSnapshot.children){
-                    var photo=photoSnapshot.getValue(Photo::class.java)
-                    if(photo!=null){
+                for (photoSnapshot in dataSnapshot.children) {
+                    var photo = photoSnapshot.getValue(Photo::class.java)
+                    if (photo != null) {
                         timeline.add(photo)
                     }
                 }
@@ -155,54 +167,54 @@ object DataManager {
     }
 
 
-    interface IAlbumCreateListener{
+    interface IAlbumCreateListener {
 
-        fun onCreateSuccess(ack:String)
+        fun onCreateSuccess(ack: String)
 
-        fun onCreateFailure(ack:String)
+        fun onCreateFailure(ack: String)
 
     }
 
-    interface ITimelineUpdateListener{
+    interface ITimelineUpdateListener {
 
-        fun onUpdateSuccess(ack:String)
+        fun onUpdateSuccess(ack: String)
 
-        fun onUpdateFailure(ack:String)
+        fun onUpdateFailure(ack: String)
 
     }
 
     interface ILoadAlbumCallback {
 
-        fun onSuccess(albums:ArrayList<Album>)
+        fun onSuccess(albums: ArrayList<Album>)
 
-        fun onFailure(ack:String)
+        fun onFailure(ack: String)
 
     }
 
-    interface IImageUploadCallback{
+    interface IImageUploadCallback {
 
-        fun onSuccess(downloadUrl:String)
+        fun onSuccess(downloadUrl: String)
 
-        fun onFailure(ack:String)
+        fun onFailure(ack: String)
     }
 
-    interface ITimelineCallback{
+    interface ITimelineCallback {
 
-        fun onSuccess(timeline:List<Photo>)
+        fun onSuccess(timeline: List<Photo>)
 
-        fun onFailure(ack:String)
+        fun onFailure(ack: String)
     }
 
-    interface IAddImageCallBack{
+    interface IAddImageCallBack {
 
         fun onSuccess(ack: String)
 
         fun onFailure(ack: String)
     }
 
-    interface ILoadImageCallback{
+    interface ILoadImageCallback {
 
-        fun onSuccess(images: List<Photo>)
+        fun onSuccess(images: ArrayList<Photo>)
 
         fun onFailure(ack: String)
     }

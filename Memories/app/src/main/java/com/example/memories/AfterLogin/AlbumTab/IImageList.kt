@@ -4,16 +4,16 @@ import com.example.memories.Repository.Photo
 
 interface IImageList {
 
-    interface IImageListView{
+    interface IImageListView {
 
         fun populateList(photos: ArrayList<Photo>)
 
     }
 
 
-    interface IImageListPresenter{
+    interface IImageListPresenter {
 
-        fun getImages(ref:String)
+        fun getImages(ref: String)
 
     }
 

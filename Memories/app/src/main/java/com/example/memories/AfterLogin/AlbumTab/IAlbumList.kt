@@ -5,16 +5,16 @@ import com.example.memories.Repository.Album
 
 interface IAlbumList {
 
-    interface IAlbumListView: IBaseView {
+    interface IAlbumListView : IBaseView {
         fun addRequest(album: Album)
 
         fun categorySelect()
 
-        fun loadAlbums(albums:ArrayList<Album>)
+        fun loadAlbums(albums: ArrayList<Album>)
 
     }
 
-    interface IAlbumListPresenter{
+    interface IAlbumListPresenter {
 
         fun getAlbums()
 

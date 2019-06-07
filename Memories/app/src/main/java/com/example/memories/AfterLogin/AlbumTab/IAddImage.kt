@@ -5,16 +5,16 @@ import com.example.memories.Repository.Photo
 
 interface IAddImage {
 
-    interface IAddImageView{
+    interface IAddImageView {
 
         fun uploadSuccess()
 
     }
 
 
-    interface IAddImagePresenter{
+    interface IAddImagePresenter {
 
-        fun uploadImage(title:String, bitmap: Bitmap)
+        fun uploadImage(title: String, bitmap: Bitmap, ref: String)
     }
 
 }

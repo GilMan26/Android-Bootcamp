@@ -12,7 +12,7 @@ import com.example.memories.R
 import com.example.memories.Repository.Album
 import com.example.memories.Repository.Photo
 
-class ImageAdapter(val images:ArrayList<Photo>) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
+class ImageAdapter(val images: ArrayList<Photo>) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.image_row_layout, parent, false)
@@ -23,21 +23,21 @@ class ImageAdapter(val images:ArrayList<Photo>) : RecyclerView.Adapter<ImageAdap
         return images.size
     }
 
-    fun addImages(photos: List<Photo>){
+    fun addImages(photos: List<Photo>) {
         images.addAll(photos)
         notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(imageViewHolder: ImageViewHolder, position: Int) {
-       imageViewHolder.bindImage(images[position])
+        imageViewHolder.bindImage(images[position])
     }
 
 
-    class ImageViewHolder(itemView:View): RecyclerView.ViewHolder(itemView) {
-        fun bindImage(photo:Photo){
-            val imageView=itemView.findViewById(R.id.image) as ImageView
-            val context=imageView.context
-            if(context!=null){
+    class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bindImage(photo: Photo) {
+            val imageView = itemView.findViewById(R.id.image) as ImageView
+            val context = imageView.context
+            if (context != null) {
                 Glide.with(context!!)
                         .load(photo.url)
                         .into(imageView)

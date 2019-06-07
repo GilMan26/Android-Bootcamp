@@ -15,7 +15,7 @@ import com.example.memories.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseUser
 import kotlinx.android.synthetic.main.fragment_albums.*
 
-class MainActivity : BaseActivity(),IActivityInteractor, IAlbumSuccess , AlbumAdapter.IAlbumClickHandler{
+class MainActivity : BaseActivity(),  AlbumAdapter.IAlbumClickHandler{
 
 
     lateinit var binding: ActivityMainBinding
@@ -30,15 +30,13 @@ class MainActivity : BaseActivity(),IActivityInteractor, IAlbumSuccess , AlbumAd
         val albumListFragment = AlbumListFragment()
         val profileFragment = ProfileFragment()
         val timelineFragment = TimelineFragment()
-        val imageListFragment=ImageListFragment()
-        val addImageFragment=AddImageFragment()
-        albumListFragment.setInstance(this)
+//        albumListFragment.setInstance(this)
         supportFragmentManager.beginTransaction().add(R.id.mainFrame, albumListFragment).commit()
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.categories -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.mainFrame, addImageFragment).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.mainFrame, albumListFragment).commit()
                     return@setOnNavigationItemSelectedListener true
                 }
 
@@ -58,26 +56,6 @@ class MainActivity : BaseActivity(),IActivityInteractor, IAlbumSuccess , AlbumAd
 
     }
 
-    override fun openAlbum(id: String) {
-        var bundle=Bundle()
-        bundle.putString("ref", id)
-        var imageListFragment=ImageListFragment()
-        imageListFragment.arguments=bundle
-        supportFragmentManager.beginTransaction().replace(R.id.mainFrame, imageListFragment).commit()
-    }
-
-    override fun addAlbum() {
-        var addAlbum=AddAlbumFragment()
-        addAlbum.setInstance(this)
-        Log.d("tag", "here")
-        supportFragmentManager.beginTransaction().add(R.id.mainFrame, addAlbum).commit()
-    }
-
-    override fun switchFragment() {
-        var albumListFragment=AlbumListFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.mainFrame, albumListFragment).commit()
-    }
-
     override fun onAlbumClick(id: String) {
         var bundle=Bundle()
         bundle.putString("ref", id)
@@ -86,10 +64,6 @@ class MainActivity : BaseActivity(),IActivityInteractor, IAlbumSuccess , AlbumAd
         supportFragmentManager.beginTransaction().replace(R.id.mainFrame, imageListFragment).commit()
     }
 
-    override fun addImage() {
-        var addImageFragment=AddImageFragment()
-        supportFragmentManager.beginTransaction().replace(R.id.mainFrame, addImageFragment)
-    }
 
 
 

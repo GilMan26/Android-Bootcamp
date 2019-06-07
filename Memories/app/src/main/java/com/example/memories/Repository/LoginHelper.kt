@@ -17,7 +17,7 @@ object LoginHelper {
     lateinit var firebaseUser: FirebaseUser
 
     interface OnSignupListener {
-        fun onSignupSuccess(user:User, firebaseuser: FirebaseUser?)
+        fun onSignupSuccess(user: User, firebaseuser: FirebaseUser?)
         fun onSignupFaliure()
     }
 
@@ -70,10 +70,10 @@ object LoginHelper {
 
     }
 
-    fun saveUserDb(user:User, firebaseUser: FirebaseUser?){
+    fun saveUserDb(user: User, firebaseUser: FirebaseUser?) {
         if (firebaseUser != null) {
             Log.d("db", firebaseUser.uid)
-            val userRef= database.getReference("/users")
+            val userRef = database.getReference("/users")
             userRef.child(firebaseUser.uid).setValue(user)
         }
     }

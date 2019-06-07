@@ -1,36 +1,30 @@
 package com.example.memories.AfterLogin.AlbumTab
 
 
-import android.app.Activity
-import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.provider.MediaStore
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.memories.AfterLogin.IAlbumSuccess
+import com.example.memories.BaseFragment
 import com.example.memories.Repository.Album
 import com.example.memories.databinding.FragmentAddAlbumBinding
 
 
-class AddAlbumFragment : Fragment(), IAddAlbum.IAddAlbumView {
+class AddAlbumFragment : BaseFragment(), IAddAlbum.IAddAlbumView {
 
     lateinit var binding: FragmentAddAlbumBinding
     lateinit var presenter: AddAlbumPresenter
-    lateinit var iAlbumSuccess: IAlbumSuccess
-    lateinit var bitmap:Bitmap
 
-    companion object{
-        private var BUNDLE_ARG="key"
+    companion object {
+        private var BUNDLE_ARG = "key"
 
-        fun getInstance(data:String): AddAlbumFragment{
-            var fragment=AddAlbumFragment()
-            var bundle=Bundle()
-            bundle.putString(BUNDLE_ARG, data)
+        fun getInstance(): AddAlbumFragment {
+            var fragment = AddAlbumFragment()
+//            var bundle=Bundle()
+//            bundle.putString(BUNDLE_ARG, d)
             return fragment
         }
     }
@@ -46,16 +40,13 @@ class AddAlbumFragment : Fragment(), IAddAlbum.IAddAlbumView {
         super.onActivityCreated(savedInstanceState)
         presenter = AddAlbumPresenter(this)
         binding.button.setOnClickListener {
-            presenter.validateAlbum(binding.albumName.text.toString(), binding.albumMessage.text.toString(), bitmap)
+            presenter.validateAlbum(binding.albumName.text.toString(), binding.albumMessage.text.toString())
         }
         binding.imageView.setOnClickListener {
-//            imageExtractor()
+            //            imageExtractor()
         }
     }
 
-    fun setInstance(iAlbumSuccess: IAlbumSuccess) {
-        this.iAlbumSuccess = iAlbumSuccess
-    }
 
     override fun requestAlbum(album: Album) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -67,14 +58,8 @@ class AddAlbumFragment : Fragment(), IAddAlbum.IAddAlbumView {
 
     override fun createResponse(ack: String) {
         Toast.makeText(context, ack, Toast.LENGTH_LONG).show()
-        createSuccess()
+        fragmentTransactionHandler.pushFragment(AlbumListFragment.getInstance())
     }
-
-    override fun createSuccess() {
-        iAlbumSuccess.switchFragment()
-    }
-
-
 
 
 }

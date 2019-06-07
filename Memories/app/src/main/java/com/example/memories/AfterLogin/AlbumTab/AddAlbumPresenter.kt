@@ -9,12 +9,10 @@ class AddAlbumPresenter(val iAddAlbumView: IAddAlbum.IAddAlbumView): IAddAlbum.I
 
 
 
-    override fun validateAlbum(title: String, message: String, bitmap: Bitmap) {
+    override fun validateAlbum(title: String, message: String) {
         if(title.isEmpty())
             iAddAlbumView.showValidatiton("Album Title mandatory")
-        else if(bitmap == null){
-            iAddAlbumView.showValidatiton("Image necessary")
-        }else{
+        else{
             val tsLong = System.currentTimeMillis() / 1000
             val ts = tsLong.toString()
             val photos=ArrayList<Photo>()
@@ -23,7 +21,7 @@ class AddAlbumPresenter(val iAddAlbumView: IAddAlbum.IAddAlbumView): IAddAlbum.I
                 DataManager.createAlbum(album, object : DataManager.IAlbumCreateListener{
                     override fun onCreateSuccess(ack: String) {
                         iAddAlbumView.createResponse(ack)
-                        iAddAlbumView.createSuccess()
+//                        iAddAlbumView.createSuccess()
                     }
 
                     override fun onCreateFailure(ack: String) {
@@ -37,7 +35,7 @@ class AddAlbumPresenter(val iAddAlbumView: IAddAlbum.IAddAlbumView): IAddAlbum.I
                 DataManager.createAlbum(album, object : DataManager.IAlbumCreateListener{
                     override fun onCreateSuccess(ack: String) {
                         iAddAlbumView.createResponse(ack)
-                        iAddAlbumView.createSuccess()
+//                        iAddAlbumView.createSuccess()
                     }
 
                     override fun onCreateFailure(ack: String) {
