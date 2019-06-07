@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
-        tools:context=".Login.SignUpFragment">
+        tools:context=".login.SignUpFragment">
 
         <ProgressBar
             android:id="@+id/progress_circular"

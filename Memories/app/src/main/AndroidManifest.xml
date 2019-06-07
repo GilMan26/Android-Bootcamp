@@ -22,7 +22,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-        <activity android:name=".Login.LoginActivity">
+        <activity android:name=".login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,7 +30,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".AfterLogin.MainActivity">
+        <activity android:name=".afterlogin.MainActivity">
 
         </activity>
     </application>

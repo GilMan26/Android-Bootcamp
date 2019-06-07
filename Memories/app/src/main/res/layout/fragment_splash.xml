@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:background="#123456"
     android:layout_height="match_parent"
-    tools:context=".Login.SplashFragment">
+    tools:context=".login.SplashFragment">
 
     <!-- TODO: Update blank fragment layout -->
 

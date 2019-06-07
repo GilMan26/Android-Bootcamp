@@ -14,7 +14,7 @@
         android:background="#FFFFFF"
         android:weightSum="10"
         android:layout_height="match_parent"
-        tools:context=".AfterLogin.AlbumTab.ImageListFragment">
+        tools:context=".afterlogin.album.ImageListFragment">
 
         <!-- TODO: Update blank fragment layout -->
         <TextView
