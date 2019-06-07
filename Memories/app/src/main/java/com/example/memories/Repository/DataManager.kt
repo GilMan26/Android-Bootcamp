@@ -8,8 +8,7 @@ import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
 import java.io.ByteArrayOutputStream
-import com.google.android.gms.tasks.Continuation as Continuation1
-import com.google.android.gms.tasks.Continuation as Continuation2
+import com.google.android.gms.tasks.Continuation
 
 object DataManager {
 
@@ -30,8 +29,21 @@ object DataManager {
         }
     }
 
+    fun addImage(image: Photo, albumRef:String,  iImageUploadCallback: IImageUploadCallback){
+        val imageRef= database.getReference("/users/"+LoginHelper.firebaseUser.uid+"/albums/"+albumRef+"/photos")
+        var key=imageRef.push().key
+        if(key!=null){
+            image.id=key
+            imageRef.child(key).setValue(image).addOnSuccessListener {
+                iImageUploadCallback.onSuccess("Image Added")
+            }.addOnFailureListener{
+                iImageUploadCallback.onFailure("failed")
+            }
+        }
+    }
 
-    fun updateTimeline(image:Photo, iImelineUpdateListener: ITImelineUpdateListener){
+
+    fun updateTimeline(image:Photo, iImelineUpdateListener: ITimelineUpdateListener){
         val timelineRef= database.getReference("users/"+LoginHelper.firebaseUser.uid+"/timeline")
         val key=timelineRef.push().key
         if(key!=null){
@@ -54,22 +66,21 @@ object DataManager {
         val data = baos.toByteArray()
 
         var uploadTask = imageReference.putBytes(data)
-        val urlTask = uploadTask.continueWithTask(Continuation2<UploadTask.TaskSnapshot, Task<Uri>> Continuation1@{ task ->
+        val urlTask = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> Continuation@{ task ->
             if (!task.isSuccessful) {
                 task.exception?.let {
                     Log.d("storage", "failed")
                     throw it
                 }
             }
-            return@Continuation1 imageReference.downloadUrl
+            return@Continuation imageReference.downloadUrl
         }).addOnCompleteListener { task ->
             if (task.isSuccessful) {
                 downloadUri = task.result.toString()
                 iImageUploadCallback.onSuccess(downloadUri)
                 Log.d("storage", downloadUri)
             } else {
-                // Handle failures
-                // ...
+                iImageUploadCallback.onFailure("failed")
             }
         }
     }
@@ -85,7 +96,7 @@ object DataManager {
             }
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                for (albumSnapshot in dataSnapshot.getChildren()) {
+                for (albumSnapshot in dataSnapshot.children) {
                     Log.d("tag", dataSnapshot.toString())
                     var album = albumSnapshot.getValue(Album::class.java)
                     if (album != null){
@@ -99,21 +110,44 @@ object DataManager {
         })
     }
 
+    fun loadImages(albumRef: String, iLoadImageCallback: ILoadImageCallback){
+        val photosRef= database.getReference("users/"+LoginHelper.firebaseUser.uid+"/albums"+albumRef+"/photos")
+        var images=ArrayList<Photo>()
+        photosRef.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                for(photoSnapshot in dataSnapshot.children){
+                    var photo=photoSnapshot.getValue(Photo::class.java)
+                    if(photo!=null){
+                        images.add(photo)
+                    }
+                }
+                iLoadImageCallback.onSuccess(images)
+            }
 
+            override fun onCancelled(p0: DatabaseError) {
+                iLoadImageCallback.onFailure(p0.toString())
+            }
+        })
+    }
 
-
-
-    fun loadTimeline(){
+    fun loadTimeline(iTimelineCallback: ITimelineCallback){
         val imageRef= database.getReference("users/"+LoginHelper.firebaseUser.uid+"/timeline")
         var timeline=ArrayList<Photo>()
         imageRef.addValueEventListener(object : ValueEventListener{
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                for(photoSnapshot in dataSnapshot.children){
+                    var photo=photoSnapshot.getValue(Photo::class.java)
+                    if(photo!=null){
+                        timeline.add(photo)
+                    }
+                }
+                iTimelineCallback.onSuccess(timeline)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                iTimelineCallback.onFailure(error.toString())
             }
 
 
@@ -129,11 +163,12 @@ object DataManager {
 
     }
 
-    interface ITImelineUpdateListener{
+    interface ITimelineUpdateListener{
 
         fun onUpdateSuccess(ack:String)
 
         fun onUpdateFailure(ack:String)
+
     }
 
     interface ILoadAlbumCallback {
@@ -149,5 +184,26 @@ object DataManager {
         fun onSuccess(downloadUrl:String)
 
         fun onFailure(ack:String)
+    }
+
+    interface ITimelineCallback{
+
+        fun onSuccess(timeline:List<Photo>)
+
+        fun onFailure(ack:String)
+    }
+
+    interface IAddImageCallBack{
+
+        fun onSuccess(ack: String)
+
+        fun onFailure(ack: String)
+    }
+
+    interface ILoadImageCallback{
+
+        fun onSuccess(images: List<Photo>)
+
+        fun onFailure(ack: String)
     }
 }

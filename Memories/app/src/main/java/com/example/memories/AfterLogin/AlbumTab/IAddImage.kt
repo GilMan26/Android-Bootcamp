@@ -7,7 +7,7 @@ interface IAddImage {
 
     interface IAddImageView{
 
-
+        fun uploadSuccess()
 
     }
 

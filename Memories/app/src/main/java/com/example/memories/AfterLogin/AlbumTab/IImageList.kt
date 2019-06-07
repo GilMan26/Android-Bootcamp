@@ -1,15 +1,19 @@
 package com.example.memories.AfterLogin.AlbumTab
 
+import com.example.memories.Repository.Photo
+
 interface IImageList {
 
-    interface ICategoryDetailView{
+    interface IImageListView{
+
+        fun populateList(photos: ArrayList<Photo>)
 
     }
 
 
-    interface ICategoryPresenter{
+    interface IImageListPresenter{
 
-        fun getImages()
+        fun getImages(ref:String)
 
     }
 

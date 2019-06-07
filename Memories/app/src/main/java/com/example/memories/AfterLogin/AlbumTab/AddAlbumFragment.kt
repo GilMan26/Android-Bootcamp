@@ -24,6 +24,17 @@ class AddAlbumFragment : Fragment(), IAddAlbum.IAddAlbumView {
     lateinit var iAlbumSuccess: IAlbumSuccess
     lateinit var bitmap:Bitmap
 
+    companion object{
+        private var BUNDLE_ARG="key"
+
+        fun getInstance(data:String): AddAlbumFragment{
+            var fragment=AddAlbumFragment()
+            var bundle=Bundle()
+            bundle.putString(BUNDLE_ARG, data)
+            return fragment
+        }
+    }
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

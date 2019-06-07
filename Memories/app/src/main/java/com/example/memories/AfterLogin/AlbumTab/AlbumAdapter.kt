@@ -11,12 +11,15 @@ import com.example.memories.Repository.Album
 class AlbumAdapter(var albums:ArrayList<Album>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
 
+    lateinit var clickHandler: IAlbumClickHandler
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.album_row_layout, parent, false)
         return AlbumViewHolder(itemView)
     }
 
-
+    fun setInstance(iAlbumClickHandler: IAlbumClickHandler){
+        clickHandler=iAlbumClickHandler
+    }
 
     override fun getItemCount(): Int {
         return albums.size
@@ -31,7 +34,7 @@ class AlbumAdapter(var albums:ArrayList<Album>) : RecyclerView.Adapter<AlbumAdap
         var data=albums[positon]
         viewHolder.bindItems(data)
         viewHolder.itemView.setOnClickListener{
-
+            clickHandler.onAlbumClick(data.id)
         }
     }
 
@@ -43,5 +46,11 @@ class AlbumAdapter(var albums:ArrayList<Album>) : RecyclerView.Adapter<AlbumAdap
             textViewTitle.text = album.title
             textViewTime.text = album.time
         }
+    }
+
+    interface IAlbumClickHandler{
+
+        fun onAlbumClick(id:String)
+
     }
 }
