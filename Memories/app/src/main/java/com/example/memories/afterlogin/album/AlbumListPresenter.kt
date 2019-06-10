@@ -8,9 +8,11 @@ class AlbumListPresenter(val iAlbumListView: IAlbumList.IAlbumListView) : IAlbum
 
 
     override fun getAlbums() {
+        iAlbumListView.showProgress()
         DataManager.loadAlbums(object : DataManager.ILoadAlbumCallback {
             override fun onSuccess(albums: ArrayList<Album>) {
                 Log.d("presenter", albums.size.toString())
+                iAlbumListView.hideProgress()
                 iAlbumListView.loadAlbums(albums)
             }
 

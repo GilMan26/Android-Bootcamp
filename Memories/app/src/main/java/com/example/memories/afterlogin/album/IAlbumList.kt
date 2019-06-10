@@ -6,6 +6,7 @@ import com.example.memories.repository.Album
 interface IAlbumList {
 
     interface IAlbumListView : IBaseView {
+
         fun addRequest(album: Album)
 
         fun categorySelect()

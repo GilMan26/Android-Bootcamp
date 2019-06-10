@@ -25,10 +25,11 @@ class AddImagePresenter(val iAddImageView: IAddImage.IAddImageView) : IAddImage.
                 })
                 DataManager.updateTimeline(photo, object : DataManager.ITimelineUpdateListener{
                     override fun onUpdateFailure(ack: String) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        Log.d("timeline", "timeline update successful")
                     }
 
                     override fun onUpdateSuccess(ack: String) {
+                        Log.d("timeline", "timeline update unsuccessful")
                         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
                 })

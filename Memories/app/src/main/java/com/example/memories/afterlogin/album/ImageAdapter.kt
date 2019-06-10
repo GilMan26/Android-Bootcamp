@@ -8,6 +8,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.memories.R
 import com.example.memories.repository.Photo
+import kotlinx.android.synthetic.main.image_row_layout.view.*
 
 class ImageAdapter(val images: ArrayList<Photo>) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
@@ -32,12 +33,12 @@ class ImageAdapter(val images: ArrayList<Photo>) : RecyclerView.Adapter<ImageAda
 
     class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindImage(photo: Photo) {
-            val imageView = itemView.findViewById(R.id.image) as ImageView
-            val context = imageView.context
+//            val imageView = itemView.findViewById(R.id.image) as ImageView
+            val context = itemView.image.context
             if (context != null) {
                 Glide.with(context!!)
                         .load(photo.url)
-                        .into(imageView)
+                        .into(itemView.image)
             }
         }
     }

@@ -14,7 +14,7 @@ class AddAlbumPresenter(val iAddAlbumView: IAddAlbum.IAddAlbumView): IAddAlbum.I
         else{
             val tsLong = System.currentTimeMillis() / 1000
             val ts = tsLong.toString()
-            val photos=ArrayList<Photo>()
+            val photos=HashMap<String, Photo>()
             if(message==null){
                 var album=Album("", title,ts, "",  photos)
                 DataManager.createAlbum(album, object : DataManager.IAlbumCreateListener{

@@ -72,20 +72,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textInputLayout" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="96dp"
-            android:layout_marginEnd="8dp"
-            android:clickable="true"
-            android:src="@drawable/blank_profile"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button"
-            tools:srcCompat="@tools:sample/avatars" />
+        <!--<ImageView-->
+            <!--android:id="@+id/imageView"-->
+            <!--android:layout_width="100dp"-->
+            <!--android:layout_height="100dp"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="96dp"-->
+            <!--android:layout_marginEnd="8dp"-->
+            <!--android:clickable="true"-->
+            <!--android:src="@drawable/blank_profile"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.498"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/button"-->
+            <!--tools:srcCompat="@tools:sample/avatars" />-->
 
     </android.support.constraint.ConstraintLayout>
 </layout>

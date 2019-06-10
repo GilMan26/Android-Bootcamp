@@ -35,9 +35,7 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_image_list, container, false)
-//        Log.d("data", savedInstanceState.toString())
         if (arguments != null) {
             albumRef = arguments!!.getString(ALBUM_REF)
             Log.d("on create test", albumRef)
@@ -52,6 +50,7 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView {
         presenter = ImageListPresenter(this)
         adapter = ImageAdapter(photos)
         presenter.getImages(albumRef)
+        binding.imageRecycler.adapter=adapter
         binding.imageRecycler.layoutManager = StaggeredGridLayoutManager(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS, StaggeredGridLayoutManager.VERTICAL)
         binding.addImageFab.setOnClickListener {
             fragmentTransactionHandler.pushFragment(AddImageFragment.getInstance(albumRef))
