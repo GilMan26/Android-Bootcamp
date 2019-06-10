@@ -1,6 +1,10 @@
 package com.example.memories.afterlogin.timeline
 
-class TimelinePresenter : ITimelineContract.ITimelinePresenter{
+import android.util.Log
+import com.example.memories.repository.DataManager
+import com.example.memories.repository.Photo
+
+class TimelinePresenter(val iTimelineView: ITimelineContract.ITimelineView) : ITimelineContract.ITimelinePresenter{
 
     override fun getImage() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -8,7 +12,17 @@ class TimelinePresenter : ITimelineContract.ITimelinePresenter{
 
 
     override fun loadImages() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        iTimelineView.showProgress()
+        DataManager.loadTimeline(object : DataManager.ITimelineCallback{
+            override fun onSuccess(timeline: ArrayList<Photo>) {
+                Log.d("timeline" , "success")
+                iTimelineView.populateList(timeline)
+            }
+
+            override fun onFailure(ack: String) {
+                Log.d("timeline", ack)
+            }
+        })
     }
 
 }

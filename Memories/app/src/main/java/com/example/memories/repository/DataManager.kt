@@ -138,16 +138,19 @@ object DataManager {
 
     fun loadTimeline(iTimelineCallback: ITimelineCallback) {
         val imageRef = database.getReference("users/" + LoginHelper.firebaseUser.uid + "/timeline")
+        Log.d("timeline", imageRef.toString())
         var timeline = ArrayList<Photo>()
         imageRef.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (photoSnapshot in dataSnapshot.children) {
+                    Log.d("timeline", dataSnapshot.toString())
                     var photo = photoSnapshot.getValue(Photo::class.java)
                     if (photo != null) {
                         timeline.add(photo)
                     }
                 }
+                Log.d("timeline array", timeline.toString())
                 iTimelineCallback.onSuccess(timeline)
 
             }
@@ -194,7 +197,7 @@ object DataManager {
 
     interface ITimelineCallback {
 
-        fun onSuccess(timeline: List<Photo>)
+        fun onSuccess(timeline: ArrayList<Photo>)
 
         fun onFailure(ack: String)
     }
