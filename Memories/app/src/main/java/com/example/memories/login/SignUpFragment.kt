@@ -1,6 +1,7 @@
 package com.example.memories.login
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
@@ -8,15 +9,27 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.example.memories.App
+import com.example.memories.BaseFragment
 import com.example.memories.databinding.FragmentSignUpBinding
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.common.api.ApiException
 
 
-class SignUpFragment : Fragment(), ISignupContract.ISignUpView {
+class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
 
 
+    val REQUEST_CODE_GOOGLE=101
     lateinit var binding: FragmentSignUpBinding
     lateinit var signUpPresenter: SignUpPresenter
-    lateinit var iSwitchView: ISwitchView
+
+    companion object{
+
+        fun getInstance():SignUpFragment{
+            var fragment= SignUpFragment()
+            return fragment
+        }
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,7 +45,10 @@ class SignUpFragment : Fragment(), ISignupContract.ISignUpView {
         }
         binding.btnLogin.setOnClickListener {
             Log.d("click", "in fragment")
-            iSwitchView.replaceFragment()
+           fragmentTransactionHandler.pushFragment(LoginFragment.getInstance())
+        }
+        binding.googleSignButton.setOnClickListener {
+            googleLogin()
         }
     }
 
@@ -55,12 +71,29 @@ class SignUpFragment : Fragment(), ISignupContract.ISignUpView {
         binding.progressCircular.visibility = View.GONE
     }
 
-    fun setSwitchInstance(iSwitchView: ISwitchView) {
-        this.iSwitchView = iSwitchView
+    override fun googleLogin() {
+        val app=activity?.application as App
+        val intent=app.googleSignInClient.signInIntent
+        startActivityForResult(intent, REQUEST_CODE_GOOGLE)
     }
 
-    interface ISwitchView {
-        fun replaceFragment()
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_GOOGLE) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)
+                signUpPresenter.requstGoogleLogin(account)
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+                Log.w("signin", "Google sign in failed", e)
+            }
+        }
+    }
+
+    override fun requestUserDetails(id:String) {
+        fragmentTransactionHandler.pushFragment(UserFormFragment.getInstance())
     }
 
 

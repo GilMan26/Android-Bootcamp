@@ -3,6 +3,7 @@ package com.example.memories.afterlogin.album
 import android.databinding.DataBindingUtil
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,7 +14,7 @@ import com.example.memories.R
 import com.example.memories.repository.Photo
 import com.example.memories.databinding.FragmentImageListBinding
 
-class ImageListFragment : BaseFragment(), IImageList.IImageListView {
+class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapter.ImageClick {
 
     lateinit var binding: FragmentImageListBinding
     lateinit var albumRef: String
@@ -49,10 +50,10 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView {
         super.onActivityCreated(savedInstanceState)
         Log.d("data", savedInstanceState.toString())
         presenter = ImageListPresenter(this)
-        adapter = ImageAdapter(photos)
+        adapter = ImageAdapter(photos, this)
         presenter.getImages(albumRef)
         binding.imageRecycler.adapter=adapter
-        binding.imageRecycler.layoutManager = StaggeredGridLayoutManager(StaggeredGridLayoutManager.GAP_HANDLING_MOVE_ITEMS_BETWEEN_SPANS, StaggeredGridLayoutManager.VERTICAL)
+        binding.imageRecycler.layoutManager = GridLayoutManager(context, 2)
         binding.addImageFab.setOnClickListener {
             fragmentTransactionHandler.pushFragment(AddImageFragment.getInstance(albumRef))
         }
@@ -64,6 +65,10 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView {
 //        if(photos.size==0)
 //            binding.parentImages.background= Drawable.createFromPath("/home/ttn/AndroidStudioProjects/Memories/app/src/main/res/drawable/ic_hourglass_empty_black_24dp.xml")
         adapter.addImages(photos)
+    }
+
+    override fun onClick(url: String) {
+        fragmentTransactionHandler.pushFragment(ImageFragment.getInstance(url))
     }
 
 

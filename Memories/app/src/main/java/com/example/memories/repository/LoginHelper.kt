@@ -17,7 +17,7 @@ object LoginHelper {
     lateinit var firebaseUser: FirebaseUser
 
     interface OnSignupListener {
-        fun onSignupSuccess(user: User, firebaseuser: FirebaseUser?)
+        fun onSignupSuccess(firebaseuser: FirebaseUser?)
         fun onSignupFaliure()
     }
 
@@ -30,11 +30,13 @@ object LoginHelper {
         auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {
-//                        signupListener.onSignupSuccess(user=User(username), firebaseuser = auth.currentUser)
                         it.result?.user?.sendEmailVerification()
+                        Log.d("signup", "success")
+                        signupListener.onSignupSuccess( firebaseuser = auth.currentUser)
 
 
                     } else {
+                        Log.d("signup", "failed")
                         signupListener.onSignupFaliure()
                     }
                 })

@@ -44,6 +44,11 @@ class TimelineFragment : BaseFragment(), ITimelineContract.ITimelineView, TImeli
         adapter = TImelineAdapter(list, this)
         binding.timelineRV.adapter = adapter
         binding.timelineRV.layoutManager = LinearLayoutManager(context)
+        binding.refreshTimeline.setOnRefreshListener {
+
+            presenter.loadImages()
+
+        }
 
     }
 
@@ -61,6 +66,7 @@ class TimelineFragment : BaseFragment(), ITimelineContract.ITimelineView, TImeli
 
     override fun populateList(list: ArrayList<Photo>) {
         adapter.addList(list)
+        binding.refreshTimeline.setRefreshing(false)
     }
 
     override fun imageClick(url: String) {

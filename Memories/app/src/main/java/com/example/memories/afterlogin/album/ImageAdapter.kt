@@ -10,7 +10,7 @@ import com.example.memories.R
 import com.example.memories.repository.Photo
 import kotlinx.android.synthetic.main.image_row_layout.view.*
 
-class ImageAdapter(val images: ArrayList<Photo>) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
+class ImageAdapter(val images: ArrayList<Photo>, var clickHandler:ImageAdapter.ImageClick) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.image_row_layout, parent, false)
@@ -28,6 +28,9 @@ class ImageAdapter(val images: ArrayList<Photo>) : RecyclerView.Adapter<ImageAda
 
     override fun onBindViewHolder(imageViewHolder: ImageViewHolder, position: Int) {
         imageViewHolder.bindImage(images[position])
+        imageViewHolder.itemView.setOnClickListener{
+            clickHandler.onClick(images[position].url)
+        }
     }
 
 
@@ -41,5 +44,11 @@ class ImageAdapter(val images: ArrayList<Photo>) : RecyclerView.Adapter<ImageAda
                         .into(itemView.image)
             }
         }
+    }
+
+    interface ImageClick{
+
+        fun onClick(url:String)
+
     }
 }

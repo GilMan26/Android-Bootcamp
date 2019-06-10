@@ -46,13 +46,13 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
         binding.addFab.setOnClickListener {
             fragmentTransactionHandler.pushFragment(AddAlbumFragment.getInstance())
         }
+        binding.refreshAlbum.setOnRefreshListener {
+            presenter.getAlbums()
+        }
         binding.categoryRecycler.adapter = adapter
         binding.categoryRecycler.layoutManager = GridLayoutManager(context, 2)
     }
 
-    override fun addRequest(album: Album) {
-//        presenter.addAlbum(album)
-    }
 
     override fun showProgress() {
         binding.progressBar.visibility=View.VISIBLE
@@ -70,6 +70,7 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
         var albums = albums
         Log.d("tag", albums.toString())
         adapter.addList(albums)
+        binding.refreshAlbum.isRefreshing=false
     }
 
     override fun onAlbumClick(id: String) {

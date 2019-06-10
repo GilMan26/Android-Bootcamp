@@ -1,6 +1,7 @@
 package com.example.memories
 
 import android.app.Application
+import android.util.Log
 import com.example.memories.repository.DataManager
 import com.example.memories.repository.LoginHelper
 import com.google.android.gms.auth.api.signin.GoogleSignIn

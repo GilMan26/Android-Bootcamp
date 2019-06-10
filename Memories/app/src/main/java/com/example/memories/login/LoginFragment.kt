@@ -10,16 +10,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.memories.App
+import com.example.memories.BaseFragment
 import com.example.memories.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
 
 
-class LoginFragment : Fragment(), ILoginContract.ILoginView {
+class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
+
+    companion object{
+
+        fun getInstance(): LoginFragment{
+            var fragment=LoginFragment()
+            return fragment
+        }
+
+    }
 
     lateinit var loginPresenter: LoginPresenter
     lateinit var binding: FragmentLoginBinding
-    val REQUEST_CODE_GOOGLE=101
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -34,9 +43,7 @@ class LoginFragment : Fragment(), ILoginContract.ILoginView {
             loginPresenter.requestLogin(binding.userLoginET.text.toString(), binding.passLoginET.text.toString())
         }
 
-       binding.googleSignButton.setOnClickListener {
-           googleLogin()
-       }
+
     }
 
     override fun showProgress() {
@@ -59,24 +66,5 @@ class LoginFragment : Fragment(), ILoginContract.ILoginView {
         Toast.makeText(context, "Login Successful", Toast.LENGTH_LONG).show()
     }
 
-    override fun googleLogin() {
-        val app=activity?.application as App
-        val intent=app.googleSignInClient.signInIntent
-        startActivityForResult(intent, REQUEST_CODE_GOOGLE)
-    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_GOOGLE) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)
-                loginPresenter.requstGoogleLogin(account)
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Log.w("signin", "Google sign in failed", e)
-            }
-        }
-    }
 }

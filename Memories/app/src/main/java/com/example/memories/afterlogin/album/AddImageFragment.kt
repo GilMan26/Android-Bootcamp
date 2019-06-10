@@ -13,12 +13,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.memories.BaseFragment
 
 import com.example.memories.R
 import com.example.memories.databinding.FragmentAddImageBinding
 
 
-class AddImageFragment : Fragment(), IAddImage.IAddImageView {
+class AddImageFragment : BaseFragment(), IAddImage.IAddImageView {
 
 
     lateinit var presenter: AddImagePresenter
@@ -68,6 +69,7 @@ class AddImageFragment : Fragment(), IAddImage.IAddImageView {
 
     override fun uploadSuccess() {
         Log.d("success", "Success")
+        fragmentTransactionHandler.pushFragment(ImageListFragment.getInstance(albumRef))
     }
 
 

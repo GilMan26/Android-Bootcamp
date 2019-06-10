@@ -6,11 +6,22 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.memories.BaseFragment
 
 import com.example.memories.R
 
 
-class SplashFragment : Fragment() {
+class SplashFragment : BaseFragment() {
+
+    companion object{
+
+        fun getInstance(): SplashFragment{
+            var fragment=SplashFragment()
+            return fragment
+        }
+
+
+    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

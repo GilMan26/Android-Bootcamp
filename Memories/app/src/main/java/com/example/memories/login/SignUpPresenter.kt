@@ -4,6 +4,7 @@ import android.text.TextUtils
 import android.util.Patterns
 import com.example.memories.repository.LoginHelper
 import com.example.memories.repository.User
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 
 class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupContract.ISignupPresenter {
@@ -20,8 +21,11 @@ class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupCont
         } else {
             signUpView.showProgress()
             LoginHelper.signUp(username, password, object : LoginHelper.OnSignupListener {
-                override fun onSignupSuccess(user: User, firebasseUser: FirebaseUser?) {
-                    LoginHelper.saveUserDb(user, firebasseUser)
+                override fun onSignupSuccess(firebasseUser: FirebaseUser?) {
+                    if (firebasseUser != null) {
+                        getUserDetails(firebasseUser.uid)
+                    }
+//                    LoginHelper.saveUserDb(user, firebasseUser)
                     signUpView.hideProgress()
                     signUpView.loginSuccessful()
                 }
@@ -32,6 +36,14 @@ class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupCont
                 }
             })
         }
+    }
+
+    override fun requstGoogleLogin(googleSignInAccount: GoogleSignInAccount?) {
+        LoginHelper.firebaseAuthWithGoogle(googleSignInAccount)
+    }
+
+    override fun getUserDetails(string: String) {
+        signUpView.requestUserDetails(string)
     }
 
 

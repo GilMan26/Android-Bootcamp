@@ -7,8 +7,6 @@ interface IAlbumList {
 
     interface IAlbumListView : IBaseView {
 
-        fun addRequest(album: Album)
-
         fun categorySelect()
 
         fun loadAlbums(albums: ArrayList<Album>)
