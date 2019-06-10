@@ -41,9 +41,6 @@ class AddAlbumFragment : BaseFragment(), IAddAlbum.IAddAlbumView {
         binding.button.setOnClickListener {
             presenter.validateAlbum(binding.albumName.text.toString(), binding.albumMessage.text.toString())
         }
-//        binding.imageView.setOnClickListener {
-//                        imageExtractor()
-//        }
     }
 
 

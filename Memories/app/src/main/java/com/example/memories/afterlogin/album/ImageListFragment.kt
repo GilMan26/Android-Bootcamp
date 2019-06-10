@@ -1,6 +1,7 @@
 package com.example.memories.afterlogin.album
 
 import android.databinding.DataBindingUtil
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
@@ -60,6 +61,8 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView {
 
     override fun populateList(photos: ArrayList<Photo>) {
         this.photos = photos
+//        if(photos.size==0)
+//            binding.parentImages.background= Drawable.createFromPath("/home/ttn/AndroidStudioProjects/Memories/app/src/main/res/drawable/ic_hourglass_empty_black_24dp.xml")
         adapter.addImages(photos)
     }
 

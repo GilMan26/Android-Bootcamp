@@ -1,13 +1,17 @@
 package com.example.memories.afterlogin.profile
 
+import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.memories.BaseFragment
 import com.example.memories.R
+import com.example.memories.databinding.FragmentProfileBinding
 
-class ProfileFragment:Fragment(), IProfileContract.IProfileView{
+class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
+    lateinit var binding:FragmentProfileBinding
 
     companion object{
         private var BUNDLE_ARG="key"
@@ -20,8 +24,18 @@ class ProfileFragment:Fragment(), IProfileContract.IProfileView{
         }
     }
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+        binding=DataBindingUtil.inflate(inflater, R.layout.fragment_profile, container, false)
+        return binding.root
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        binding.logoutbtn.setOnClickListener{
+
+        }
     }
 
     override fun requestChangeProfile() {

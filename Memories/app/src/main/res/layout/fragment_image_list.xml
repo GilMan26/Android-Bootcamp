@@ -9,6 +9,7 @@
     </data>
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/parent_images"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:background="#FFFFFF"

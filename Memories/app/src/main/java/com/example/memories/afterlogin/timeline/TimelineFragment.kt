@@ -8,11 +8,13 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.memories.BaseFragment
 import com.example.memories.R
+import com.example.memories.afterlogin.album.ImageFragment
 import com.example.memories.databinding.FragmentTimelineBinding
 import com.example.memories.repository.Photo
 
-class TimelineFragment : Fragment(), ITimelineContract.ITimelineView {
+class TimelineFragment : BaseFragment(), ITimelineContract.ITimelineView, TImelineAdapter.TimelineClickHandler {
 
     lateinit var binding: FragmentTimelineBinding
     lateinit var adapter: TImelineAdapter
@@ -39,7 +41,7 @@ class TimelineFragment : Fragment(), ITimelineContract.ITimelineView {
         super.onActivityCreated(savedInstanceState)
         presenter = TimelinePresenter(this)
         presenter.loadImages()
-        adapter = TImelineAdapter(list)
+        adapter = TImelineAdapter(list, this)
         binding.timelineRV.adapter = adapter
         binding.timelineRV.layoutManager = LinearLayoutManager(context)
 
@@ -59,5 +61,9 @@ class TimelineFragment : Fragment(), ITimelineContract.ITimelineView {
 
     override fun populateList(list: ArrayList<Photo>) {
         adapter.addList(list)
+    }
+
+    override fun imageClick(url: String) {
+        fragmentTransactionHandler.pushFragment(ImageFragment.getInstance(url))
     }
 }

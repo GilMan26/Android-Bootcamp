@@ -12,7 +12,7 @@ import com.example.memories.repository.Photo
 import kotlinx.android.synthetic.main.image_row_layout.view.*
 import kotlinx.android.synthetic.main.timeline_row.view.*
 
-class TImelineAdapter(var list: List<Photo>) : RecyclerView.Adapter<TImelineAdapter.TimeLineViewHolder>() {
+class TImelineAdapter(var list: List<Photo>, val clickHandler: TimelineClickHandler) : RecyclerView.Adapter<TImelineAdapter.TimeLineViewHolder>() {
 
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TimeLineViewHolder {
@@ -31,6 +31,9 @@ class TImelineAdapter(var list: List<Photo>) : RecyclerView.Adapter<TImelineAdap
 
     override fun onBindViewHolder(timelineViewHolder: TimeLineViewHolder, position: Int) {
         timelineViewHolder.bindImage(list[position])
+        timelineViewHolder.itemView.setOnClickListener{
+            clickHandler.imageClick(list[position].url)
+        }
     }
 
 
@@ -44,6 +47,15 @@ class TImelineAdapter(var list: List<Photo>) : RecyclerView.Adapter<TImelineAdap
                         .load(photo.url)
                         .into(itemView.timelineIV)
             }
+            itemView.setOnClickListener{
+
+            }
         }
+    }
+
+    interface TimelineClickHandler{
+
+        fun imageClick(url:String)
+
     }
 }

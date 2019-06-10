@@ -14,12 +14,6 @@
         android:layout_height="match_parent"
         tools:context=".afterlogin.timeline.TimelineFragment">
 
-        <!-- TODO: Update blank fragment layout -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Timeline" />
-
         <android.support.v7.widget.RecyclerView
             android:id="@+id/timelineRV"
             android:layout_width="match_parent"

@@ -18,6 +18,8 @@ interface IProfileContract {
 
         fun changeProfile()
 
+        fun logout()
+
     }
 
 }
