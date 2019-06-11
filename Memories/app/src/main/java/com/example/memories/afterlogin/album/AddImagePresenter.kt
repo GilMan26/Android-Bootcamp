@@ -1,7 +1,6 @@
 package com.example.memories.afterlogin.album
 
 import android.graphics.Bitmap
-import android.provider.ContactsContract
 import android.util.Log
 import com.example.memories.repository.DataManager
 import com.example.memories.repository.Photo
@@ -17,6 +16,7 @@ class AddImagePresenter(val iAddImageView: IAddImage.IAddImageView) : IAddImage.
                 DataManager.addImage(photo, ref, object : DataManager.IAddImageCallBack {
                     override fun onSuccess(downloadUrl: String) {
                         Log.d("upload", "success")
+                        iAddImageView.uploadSuccess()
                     }
 
                     override fun onFailure(ack: String) {
@@ -26,7 +26,6 @@ class AddImagePresenter(val iAddImageView: IAddImage.IAddImageView) : IAddImage.
                 DataManager.updateTimeline(photo, object : DataManager.ITimelineUpdateListener{
                     override fun onUpdateFailure(ack: String) {
                         Log.d("timeline", "timeline update successful")
-                        iAddImageView.uploadSuccess()
                     }
 
                     override fun onUpdateSuccess(ack: String) {

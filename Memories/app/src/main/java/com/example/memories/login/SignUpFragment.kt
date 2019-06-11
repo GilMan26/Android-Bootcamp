@@ -7,18 +7,14 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.example.memories.App
 import com.example.memories.BaseFragment
 import com.example.memories.databinding.FragmentSignUpBinding
 import com.example.memories.repository.User
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.common.api.ApiException
 
 
 class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {

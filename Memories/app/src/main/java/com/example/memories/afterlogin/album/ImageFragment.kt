@@ -5,7 +5,6 @@ import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import com.example.memories.BaseFragment
 
 import com.example.memories.R
 import com.example.memories.databinding.FragmentImageBinding
-import java.net.URL
 
 
 class ImageFragment : BaseFragment(), DownloadAsyncTask.IDownloadListener {
@@ -67,6 +65,7 @@ class ImageFragment : BaseFragment(), DownloadAsyncTask.IDownloadListener {
         }
 
     }
+
 
 
 }

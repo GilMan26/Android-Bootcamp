@@ -18,6 +18,7 @@ object DataManager {
     fun createAlbum(album: Album, iAlbumCreateListener: IAlbumCreateListener) {
         val albumRef = database.getReference("/users/" + LoginHelper.firebaseUser.uid + "/albums")
         var key = albumRef.push().key
+        album.cover="https://firebasestorage.googleapis.com/v0/b/memories-1e4f7.appspot.com/o/images%2Fblank_profile.png?alt=media&token=12b0fe92-c80e-4671-961f-b5b449bba5de"
         if (key != null) {
             album.id = key
             albumRef.child(key).setValue(album).addOnSuccessListener {

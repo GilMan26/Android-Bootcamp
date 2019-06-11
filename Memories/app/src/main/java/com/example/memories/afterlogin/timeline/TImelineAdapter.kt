@@ -1,15 +1,12 @@
 package com.example.memories.afterlogin.timeline
 
-import android.content.Context
 import android.support.v7.widget.RecyclerView
-import android.text.Layout
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.example.memories.R
 import com.example.memories.repository.Photo
-import kotlinx.android.synthetic.main.image_row_layout.view.*
 import kotlinx.android.synthetic.main.timeline_row.view.*
 
 class TImelineAdapter(var list: List<Photo>, val clickHandler: TimelineClickHandler) : RecyclerView.Adapter<TImelineAdapter.TimeLineViewHolder>() {

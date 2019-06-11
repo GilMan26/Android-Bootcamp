@@ -2,16 +2,13 @@ package com.example.memories.login
 
 import android.content.Intent
 import android.databinding.DataBindingUtil
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.memories.BaseActivity
-import com.example.memories.BaseFragment
 import com.example.memories.afterlogin.MainActivity
 import com.example.memories.repository.LoginHelper.auth
 import com.example.memories.R
 import com.example.memories.databinding.ActivityLoginBinding
-import com.example.memories.repository.LoginHelper.login
 import com.google.firebase.auth.FirebaseUser
 
 

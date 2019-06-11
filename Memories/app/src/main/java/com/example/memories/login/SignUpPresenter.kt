@@ -1,14 +1,12 @@
 package com.example.memories.login
 
 import android.graphics.Bitmap
-import android.provider.ContactsContract
 import android.text.TextUtils
 import android.util.Log
 import android.util.Patterns
 import com.example.memories.repository.DataManager
 import com.example.memories.repository.LoginHelper
 import com.example.memories.repository.User
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.firebase.auth.FirebaseUser
 
 class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupContract.ISignupPresenter {

@@ -6,9 +6,7 @@ import android.graphics.BitmapFactory
 import android.os.AsyncTask
 import android.provider.MediaStore
 import android.widget.Toast
-import java.io.File
 import java.net.URL
-import kotlin.coroutines.coroutineContext
 
 class DownloadAsyncTask(var downloadListener: IDownloadListener) : AsyncTask<String, Int, Bitmap>() {
 

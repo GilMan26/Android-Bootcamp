@@ -2,8 +2,6 @@ package com.example.memories.afterlogin.timeline
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.provider.ContactsContract
-import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View

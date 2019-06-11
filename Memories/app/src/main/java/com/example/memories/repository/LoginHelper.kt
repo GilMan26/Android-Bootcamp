@@ -1,8 +1,6 @@
 package com.example.memories.repository
 
 import android.util.Log
-import com.example.memories.repository.LoginHelper.database
-import com.example.memories.repository.LoginHelper.firebaseUser
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
@@ -82,7 +80,7 @@ object LoginHelper {
                     if (it.isSuccessful) {
                         Log.d("google", acct?.displayName + acct?.photoUrl)
                         var data = User(auth.currentUser!!.uid, acct?.displayName.toString(), acct?.photoUrl.toString())
-//                        saveUserDb(data, auth.currentUser)
+                        saveUserDb(data)
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("google", "signInWithCredential:success")
                         val user = auth.currentUser
