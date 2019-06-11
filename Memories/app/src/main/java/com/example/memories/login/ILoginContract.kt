@@ -2,6 +2,7 @@ package com.example.memories.login
 
 import com.example.memories.IBaseView
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.firebase.auth.FirebaseUser
 
 interface ILoginContract {
 
@@ -15,7 +16,7 @@ interface ILoginContract {
 
         fun showLoginError(string: String)
 
-        fun loginSuccessful()
+        fun loginSuccessful(user:FirebaseUser)
 
         fun googleLogin()
 

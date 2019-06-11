@@ -140,7 +140,7 @@ object DataManager {
         val imageRef = database.getReference("users/" + LoginHelper.firebaseUser.uid + "/timeline")
         Log.d("timeline", imageRef.toString())
         var timeline = ArrayList<Photo>()
-        imageRef.addValueEventListener(object : ValueEventListener {
+        imageRef.orderByChild("time").addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 for (photoSnapshot in dataSnapshot.children) {
@@ -151,6 +151,7 @@ object DataManager {
                     }
                 }
                 Log.d("timeline array", timeline.toString())
+                timeline.reverse()
                 iTimelineCallback.onSuccess(timeline)
 
             }
@@ -165,9 +166,11 @@ object DataManager {
 
     fun getUser(iUserDataCallback: IUserDataCallback) {
         val userRef = database.getReference("users/" + LoginHelper.firebaseUser.uid)
+        var user=User()
         userRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var user = dataSnapshot.getValue(User::class.java)
+                Log.d("user", dataSnapshot.toString())
+                user = dataSnapshot.getValue(User::class.java)!!
                 if (user != null)
                     iUserDataCallback.onSuccess(user)
                 else

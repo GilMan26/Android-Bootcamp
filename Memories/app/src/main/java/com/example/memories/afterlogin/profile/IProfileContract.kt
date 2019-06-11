@@ -8,6 +8,10 @@ interface IProfileContract {
 
         fun requestChangeProfile()
 
+        fun inflateData(name:String, url:String)
+
+        fun logout()
+
 
 
     }

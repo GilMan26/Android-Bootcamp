@@ -1,6 +1,8 @@
 package com.example.memories.repository
 
 import android.util.Log
+import com.example.memories.repository.LoginHelper.database
+import com.example.memories.repository.LoginHelper.firebaseUser
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.OnCompleteListener
@@ -26,13 +28,26 @@ object LoginHelper {
         fun onLoginFailure()
     }
 
+    interface OnGoogleSignIn {
+
+        fun onSuccess(firebaseuser: FirebaseUser?)
+
+        fun onFailure(ac: String)
+    }
+
+    interface SignOutListener {
+
+        fun onSignout()
+
+    }
+
     fun signUp(username: String, password: String, signupListener: OnSignupListener) {
         auth.createUserWithEmailAndPassword(username, password)
                 .addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {
                         it.result?.user?.sendEmailVerification()
                         Log.d("signup", "success")
-                        signupListener.onSignupSuccess( firebaseuser = auth.currentUser)
+                        signupListener.onSignupSuccess(firebaseuser = auth.currentUser)
 
 
                     } else {
@@ -57,32 +72,39 @@ object LoginHelper {
     }
 
 
-
-    fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
+    fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?, iGoogleSignIn: OnGoogleSignIn) {
         Log.d("google model", "firebaseAuthWithGoogle:")
 
         val credential = GoogleAuthProvider.getCredential(acct?.idToken, null)
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {
-                        Log.d("google", acct?.displayName+acct?.photoUrl)
-                        var data=User(auth.currentUser!!.uid, acct?.displayName.toString(), acct?.photoUrl.toString())
+                        Log.d("google", acct?.displayName + acct?.photoUrl)
+                        var data = User(auth.currentUser!!.uid, acct?.displayName.toString(), acct?.photoUrl.toString())
 //                        saveUserDb(data, auth.currentUser)
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("google", "signInWithCredential:success")
                         val user = auth.currentUser
+                        iGoogleSignIn.onSuccess(user)
                     } else {
                         // If sign in fails, display a message to the user.
                         Log.w("google", "signInWithCredential:failure")
+                        iGoogleSignIn.onFailure("failed")
                     }
                 })
 
     }
 
+    fun signOut(signOutListener: SignOutListener) {
+        auth.signOut()
+        signOutListener.onSignout()
+
+    }
+
     fun saveUserDb(user: User) {
-            Log.d("db", firebaseUser.uid)
-            val userRef = database.getReference("/users")
-            userRef.child(firebaseUser.uid).setValue(user)
+        Log.d("db", firebaseUser.uid)
+        val userRef = database.getReference("/users")
+        userRef.child(firebaseUser.uid).setValue(user)
     }
 
 }

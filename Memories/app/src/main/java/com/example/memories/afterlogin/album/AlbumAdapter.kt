@@ -9,17 +9,12 @@ import android.widget.TextView
 import com.example.memories.R
 import com.example.memories.repository.Album
 
-class AlbumAdapter(var albums: ArrayList<Album>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
+class AlbumAdapter(var albums: ArrayList<Album>, var clickHandler: IAlbumClickHandler) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
 
-    lateinit var clickHandler: IAlbumClickHandler
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.album_row_layout, parent, false)
         return AlbumViewHolder(itemView)
-    }
-
-    fun setInstance(iAlbumClickHandler: IAlbumClickHandler) {
-        clickHandler = iAlbumClickHandler
     }
 
     override fun getItemCount(): Int {

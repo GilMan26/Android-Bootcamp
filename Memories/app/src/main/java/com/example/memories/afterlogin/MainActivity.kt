@@ -10,7 +10,7 @@ import com.example.memories.R
 import com.example.memories.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseUser
 
-class MainActivity : BaseActivity(),  AlbumAdapter.IAlbumClickHandler{
+class MainActivity : BaseActivity(){
 
 
     lateinit var binding: ActivityMainBinding
@@ -25,7 +25,6 @@ class MainActivity : BaseActivity(),  AlbumAdapter.IAlbumClickHandler{
         val albumListFragment = AlbumListFragment()
         val profileFragment = ProfileFragment()
         val timelineFragment = TimelineFragment()
-//        albumListFragment.setInstance(this)
         supportFragmentManager.beginTransaction().add(R.id.mainFrame, albumListFragment).commit()
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener {
@@ -51,13 +50,6 @@ class MainActivity : BaseActivity(),  AlbumAdapter.IAlbumClickHandler{
 
     }
 
-    override fun onAlbumClick(id: String) {
-        var bundle=Bundle()
-        bundle.putString("ref", id)
-        var imageListFragment=ImageListFragment()
-        imageListFragment.arguments=bundle
-        supportFragmentManager.beginTransaction().replace(R.id.mainFrame, imageListFragment).commit()
-    }
 
 
 

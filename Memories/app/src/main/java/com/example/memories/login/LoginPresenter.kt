@@ -1,6 +1,7 @@
 package com.example.memories.login
 
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import com.example.memories.repository.LoginHelper
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
@@ -21,8 +22,13 @@ class LoginPresenter(val loginView: ILoginContract.ILoginView) : ILoginContract.
             loginView.showProgress()
             LoginHelper.login(username, password, object : LoginHelper.OnLoginListener {
                 override fun onLoginSuccess(user: FirebaseUser?) {
+                    if (user != null) {
+                        Log.d("login", user.uid)
+                        loginView.loginSuccessful(user)
+
+                    }
                     loginView.hideProgress()
-                    loginView.loginSuccessful()
+
                 }
 
                 override fun onLoginFailure() {
@@ -35,9 +41,18 @@ class LoginPresenter(val loginView: ILoginContract.ILoginView) : ILoginContract.
 
 
     override fun requestGoogleLogin(googleSignInAccount: GoogleSignInAccount) {
-        LoginHelper.firebaseAuthWithGoogle(googleSignInAccount)
-    }
+        LoginHelper.firebaseAuthWithGoogle(googleSignInAccount, object : LoginHelper.OnGoogleSignIn {
+            override fun onSuccess(firebaseuser: FirebaseUser?) {
+                if (firebaseuser != null)
+                    loginView.loginSuccessful(firebaseuser)
+            }
 
+            override fun onFailure(ac: String) {
+                Log.d("google", "failed")
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+        })
+    }
 
 
 }

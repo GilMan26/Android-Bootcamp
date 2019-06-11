@@ -6,12 +6,15 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.memories.BaseFragment
 import com.example.memories.R
 import com.example.memories.databinding.FragmentProfileBinding
+import com.example.memories.login.SignUpFragment
 
 class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
     lateinit var binding:FragmentProfileBinding
+    lateinit var presenter: ProfilePresenter
 
     companion object{
         private var BUNDLE_ARG="key"
@@ -33,8 +36,10 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        presenter= ProfilePresenter(this)
+        presenter.getDetials()
         binding.logoutbtn.setOnClickListener{
-
+            presenter.logout()
         }
     }
 
@@ -43,10 +48,23 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
     }
 
     override fun hideProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        binding.profileProgress.visibility=View.GONE
     }
 
     override fun showProgress() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        binding.profileProgress.visibility=View.VISIBLE
+    }
+
+    override fun inflateData(name: String, url: String) {
+        binding.profileName.text=name
+        if(context!=null) {
+            Glide.with(context!!)
+                    .load(url)
+                    .into(binding.profileImage)
+        }
+    }
+
+    override fun logout() {
+        System.exit(0)
     }
 }

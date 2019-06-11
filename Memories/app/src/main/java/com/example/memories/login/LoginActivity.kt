@@ -23,7 +23,7 @@ class LoginActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
-        val loginFragment=LoginFragment()
+        val loginFragment = LoginFragment()
         supportFragmentManager.beginTransaction().add(R.id.loginFrame, loginFragment).commitAllowingStateLoss()
     }
 
@@ -32,13 +32,14 @@ class LoginActivity : BaseActivity() {
         super.onStart()
         // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
-//        updateUI(currentUser)
+        if (currentUser != null)
+            updateUI(currentUser)
     }
 
-    fun updateUI(user: FirebaseUser?){
+    fun updateUI(user: FirebaseUser?) {
         var intent = Intent(this, MainActivity::class.java)
         intent.putExtra("user", user)
-        Log.d("user",user.toString())
+        Log.d("user", user.toString())
         startActivity(intent)
     }
 

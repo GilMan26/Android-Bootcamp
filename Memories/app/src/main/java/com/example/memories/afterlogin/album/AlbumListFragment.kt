@@ -3,6 +3,7 @@ package com.example.memories.afterlogin.album
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -40,8 +41,7 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter = AlbumListPresenter(this)
-        adapter = AlbumAdapter(albums)
-        adapter.setInstance(this)
+        adapter = AlbumAdapter(albums, this)
         presenter.getAlbums()
         binding.addFab.setOnClickListener {
             fragmentTransactionHandler.pushFragment(AddAlbumFragment.getInstance())

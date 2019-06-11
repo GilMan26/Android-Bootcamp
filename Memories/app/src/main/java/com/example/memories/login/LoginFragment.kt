@@ -11,9 +11,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.memories.App
 import com.example.memories.BaseFragment
+import com.example.memories.afterlogin.MainActivity
 import com.example.memories.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.common.api.ApiException
+import com.google.firebase.auth.FirebaseUser
 
 
 class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
@@ -74,7 +76,11 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
         Toast.makeText(context, string, Toast.LENGTH_LONG).show()
     }
 
-    override fun loginSuccessful() {
+    override fun loginSuccessful(user:FirebaseUser) {
+        var intent = Intent(context, MainActivity::class.java)
+        intent.putExtra("user", user)
+        Log.d("user",user.toString())
+        startActivity(intent)
         Toast.makeText(context, "Login Successful", Toast.LENGTH_LONG).show()
     }
 
