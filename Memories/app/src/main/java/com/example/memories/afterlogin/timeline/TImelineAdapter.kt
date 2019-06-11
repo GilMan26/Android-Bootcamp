@@ -21,6 +21,7 @@ class TImelineAdapter(var list: List<Photo>, val clickHandler: TimelineClickHand
     }
 
     fun addList(images:ArrayList<Photo>){
+        list= mutableListOf()
         this.list=images
         notifyDataSetChanged()
     }

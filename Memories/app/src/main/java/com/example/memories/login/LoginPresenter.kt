@@ -34,5 +34,10 @@ class LoginPresenter(val loginView: ILoginContract.ILoginView) : ILoginContract.
     }
 
 
+    override fun requestGoogleLogin(googleSignInAccount: GoogleSignInAccount) {
+        LoginHelper.firebaseAuthWithGoogle(googleSignInAccount)
+    }
+
+
 
 }

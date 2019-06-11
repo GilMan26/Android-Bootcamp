@@ -10,19 +10,47 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         tools:context=".login.SignUpFragment">
 
         <ProgressBar
             android:id="@+id/progress_circular"
-            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:visibility="gone" />
 
         <android.support.constraint.ConstraintLayout
+            android:id="@+id/loginConstraint"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/userFormIV"
+                android:layout_width="182dp"
+                android:layout_height="181dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <EditText
+                android:id="@+id/userNameET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="24dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Name"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/userFormIV" />
+
 
             <EditText
                 android:id="@+id/userSignET"
@@ -30,13 +58,13 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_marginStart="32dp"
-                android:layout_marginTop="264dp"
+                android:layout_marginTop="28dp"
                 android:layout_marginEnd="32dp"
                 android:hint="Username"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/userNameET" />
 
             <EditText
                 android:id="@+id/passSignET"
@@ -49,12 +77,12 @@
                 android:hint="Password"
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/userSignET" />
 
-
             <Button
-                android:id="@+id/btn_sign"
+                android:id="@+id/btn_signUp"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
@@ -67,33 +95,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passSignET" />
 
-            <com.google.android.gms.common.SignInButton
-                android:id="@+id/google_sign_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                app:layout_constraintBottom_toTopOf="@+id/btn_login"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/btn_sign" />
-
-            <TextView
-                android:id="@+id/btn_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:layout_marginStart="48dp"
-                android:layout_marginTop="48dp"
-                android:layout_marginEnd="48dp"
-                android:clickable="true"
-                android:gravity="center"
-                android:text="Already have an account ? Login"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/google_sign_button" />
-
         </android.support.constraint.ConstraintLayout>
-
 
     </FrameLayout>
 </layout>

@@ -22,6 +22,7 @@ class ImageAdapter(val images: ArrayList<Photo>, var clickHandler:ImageAdapter.I
     }
 
     fun addImages(photos: List<Photo>) {
+        this.images.clear()
         images.addAll(photos)
         notifyDataSetChanged()
     }

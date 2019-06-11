@@ -10,21 +10,19 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:context=".login.SignUpFragment">
+        android:layout_height="match_parent"
+        tools:context=".login.LoginFragment">
 
         <ProgressBar
             android:id="@+id/progress_circular"
+            android:visibility="gone"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
+            android:layout_height="match_parent" />
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/loginConstraint"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
 
             <EditText
                 android:id="@+id/userLoginET"
@@ -38,7 +36,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"  />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <EditText
                 android:id="@+id/passLoginET"
@@ -52,7 +50,8 @@
                 android:inputType="textPassword"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userLoginET"  />
+                app:layout_constraintTop_toBottomOf="@+id/userLoginET" />
+
 
             <Button
                 android:id="@+id/btn_login"
@@ -62,13 +61,38 @@
                 android:layout_marginStart="72dp"
                 android:layout_marginTop="72dp"
                 android:layout_marginEnd="72dp"
-                android:text="Sign Up"
+                android:text="Sign In"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.495"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/passLoginET" />
 
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/google_sign_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btn_login" />
+
+            <TextView
+                android:id="@+id/text_signup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:layout_marginStart="48dp"
+                android:layout_marginTop="48dp"
+                android:layout_marginEnd="48dp"
+                android:clickable="true"
+                android:gravity="center"
+                android:text="Don't have an account ? Sign Up"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/google_sign_button" />
+
         </android.support.constraint.ConstraintLayout>
+
 
     </FrameLayout>
 </layout>

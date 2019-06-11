@@ -18,6 +18,9 @@ import com.google.android.gms.common.api.ApiException
 
 class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
 
+    val REQUEST_CODE_GOOGLE=101
+
+
     companion object{
 
         fun getInstance(): LoginFragment{
@@ -42,9 +45,18 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
         binding.btnLogin.setOnClickListener {
             loginPresenter.requestLogin(binding.userLoginET.text.toString(), binding.passLoginET.text.toString())
         }
+        binding.googleSignButton.setOnClickListener {
+            googleLogin()
+        }
+        binding.textSignup.setOnClickListener{
+            fragmentTransactionHandler.pushFragment(SignUpFragment.getInstance())
+        }
+
 
 
     }
+
+
 
     override fun showProgress() {
         binding.progressCircular.visibility = View.VISIBLE
@@ -64,6 +76,30 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
 
     override fun loginSuccessful() {
         Toast.makeText(context, "Login Successful", Toast.LENGTH_LONG).show()
+    }
+
+    override fun googleLogin() {
+        val app=activity?.application as App
+        val intent=app.googleSignInClient.signInIntent
+        startActivityForResult(intent, REQUEST_CODE_GOOGLE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_GOOGLE) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                val account = task.getResult(ApiException::class.java)
+
+                if (account != null) {
+                    loginPresenter.requestGoogleLogin(account)
+                }
+            } catch (e: ApiException) {
+                // Google Sign In failed, update UI appropriately
+                Log.w("signin", "Google sign in failed", e)
+            }
+        }
     }
 
 

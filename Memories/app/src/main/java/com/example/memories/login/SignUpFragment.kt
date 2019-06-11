@@ -1,8 +1,12 @@
 package com.example.memories.login
 
 
+import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.LayoutInflater
@@ -18,15 +22,14 @@ import com.google.android.gms.common.api.ApiException
 
 class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
 
-
-    val REQUEST_CODE_GOOGLE=101
+    lateinit var bitmap: Bitmap
     lateinit var binding: FragmentSignUpBinding
     lateinit var signUpPresenter: SignUpPresenter
 
-    companion object{
+    companion object {
 
-        fun getInstance():SignUpFragment{
-            var fragment= SignUpFragment()
+        fun getInstance(): SignUpFragment {
+            var fragment = SignUpFragment()
             return fragment
         }
     }
@@ -40,16 +43,22 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         signUpPresenter = SignUpPresenter(this)
-        binding.btnSign.setOnClickListener {
-            signUpPresenter.requestSignup(binding.userSignET.text.toString(), binding.passSignET.text.toString())
+        binding.btnSignUp.setOnClickListener {
+//            signUpPresenter.requestSignup(binding.userSignET.text.toString(), binding.passSignET.text.toString())
         }
-        binding.btnLogin.setOnClickListener {
-            Log.d("click", "in fragment")
-           fragmentTransactionHandler.pushFragment(LoginFragment.getInstance())
+
+        binding.userFormIV.setOnClickListener{
+            imageExtractor()
         }
-        binding.googleSignButton.setOnClickListener {
-            googleLogin()
-        }
+
+
+//        binding.btnLogin.setOnClickListener {
+//            Log.d("click", "in fragment")
+//           fragmentTransactionHandler.pushFragment(LoginFragment.getInstance())
+//        }
+//        binding.googleSignButton.setOnClickListener {
+//            googleLogin()
+//        }
     }
 
     override fun showProgress() {
@@ -61,6 +70,7 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
     }
 
     override fun showSignupError(error: String) {
+        Log.d("signup", error)
     }
 
     override fun loginSuccessful() {
@@ -71,30 +81,51 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
         binding.progressCircular.visibility = View.GONE
     }
 
-    override fun googleLogin() {
-        val app=activity?.application as App
-        val intent=app.googleSignInClient.signInIntent
-        startActivityForResult(intent, REQUEST_CODE_GOOGLE)
+    private fun imageExtractor() {
+        var intent = Intent()
+        intent.setAction(Intent.ACTION_GET_CONTENT)
+        intent.setType("image/*")
+        startActivityForResult(intent, 1011)
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE_GOOGLE) {
-            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                val account = task.getResult(ApiException::class.java)
-                signUpPresenter.requstGoogleLogin(account)
-            } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
-                Log.w("signin", "Google sign in failed", e)
+        if (resultCode == Activity.RESULT_OK && requestCode == 1011) {
+            if (data != null) {
+                var uri: Uri? = data.data
+                binding.userFormIV.setImageURI(uri)
+                bitmap = MediaStore.Images.Media.getBitmap(context?.contentResolver, uri)
+
+            } else {
+
             }
         }
     }
 
-    override fun requestUserDetails(id:String) {
-        fragmentTransactionHandler.pushFragment(UserFormFragment.getInstance())
-    }
+//    override fun googleLogin() {
+//        val app=activity?.application as App
+//        val intent=app.googleSignInClient.signInIntent
+//        startActivityForResult(intent, REQUEST_CODE_GOOGLE)
+//    }
+//
+//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//        if (requestCode == REQUEST_CODE_GOOGLE) {
+//            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+//            try {
+//                // Google Sign In was successful, authenticate with Firebase
+//                val account = task.getResult(ApiException::class.java)
+//                signUpPresenter.requstGoogleLogin(account)
+//            } catch (e: ApiException) {
+//                // Google Sign In failed, update UI appropriately
+//                Log.w("signin", "Google sign in failed", e)
+//            }
+//        }
+//    }
+
+//    override fun requestUserDetails(id:String) {
+//        fragmentTransactionHandler.pushFragment(UserFormFragment.getInstance())
+//    }
 
 
 }

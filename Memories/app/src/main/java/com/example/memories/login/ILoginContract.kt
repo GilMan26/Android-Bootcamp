@@ -17,6 +17,8 @@ interface ILoginContract {
 
         fun loginSuccessful()
 
+        fun googleLogin()
+
 
 
 
@@ -26,6 +28,6 @@ interface ILoginContract {
     interface ILoginPresenter {
         fun requestLogin(username: String, password: String)
 
-
+        fun requestGoogleLogin(googleSignInAccount: GoogleSignInAccount)
     }
 }

@@ -1,5 +1,6 @@
 package com.example.memories.login
 
+import android.graphics.Bitmap
 import com.example.memories.IBaseView
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 
@@ -18,20 +19,21 @@ interface ISignupContract {
 
         fun loginSuccessful()
 
-        fun googleLogin()
-
-        fun requestUserDetails(id:String)
+//        fun googleLogin()
+//
+//        fun requestUserDetails(id:String)
 
 
     }
 
 
     interface ISignupPresenter {
-        fun requestSignup(username: String, password: String)
 
-        fun requstGoogleLogin(googleSignInAccount: GoogleSignInAccount?)
+        fun requestSignup(username: String, password: String, name:String,bitmap: Bitmap)
 
-        fun getUserDetails(id:String)
+//        fun requstGoogleLogin(googleSignInAccount: GoogleSignInAccount?)
+//
+//        fun getUserDetails(id:String)
 
     }
 

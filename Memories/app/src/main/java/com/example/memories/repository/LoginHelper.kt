@@ -46,9 +46,11 @@ object LoginHelper {
         auth.signInWithEmailAndPassword(username, password)
                 .addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {
+                        Log.d("login", "success")
                         loginListener.onLoginSuccess(auth.currentUser)
 
                     } else {
+                        Log.d("login", "failure")
                         loginListener.onLoginFailure()
                     }
                 })
@@ -61,6 +63,9 @@ object LoginHelper {
         auth.signInWithCredential(credential)
                 .addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {
+                        Log.d("google", acct?.displayName+acct?.photoUrl)
+                        var data=User(auth.currentUser!!.uid, acct?.displayName.toString(), acct?.photoUrl.toString())
+//                        saveUserDb(data, auth.currentUser)
                         // Sign in success, update UI with the signed-in user's information
                         Log.d("google", "signInWithCredential:success")
                         val user = auth.currentUser
@@ -72,12 +77,10 @@ object LoginHelper {
 
     }
 
-    fun saveUserDb(user: User, firebaseUser: FirebaseUser?) {
-        if (firebaseUser != null) {
+    fun saveUserDb(user: User) {
             Log.d("db", firebaseUser.uid)
             val userRef = database.getReference("/users")
             userRef.child(firebaseUser.uid).setValue(user)
-        }
     }
 
 }

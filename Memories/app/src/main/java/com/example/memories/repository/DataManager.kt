@@ -113,7 +113,7 @@ object DataManager {
     fun loadImages(albumRef: String, iLoadImageCallback: ILoadImageCallback) {
         val photosRef = database.getReference("users/" + LoginHelper.firebaseUser.uid + "/albums/" + albumRef + "/photos")
         var images = ArrayList<Photo>()
-        Log.d("photo", "in data manager"+photosRef.toString())
+        Log.d("photo", "in data manager" + photosRef.toString())
         photosRef.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(dataSnapshot: DataSnapshot) {
                 Log.d("photo", dataSnapshot.toString())
@@ -130,7 +130,7 @@ object DataManager {
             }
 
             override fun onCancelled(p0: DatabaseError) {
-                Log.d("photo" , p0.toString())
+                Log.d("photo", p0.toString())
                 iLoadImageCallback.onFailure(p0.toString())
             }
         })
@@ -160,6 +160,23 @@ object DataManager {
             }
 
 
+        })
+    }
+
+    fun getUser(iUserDataCallback: IUserDataCallback) {
+        val userRef = database.getReference("users/" + LoginHelper.firebaseUser.uid)
+        userRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                var user = dataSnapshot.getValue(User::class.java)
+                if (user != null)
+                    iUserDataCallback.onSuccess(user)
+                else
+                    iUserDataCallback.onFailure("error")
+            }
+
+            override fun onCancelled(dataBasError: DatabaseError) {
+                iUserDataCallback.onFailure(dataBasError.toString())
+            }
         })
     }
 
@@ -214,5 +231,13 @@ object DataManager {
         fun onSuccess(images: ArrayList<Photo>)
 
         fun onFailure(ack: String)
+    }
+
+    interface IUserDataCallback {
+
+        fun onSuccess(user: User)
+
+        fun onFailure(ack: String)
+
     }
 }

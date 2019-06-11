@@ -27,6 +27,7 @@ class AlbumAdapter(var albums: ArrayList<Album>) : RecyclerView.Adapter<AlbumAda
     }
 
     fun addList(albums: ArrayList<Album>) {
+        this.albums.clear()
         this.albums = albums
         notifyDataSetChanged()
     }
