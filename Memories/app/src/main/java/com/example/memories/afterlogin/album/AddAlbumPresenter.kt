@@ -16,7 +16,7 @@ class AddAlbumPresenter(val iAddAlbumView: IAddAlbum.IAddAlbumView): IAddAlbum.I
             val ts = tsLong.toString()
             val photos=HashMap<String, Photo>()
             if(message==null){
-                var album=Album("", title,ts, "",  photos)
+                var album=Album("", title,ts, "",  "",photos)
                 DataManager.createAlbum(album, object : DataManager.IAlbumCreateListener{
                     override fun onCreateSuccess(ack: String) {
                         iAddAlbumView.createResponse(ack)
@@ -30,7 +30,7 @@ class AddAlbumPresenter(val iAddAlbumView: IAddAlbum.IAddAlbumView): IAddAlbum.I
                 })
             }
             else{
-                var album=Album("", title,ts, message,  photos)
+                var album=Album("", title,ts, "",message,  photos)
                 DataManager.createAlbum(album, object : DataManager.IAlbumCreateListener{
                     override fun onCreateSuccess(ack: String) {
                         iAddAlbumView.createResponse(ack)

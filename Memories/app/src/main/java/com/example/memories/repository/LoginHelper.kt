@@ -18,6 +18,7 @@ object LoginHelper {
     lateinit var database: FirebaseDatabase
     lateinit var firebaseUser: FirebaseUser
 
+
     interface OnSignupListener {
         fun onSignupSuccess(firebaseuser: FirebaseUser?)
         fun onSignupFaliure()

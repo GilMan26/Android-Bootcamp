@@ -48,9 +48,6 @@ class TImelineAdapter(var list: List<Photo>, val clickHandler: TimelineClickHand
                         .load(photo.url)
                         .into(itemView.timelineIV)
             }
-            itemView.setOnClickListener{
-
-            }
         }
     }
 

@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
 
@@ -11,27 +13,33 @@
         android:shadowColor="@color/colorPrimaryDark"
         android:layout_height="wrap_content">
 
-    <LinearLayout
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_margin="15dp"
         android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/albumIV"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:scaleType="fitXY"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/titleTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
             android:text="Title"
+            android:gravity="start|bottom"
+            android:textColor="#000000"
             android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <TextView
-            android:id="@+id/timeTV"
-            android:text="Time"
-            android:textSize="20sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            app:layout_constraintBottom_toBottomOf="@+id/albumIV"
+            app:layout_constraintStart_toStartOf="@+id/albumIV" />
 
 
-    </LinearLayout>
+
+    </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </layout>

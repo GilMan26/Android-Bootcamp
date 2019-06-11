@@ -32,6 +32,8 @@ object DataManager {
     fun addImage(image: Photo, albumRef: String, iAddImageCallBack: IAddImageCallBack) {
         Log.d("test", albumRef)
         val imageRef = database.getReference("/users/" + LoginHelper.firebaseUser.uid + "/albums/" + albumRef + "/photos")
+        val albumRef= database.getReference("/users/"+LoginHelper.firebaseUser.uid+"/albums/"+albumRef)
+        albumRef.child("cover").setValue(image.url)
         var key = imageRef.push().key
         if (key != null) {
             image.id = key

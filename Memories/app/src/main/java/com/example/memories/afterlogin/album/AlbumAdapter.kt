@@ -1,13 +1,18 @@
 package com.example.memories.afterlogin.album
 
+import android.media.Image
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.example.memories.R
 import com.example.memories.repository.Album
+import kotlinx.android.synthetic.main.album_row_layout.view.*
+import kotlinx.android.synthetic.main.timeline_row.view.*
 
 class AlbumAdapter(var albums: ArrayList<Album>, var clickHandler: IAlbumClickHandler) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
@@ -39,10 +44,14 @@ class AlbumAdapter(var albums: ArrayList<Album>, var clickHandler: IAlbumClickHa
 
     class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(album: Album) {
-            val textViewTitle = itemView.findViewById(R.id.titleTV) as TextView
-            val textViewTime = itemView.findViewById(R.id.timeTV) as TextView
-            textViewTitle.text = album.title
-            textViewTime.text = album.time
+            itemView.titleTV.text=album.title
+            val context = itemView.albumIV.context
+            if (context != null) {
+                Glide.with(context!!)
+                        .load(album.cover)
+                        .into(itemView.albumIV)
+            }
+
         }
     }
 
