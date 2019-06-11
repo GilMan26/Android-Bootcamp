@@ -56,6 +56,8 @@ object LoginHelper {
                 })
     }
 
+
+
     fun firebaseAuthWithGoogle(acct: GoogleSignInAccount?) {
         Log.d("google model", "firebaseAuthWithGoogle:")
 
