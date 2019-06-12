@@ -69,7 +69,7 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
         var albums = albums
         Log.d("tag", albums.toString())
         adapter.addList(albums)
-        binding.refreshAlbum.isRefreshing=false
+        binding.refreshAlbum.setRefreshing(false)
     }
 
     override fun onAlbumClick(id: String) {

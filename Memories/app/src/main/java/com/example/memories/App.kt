@@ -21,7 +21,9 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         auth = FirebaseAuth.getInstance()
-        LoginHelper.firebaseUser = auth.currentUser!!
+        if(auth.currentUser!=null)
+            LoginHelper.firebaseUser= auth.currentUser!!
+
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()

@@ -56,13 +56,16 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
             fragmentTransactionHandler.pushFragment(AddImageFragment.getInstance(albumRef))
         }
 
+        binding.refreshImages.setOnRefreshListener {
+            presenter.getImages(albumRef)
+        }
+
     }
 
     override fun populateList(photos: ArrayList<Photo>) {
         this.photos = photos
-//        if(photos.size==0)
-//            binding.parentImages.background= Drawable.createFromPath("/home/ttn/AndroidStudioProjects/Memories/app/src/main/res/drawable/ic_hourglass_empty_black_24dp.xml")
         adapter.addImages(photos)
+        binding.refreshImages.setRefreshing(false)
     }
 
     override fun onClick(url: String) {

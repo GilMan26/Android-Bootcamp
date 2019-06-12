@@ -45,9 +45,9 @@ object LoginHelper {
                 .addOnCompleteListener(OnCompleteListener {
                     if (it.isSuccessful) {
                         it.result?.user?.sendEmailVerification()
-                        Log.d("signup", "success")
                         signupListener.onSignupSuccess(firebaseuser = auth.currentUser)
-
+                        if (auth.currentUser != null)
+                            firebaseUser = auth.currentUser!!
 
                     } else {
                         Log.d("signup", "failed")
@@ -62,6 +62,8 @@ object LoginHelper {
                     if (it.isSuccessful) {
                         Log.d("login", "success")
                         loginListener.onLoginSuccess(auth.currentUser)
+                        if (auth.currentUser != null)
+                            firebaseUser = auth.currentUser!!
 
                     } else {
                         Log.d("login", "failure")
@@ -80,10 +82,14 @@ object LoginHelper {
                     if (it.isSuccessful) {
                         Log.d("google", acct?.displayName + acct?.photoUrl)
                         var data = User(auth.currentUser!!.uid, acct?.displayName.toString(), acct?.photoUrl.toString())
-                        saveUserDb(data)
-                        // Sign in success, update UI with the signed-in user's information
+
                         Log.d("google", "signInWithCredential:success")
                         val user = auth.currentUser
+                        if (user != null) {
+                            firebaseUser = user
+                            saveUserDb(user = data)
+                        }
+
                         iGoogleSignIn.onSuccess(user)
                     } else {
                         // If sign in fails, display a message to the user.
@@ -101,9 +107,11 @@ object LoginHelper {
     }
 
     fun saveUserDb(user: User) {
-        Log.d("db", firebaseUser.uid)
-        val userRef = database.getReference("/users")
-        userRef.child(firebaseUser.uid).setValue(user)
+        if (firebaseUser != null) {
+            val userRef = database.getReference("/users")
+            userRef.child(auth.currentUser?.uid!!).setValue(user)
+        }
+
     }
 
 }

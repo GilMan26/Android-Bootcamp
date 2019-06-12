@@ -12,6 +12,8 @@ interface IProfileContract {
 
         fun logout()
 
+//        fun showImage()
+
 
 
     }
@@ -23,6 +25,8 @@ interface IProfileContract {
         fun changeProfile()
 
         fun logout()
+
+//        fun viewImage()
 
     }
 

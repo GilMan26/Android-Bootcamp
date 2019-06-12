@@ -17,6 +17,11 @@
         android:layout_height="match_parent"
         tools:context=".afterlogin.album.ImageListFragment">
 
+        <com.yalantis.phoenix.PullToRefreshView
+            android:id="@+id/refreshImages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/imageRecycler"
@@ -28,6 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        </com.yalantis.phoenix.PullToRefreshView>
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/addImageFab"
             android:layout_width="wrap_content"

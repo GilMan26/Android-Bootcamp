@@ -13,8 +13,10 @@
 
         <ProgressBar
             android:id="@+id/profileProgress"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            android:foregroundGravity="center" />
 
 
         <android.support.constraint.ConstraintLayout

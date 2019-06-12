@@ -8,6 +8,10 @@ import com.bumptech.glide.Glide
 import com.example.memories.R
 import com.example.memories.repository.Photo
 import kotlinx.android.synthetic.main.timeline_row.view.*
+import java.time.format.DateTimeFormatter
+import java.util.*
+import kotlin.collections.ArrayList
+
 
 class TImelineAdapter(var list: List<Photo>, val clickHandler: TimelineClickHandler) : RecyclerView.Adapter<TImelineAdapter.TimeLineViewHolder>() {
 
@@ -38,13 +42,19 @@ class TImelineAdapter(var list: List<Photo>, val clickHandler: TimelineClickHand
     class TimeLineViewHolder(view:View):RecyclerView.ViewHolder(view){
         fun bindImage(photo: Photo) {
             itemView.nameTV.text=photo.title
-            itemView.timeTV.text=photo.time
+            itemView.timeTV.text=getData(photo.time)
             val context = itemView.timelineIV.context
             if (context != null) {
                 Glide.with(context!!)
                         .load(photo.url)
                         .into(itemView.timelineIV)
             }
+        }
+
+        fun getData(time:String):String{
+            val epoch = java.lang.Long.parseLong(time)
+            val expiry = Date(epoch * 1000)
+            return expiry.toString()
         }
     }
 
@@ -53,4 +63,6 @@ class TImelineAdapter(var list: List<Photo>, val clickHandler: TimelineClickHand
         fun imageClick(url:String)
 
     }
+
+
 }
