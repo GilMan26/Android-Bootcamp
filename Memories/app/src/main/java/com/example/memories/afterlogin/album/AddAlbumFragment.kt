@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import android.widget.Toolbar
 import com.example.memories.BaseFragment
+import com.example.memories.R
 import com.example.memories.repository.Album
 import com.example.memories.databinding.FragmentAddAlbumBinding
 
@@ -38,6 +40,10 @@ class AddAlbumFragment : BaseFragment(), IAddAlbum.IAddAlbumView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         presenter = AddAlbumPresenter(this)
+        binding.addAlbumToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        binding.addAlbumToolbar.setNavigationOnClickListener{
+            fragmentManager?.popBackStackImmediate()
+        }
         binding.button.setOnClickListener {
             presenter.validateAlbum(binding.albumName.text.toString(), binding.albumMessage.text.toString())
         }

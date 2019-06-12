@@ -7,5 +7,7 @@ interface FragmentTransactionHandler {
 
     fun pushFragment(fragment: Fragment)
 
+    fun pushFullFragment(fragment: Fragment)
+
 
 }

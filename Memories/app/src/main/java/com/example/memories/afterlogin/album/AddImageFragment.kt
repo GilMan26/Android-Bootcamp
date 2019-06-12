@@ -12,6 +12,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toolbar
 import com.example.memories.BaseFragment
 
 import com.example.memories.R
@@ -33,15 +35,14 @@ class AddImageFragment : BaseFragment(), IAddImage.IAddImageView {
             var fragment = AddImageFragment()
             var bundle = Bundle()
             bundle.putString(ALBUM_REF, ref)
-
             fragment.arguments = bundle
-
             return fragment
         }
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_image, container, false)
         if (arguments != null) {
             albumRef = arguments!!.getString(ALBUM_REF)
@@ -51,9 +52,13 @@ class AddImageFragment : BaseFragment(), IAddImage.IAddImageView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        binding.addImageToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        binding.addImageToolbar.setNavigationOnClickListener{
+            fragmentManager?.popBackStackImmediate()
+        }
         presenter = AddImagePresenter(this)
         binding.addImage.setOnClickListener {
-            presenter.uploadImage(binding.imageName.text.toString(), bitmap, albumRef)
+            presenter.validate(binding.imageName.text.toString(),binding.imageMessage.text.toString(),  bitmap, albumRef)
         }
 
         binding.imageView.setOnClickListener {
@@ -66,13 +71,17 @@ class AddImageFragment : BaseFragment(), IAddImage.IAddImageView {
         binding.addImageProgress.visibility = View.VISIBLE
     }
 
+    override fun showValidationError(ack:String) {
+        Toast.makeText(context, ack , Toast.LENGTH_LONG).show()
+    }
+
     override fun hideProgress() {
         binding.addImageProgress.visibility = View.GONE
     }
 
     override fun uploadSuccess() {
         Log.d("success", "Success")
-        fragmentTransactionHandler.pushFragment(ImageListFragment.getInstance(albumRef))
+        fragmentTransactionHandler.pushFullFragment(ImageListFragment.getInstance(albumRef))
     }
 
 

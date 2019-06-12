@@ -2,6 +2,9 @@ package com.example.memories.afterlogin
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.app.ActionBar
+import android.util.Log
+import android.widget.Toolbar
 import com.example.memories.afterlogin.album.*
 import com.example.memories.afterlogin.profile.ProfileFragment
 import com.example.memories.afterlogin.timeline.TimelineFragment
@@ -12,7 +15,6 @@ import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : BaseActivity(){
 
-
     lateinit var binding: ActivityMainBinding
     lateinit var firebaseUser: FirebaseUser
 
@@ -21,7 +23,13 @@ class MainActivity : BaseActivity(){
         setContentView(R.layout.activity_main)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
         firebaseUser=intent.getParcelableExtra("user")
-
+//        binding.mainToolbar.title="Memories"
+//        setSupportActionBar(binding.mainToolbar)
+//        binding.mainToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+//        binding.mainToolbar.setNavigationOnClickListener{
+//            Log.d("activity", "back clicked")
+//            supportFragmentManager.popBackStack()
+//        }
         val albumListFragment = AlbumListFragment()
         val profileFragment = ProfileFragment()
         val timelineFragment = TimelineFragment()

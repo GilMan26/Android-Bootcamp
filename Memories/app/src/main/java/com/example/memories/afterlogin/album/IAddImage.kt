@@ -13,13 +13,15 @@ interface IAddImage {
 
         override fun hideProgress()
 
+        fun showValidationError(ack:String)
+
 
     }
 
 
     interface IAddImagePresenter {
 
-        fun uploadImage(title: String, bitmap: Bitmap, ref: String)
+        fun validate(title: String,mesasge:String,  bitmap: Bitmap, ref: String)
     }
 
 }

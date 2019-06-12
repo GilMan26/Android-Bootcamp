@@ -45,6 +45,10 @@ class ImageFragment : BaseFragment(), DownloadAsyncTask.IDownloadListener {
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
+        binding.imageToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        binding.imageToolbar.setNavigationOnClickListener{
+            fragmentManager?.popBackStackImmediate()
+        }
         if (arguments != null)
             url = arguments!!.getString("url")
         super.onActivityCreated(savedInstanceState)

@@ -39,6 +39,7 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
         super.onActivityCreated(savedInstanceState)
         presenter= ProfilePresenter(this)
         presenter.getDetials()
+        binding.profileToolbar.title="Profile"
         binding.logoutbtn.setOnClickListener{
             presenter.logout()
         }

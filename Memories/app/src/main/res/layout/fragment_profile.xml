@@ -7,7 +7,19 @@
 
     </data>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/profileToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimary" />
+
     <FrameLayout
+        android:layout_below="@id/profileToolbar"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -65,4 +77,5 @@
 
         </android.support.constraint.ConstraintLayout>
     </FrameLayout>
+    </RelativeLayout>
 </layout>

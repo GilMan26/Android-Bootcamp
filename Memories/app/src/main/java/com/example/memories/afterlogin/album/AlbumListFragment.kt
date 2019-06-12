@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.memories.BaseFragment
+import com.example.memories.R
 import com.example.memories.repository.Album
 import com.example.memories.databinding.FragmentAlbumsBinding
 
@@ -39,7 +40,7 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
+        binding.albumsToolbar.title = "Albums"
         presenter = AlbumListPresenter(this)
         adapter = AlbumAdapter(albums, this)
         presenter.getAlbums()
@@ -55,11 +56,12 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
 
 
     override fun showProgress() {
-        binding.progressBar.visibility=View.VISIBLE
+        binding.progressBar.visibility = View.VISIBLE
     }
 
+
     override fun hideProgress() {
-        binding.progressBar.visibility=View.GONE
+        binding.progressBar.visibility = View.GONE
     }
 
     override fun categorySelect() {
@@ -75,7 +77,7 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
 
     override fun onAlbumClick(id: String) {
         Log.d("fragment test", id)
-        fragmentTransactionHandler.pushFragment(ImageListFragment.getInstance(id))
+        fragmentTransactionHandler.pushFullFragment(ImageListFragment.getInstance(id))
     }
 
 

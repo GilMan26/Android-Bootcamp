@@ -39,6 +39,7 @@ class TimelineFragment : BaseFragment(), ITimelineContract.ITimelineView, TImeli
         super.onActivityCreated(savedInstanceState)
         presenter = TimelinePresenter(this)
         presenter.loadImages()
+        binding.timelineToolbar.title="Timeline"
         adapter = TImelineAdapter(list, this)
         binding.timelineRV.adapter = adapter
         binding.timelineRV.layoutManager = LinearLayoutManager(context)
@@ -68,6 +69,6 @@ class TimelineFragment : BaseFragment(), ITimelineContract.ITimelineView, TImeli
     }
 
     override fun imageClick(url: String) {
-        fragmentTransactionHandler.pushFragment(ImageFragment.getInstance(url))
+        fragmentTransactionHandler.pushFullFragment(ImageFragment.getInstance(url))
     }
 }

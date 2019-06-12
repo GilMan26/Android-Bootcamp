@@ -7,8 +7,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toolbar
 import com.example.memories.BaseFragment
 import com.example.memories.R
+import com.example.memories.afterlogin.MainActivity
 import com.example.memories.repository.Photo
 import com.example.memories.databinding.FragmentImageListBinding
 
@@ -47,13 +49,17 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         Log.d("data", savedInstanceState.toString())
+        binding.imageListToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
+        binding.imageListToolbar.setNavigationOnClickListener{
+            fragmentManager?.popBackStackImmediate()
+        }
         presenter = ImageListPresenter(this)
         adapter = ImageAdapter(photos, this)
         presenter.getImages(albumRef)
         binding.imageRecycler.adapter=adapter
         binding.imageRecycler.layoutManager = GridLayoutManager(context, 2)
         binding.addImageFab.setOnClickListener {
-            fragmentTransactionHandler.pushFragment(AddImageFragment.getInstance(albumRef))
+            fragmentTransactionHandler.pushFullFragment(AddImageFragment.getInstance(albumRef))
         }
 
         binding.refreshImages.setOnRefreshListener {
@@ -77,7 +83,7 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
     }
 
     override fun onClick(url: String) {
-        fragmentTransactionHandler.pushFragment(ImageFragment.getInstance(url))
+        fragmentTransactionHandler.pushFullFragment(ImageFragment.getInstance(url))
     }
 
 
