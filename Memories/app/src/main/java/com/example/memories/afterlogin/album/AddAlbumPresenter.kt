@@ -17,10 +17,11 @@ class AddAlbumPresenter(val iAddAlbumView: IAddAlbum.IAddAlbumView): IAddAlbum.I
             val photos=HashMap<String, Photo>()
             if(message==null){
                 var album=Album("", title,ts, "",  "",photos)
+                iAddAlbumView.showProgress()
                 DataManager.createAlbum(album, object : DataManager.IAlbumCreateListener{
                     override fun onCreateSuccess(ack: String) {
                         iAddAlbumView.createResponse(ack)
-//                        iAddAlbumView.createSuccess()
+                        iAddAlbumView.hideProgress()
                     }
 
                     override fun onCreateFailure(ack: String) {
@@ -31,10 +32,11 @@ class AddAlbumPresenter(val iAddAlbumView: IAddAlbum.IAddAlbumView): IAddAlbum.I
             }
             else{
                 var album=Album("", title,ts, "",message,  photos)
+                iAddAlbumView.showProgress()
                 DataManager.createAlbum(album, object : DataManager.IAlbumCreateListener{
                     override fun onCreateSuccess(ack: String) {
                         iAddAlbumView.createResponse(ack)
-//                        iAddAlbumView.createSuccess()
+                        iAddAlbumView.hideProgress()
                     }
 
                     override fun onCreateFailure(ack: String) {

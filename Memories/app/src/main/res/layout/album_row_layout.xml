@@ -10,10 +10,11 @@
     <android.support.v7.widget.CardView
         android:layout_width="wrap_content"
         android:layout_margin="15dp"
+        app:cardCornerRadius="20dp"
         android:shadowColor="@color/colorPrimaryDark"
         android:layout_height="wrap_content">
 
-    <android.support.constraint.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content">
@@ -25,6 +26,7 @@
             android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/titleTV"
             android:layout_width="wrap_content"
@@ -32,13 +34,13 @@
             android:layout_marginStart="8dp"
             android:text="Title"
             android:gravity="start|bottom"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="@+id/albumIV"
             app:layout_constraintStart_toStartOf="@+id/albumIV" />
 
 
 
-    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
     </android.support.v7.widget.CardView>
 </layout>

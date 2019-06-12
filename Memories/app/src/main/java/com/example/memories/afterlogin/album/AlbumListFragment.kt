@@ -39,6 +39,7 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
         presenter = AlbumListPresenter(this)
         adapter = AlbumAdapter(albums, this)
         presenter.getAlbums()

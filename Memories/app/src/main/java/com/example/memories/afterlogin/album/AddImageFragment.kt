@@ -42,7 +42,6 @@ class AddImageFragment : BaseFragment(), IAddImage.IAddImageView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_add_image, container, false)
         if (arguments != null) {
             albumRef = arguments!!.getString(ALBUM_REF)
@@ -54,16 +53,21 @@ class AddImageFragment : BaseFragment(), IAddImage.IAddImageView {
         super.onActivityCreated(savedInstanceState)
         presenter = AddImagePresenter(this)
         binding.addImage.setOnClickListener {
-            Log.d("test", "button click")
-
             presenter.uploadImage(binding.imageName.text.toString(), bitmap, albumRef)
         }
 
         binding.imageView.setOnClickListener {
-            Log.d("test", "image click")
             imageExtractor()
         }
 
+    }
+
+    override fun showProgress() {
+        binding.addImageProgress.visibility = View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        binding.addImageProgress.visibility = View.GONE
     }
 
     override fun uploadSuccess() {

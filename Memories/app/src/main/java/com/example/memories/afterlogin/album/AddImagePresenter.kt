@@ -8,6 +8,7 @@ import com.example.memories.repository.Photo
 class AddImagePresenter(val iAddImageView: IAddImage.IAddImageView) : IAddImage.IAddImagePresenter {
 
     override fun uploadImage(title: String, bitmap: Bitmap, ref: String) {
+        iAddImageView.showProgress()
         DataManager.uploadImage(title, bitmap, object : DataManager.IImageUploadCallback {
             override fun onSuccess(downloadUrl: String) {
                 val tsLong = System.currentTimeMillis() / 1000
@@ -17,10 +18,12 @@ class AddImagePresenter(val iAddImageView: IAddImage.IAddImageView) : IAddImage.
                     override fun onSuccess(downloadUrl: String) {
                         Log.d("upload", "success")
                         iAddImageView.uploadSuccess()
+                        iAddImageView.hideProgress()
                     }
 
                     override fun onFailure(ack: String) {
                         Log.d("upload", "failure")
+                        iAddImageView.hideProgress()
                     }
                 })
                 DataManager.updateTimeline(photo, object : DataManager.ITimelineUpdateListener{

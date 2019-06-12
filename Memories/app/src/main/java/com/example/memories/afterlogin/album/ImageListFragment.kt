@@ -68,6 +68,14 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
         binding.refreshImages.setRefreshing(false)
     }
 
+    override fun showProgress() {
+        binding.imageListProgress.visibility=View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        binding.imageListProgress.visibility=View.GONE
+    }
+
     override fun onClick(url: String) {
         fragmentTransactionHandler.pushFragment(ImageFragment.getInstance(url))
     }

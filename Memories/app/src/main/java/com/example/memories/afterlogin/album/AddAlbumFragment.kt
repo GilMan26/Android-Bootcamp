@@ -43,6 +43,14 @@ class AddAlbumFragment : BaseFragment(), IAddAlbum.IAddAlbumView {
         }
     }
 
+    override fun showProgress() {
+        binding.addAlbumProgress.visibility=View.VISIBLE
+    }
+
+    override fun hideProgress() {
+        binding.addAlbumProgress.visibility=View.GONE
+    }
+
 
     override fun requestAlbum(album: Album) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

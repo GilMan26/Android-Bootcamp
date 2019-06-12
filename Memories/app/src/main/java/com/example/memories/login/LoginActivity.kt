@@ -27,7 +27,6 @@ class LoginActivity : BaseActivity() {
 
     override fun onStart() {
         super.onStart()
-        // Check if user is signed in (non-null) and update UI accordingly.
         val currentUser = auth.currentUser
         if (currentUser != null)
             updateUI(currentUser)
@@ -36,8 +35,10 @@ class LoginActivity : BaseActivity() {
     fun updateUI(user: FirebaseUser?) {
         var intent = Intent(this, MainActivity::class.java)
         intent.putExtra("user", user)
+        intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
         Log.d("user", user.toString())
         startActivity(intent)
+        this.finish()
     }
 
 }
