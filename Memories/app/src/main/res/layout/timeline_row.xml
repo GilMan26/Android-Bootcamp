@@ -34,11 +34,14 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:ems="10"
-            android:inputType="textPersonName"
+            android:shadowColor="#55000000"
+            android:shadowDx="6"
+            android:shadowDy="6"
+            android:shadowRadius="6"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="@+id/timelineIV"
             app:layout_constraintStart_toStartOf="@+id/timelineIV"
-            tools:text="Name" />
+            tools:text="Title" />
 
         <TextView
             android:id="@+id/timeTV"

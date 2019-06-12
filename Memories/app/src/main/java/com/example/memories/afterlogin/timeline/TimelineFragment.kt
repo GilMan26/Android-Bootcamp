@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.memories.BaseFragment
 import com.example.memories.R
+import com.example.memories.afterlogin.ListEmptyFragment
 import com.example.memories.afterlogin.album.ImageFragment
 import com.example.memories.databinding.FragmentTimelineBinding
 import com.example.memories.repository.Photo
@@ -64,6 +65,8 @@ class TimelineFragment : BaseFragment(), ITimelineContract.ITimelineView, TImeli
     }
 
     override fun populateList(list: ArrayList<Photo>) {
+        if(list.isEmpty())
+            fragmentTransactionHandler.pushFragment(ListEmptyFragment.getInstance())
         adapter.addList(list)
         binding.refreshTimeline.setRefreshing(false)
     }

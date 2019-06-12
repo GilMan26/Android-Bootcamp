@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toolbar
 import com.example.memories.BaseFragment
 import com.example.memories.R
+import com.example.memories.afterlogin.ListEmptyFragment
 import com.example.memories.afterlogin.MainActivity
 import com.example.memories.repository.Photo
 import com.example.memories.databinding.FragmentImageListBinding
@@ -69,6 +70,8 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
     }
 
     override fun populateList(photos: ArrayList<Photo>) {
+        if(photos.isEmpty())
+            fragmentTransactionHandler.pushFragment(ListEmptyFragment.getInstance())
         this.photos = photos
         adapter.addImages(photos)
         binding.refreshImages.setRefreshing(false)
