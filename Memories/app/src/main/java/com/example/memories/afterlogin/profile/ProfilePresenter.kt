@@ -29,6 +29,16 @@ class ProfilePresenter(var iProfileView: IProfileContract.IProfileView): IProfil
         })
     }
 
+    override fun onClick() {
+
+    }
+
+
+    override fun onLongClick() {
+
+    }
+
+
     override fun logout() {
         LoginHelper.signOut(object : LoginHelper.SignOutListener{
             override fun onSignout() {

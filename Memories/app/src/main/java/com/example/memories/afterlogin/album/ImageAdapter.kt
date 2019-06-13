@@ -33,10 +33,13 @@ class ImageAdapter(val images: ArrayList<Photo>, var clickHandler:ImageAdapter.I
         }
     }
 
+    fun updateList(newPhotos:List<Photo>){
+
+    }
+
 
     class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindImage(photo: Photo) {
-//            val imageView = itemView.findViewById(R.id.image) as ImageView
             val context = itemView.image.context
             if (context != null) {
                 Glide.with(context!!)

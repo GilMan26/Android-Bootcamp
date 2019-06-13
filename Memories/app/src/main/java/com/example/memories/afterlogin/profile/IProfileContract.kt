@@ -26,7 +26,9 @@ interface IProfileContract {
 
         fun logout()
 
-//        fun viewImage()
+        fun onClick()
+
+        fun onLongClick()
 
     }
 

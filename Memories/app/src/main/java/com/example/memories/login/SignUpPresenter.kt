@@ -8,6 +8,7 @@ import com.example.memories.repository.DataManager
 import com.example.memories.repository.LoginHelper
 import com.example.memories.repository.User
 import com.google.firebase.auth.FirebaseUser
+import kotlin.math.sign
 
 class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupContract.ISignupPresenter {
 
@@ -18,6 +19,8 @@ class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupCont
             signUpView.showValidationError("Invalid Username")
         } else if (TextUtils.isEmpty(password)) {
             signUpView.showValidationError("Password cannot be empty")
+        } else if(bitmap==null){
+            signUpView.showValidationError("Profile Image Required")
         } else if (password.length < 6) {
             signUpView.showValidationError("Password length too short")
         } else {
@@ -43,6 +46,7 @@ class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupCont
 
                                     override fun onSaveSuccess() {
                                         Log.d("save", "success")
+                                        signUpView.loginSuccessful(firebaseuser)
                                     }
 
                                     override fun onSaveFailure() {
@@ -50,21 +54,22 @@ class SignUpPresenter(val signUpView: ISignupContract.ISignUpView) : ISignupCont
                                     }
 
                                 })
-                                DataManager.getUser(object : DataManager.IUserDataCallback {
-                                    override fun onSuccess(user: User) {
-                                        Log.d("userdata", "success")
-                                    }
-
-                                    override fun onFailure(ack: String) {
-                                        Log.d("userdata", "no success")
-                                    }
-                                })
+//                                DataManager.getUser(object : DataManager.IUserDataCallback {
+//                                    override fun onSuccess(user: User) {
+//                                        Log.d("userdata", "success")
+//                                    }
+//
+//                                    override fun onFailure(ack: String) {
+//                                        Log.d("userdata", "no success")
+//                                    }
+//                                })
 
                             }
                         }
 
                         override fun onSignupFaliure() {
                             Log.d("signup", "failure")
+                            signUpView.showSignupError("Failed to Sign Up")
                         }
                     })
                 }

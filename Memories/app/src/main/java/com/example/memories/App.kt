@@ -21,7 +21,7 @@ class App : Application() {
     override fun onCreate() {
         super.onCreate()
         auth = FirebaseAuth.getInstance()
-//        auth.signOut()
+        auth.signOut()
         if(auth.currentUser!=null)
             LoginHelper.firebaseUser= auth.currentUser!!
 

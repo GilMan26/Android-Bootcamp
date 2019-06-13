@@ -80,7 +80,6 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
         intent.putExtra("user", user)
         Log.d("user",user.toString())
         startActivity(intent)
-        Toast.makeText(context, "Login Successful", Toast.LENGTH_LONG).show()
     }
 
     override fun googleLogin() {

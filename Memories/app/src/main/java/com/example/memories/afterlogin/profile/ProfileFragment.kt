@@ -1,5 +1,6 @@
 package com.example.memories.afterlogin.profile
 
+import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.util.Log
@@ -11,6 +12,7 @@ import com.example.memories.BaseFragment
 import com.example.memories.R
 import com.example.memories.afterlogin.album.ImageFragment
 import com.example.memories.databinding.FragmentProfileBinding
+import com.example.memories.login.LoginActivity
 import com.example.memories.repository.LoginHelper
 
 class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
@@ -43,11 +45,15 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
         binding.logoutbtn.setOnClickListener{
             presenter.logout()
         }
-    }
+        binding.profileImage.setOnClickListener{
+            presenter.onClick()
+        }
 
-//    override fun showImage() {
-//        presenter.
-//    }
+        binding.profileImage.setOnLongClickListener{
+            presenter.changeProfile()
+            return@setOnLongClickListener true
+        }
+    }
 
     override fun requestChangeProfile() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -71,10 +77,9 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
     }
 
     override fun logout() {
-        LoginHelper.signOut(object : LoginHelper.SignOutListener{
-            override fun onSignout() {
-                Log.d("profile", "signed out")
-            }
-        })
+        var intent=Intent(context, LoginActivity::class.java)
+        intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK
+        intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
     }
 }

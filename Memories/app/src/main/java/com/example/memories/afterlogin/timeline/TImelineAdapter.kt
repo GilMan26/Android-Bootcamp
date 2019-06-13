@@ -54,7 +54,7 @@ class TImelineAdapter(var list: List<Photo>, val clickHandler: TimelineClickHand
         fun getData(time:String):String{
             val epoch = java.lang.Long.parseLong(time)
             val expiry = Date(epoch * 1000)
-            return expiry.toString()
+            return expiry.toString().substring(0, 20)
         }
     }
 

@@ -41,14 +41,17 @@ class LoginPresenter(val loginView: ILoginContract.ILoginView) : ILoginContract.
 
 
     override fun requestGoogleLogin(googleSignInAccount: GoogleSignInAccount) {
+        loginView.showProgress()
         LoginHelper.firebaseAuthWithGoogle(googleSignInAccount, object : LoginHelper.OnGoogleSignIn {
             override fun onSuccess(firebaseuser: FirebaseUser?) {
                 if (firebaseuser != null)
                     loginView.loginSuccessful(firebaseuser)
+                loginView.hideProgress()
             }
 
             override fun onFailure(ac: String) {
                 Log.d("google", "failed")
+                loginView.hideProgress()
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
         })
