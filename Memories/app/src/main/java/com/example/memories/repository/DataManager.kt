@@ -187,6 +187,8 @@ object DataManager {
     }
 
 
+
+
     interface IAlbumCreateListener {
 
         fun onCreateSuccess(ack: String)

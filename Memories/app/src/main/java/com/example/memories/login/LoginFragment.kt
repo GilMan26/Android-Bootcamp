@@ -94,14 +94,12 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
         if (requestCode == REQUEST_CODE_GOOGLE) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                // Google Sign In was successful, authenticate with Firebase
                 val account = task.getResult(ApiException::class.java)
 
                 if (account != null) {
                     loginPresenter.requestGoogleLogin(account)
                 }
             } catch (e: ApiException) {
-                // Google Sign In failed, update UI appropriately
                 Log.w("signin", "Google sign in failed", e)
             }
         }

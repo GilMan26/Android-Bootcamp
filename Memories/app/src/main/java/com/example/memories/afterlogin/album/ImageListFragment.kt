@@ -3,6 +3,7 @@ package com.example.memories.afterlogin.album
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.widget.GridLayoutManager
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -46,6 +47,10 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.getImages(albumRef)
+    }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -58,7 +63,7 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
         adapter = ImageAdapter(photos, this)
         presenter.getImages(albumRef)
         binding.imageRecycler.adapter=adapter
-        binding.imageRecycler.layoutManager = GridLayoutManager(context, 2)
+        binding.imageRecycler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.addImageFab.setOnClickListener {
             fragmentTransactionHandler.pushFullFragment(AddImageFragment.getInstance(albumRef))
         }

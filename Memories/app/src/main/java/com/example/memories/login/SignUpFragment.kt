@@ -13,8 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.memories.BaseFragment
+import com.example.memories.afterlogin.MainActivity
 import com.example.memories.databinding.FragmentSignUpBinding
 import com.example.memories.repository.User
+import com.google.firebase.auth.FirebaseUser
 
 
 class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
@@ -22,7 +24,7 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
     lateinit var bitmap: Bitmap
     lateinit var binding: FragmentSignUpBinding
     lateinit var signUpPresenter: SignUpPresenter
-    var user= User()
+    var user = User()
 
     companion object {
 
@@ -45,7 +47,7 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
             signUpPresenter.requestSignup(binding.userSignET.text.toString(), binding.passSignET.text.toString(), binding.userNameET.text.toString(), bitmap)
         }
 
-        binding.userFormIV.setOnClickListener{
+        binding.userFormIV.setOnClickListener {
             imageExtractor()
         }
 
@@ -64,8 +66,12 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
         Log.d("signup", error)
     }
 
-    override fun loginSuccessful() {
-        Toast.makeText(context, "Login succesful", Toast.LENGTH_LONG).show()
+    override fun loginSuccessful(firebaseUser: FirebaseUser) {
+        var intent = Intent(context, MainActivity::class.java)
+        intent.putExtra("user", firebaseUser)
+        Log.d("user", user.toString())
+        startActivity(intent)
+        Toast.makeText(context, "SignUp Successful", Toast.LENGTH_LONG).show()
     }
 
     override fun hideProgress() {
@@ -92,7 +98,6 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
             }
         }
     }
-
 
 
 }

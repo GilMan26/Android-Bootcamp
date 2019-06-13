@@ -2,6 +2,7 @@ package com.example.memories.login
 
 import android.graphics.Bitmap
 import com.example.memories.IBaseView
+import com.google.firebase.auth.FirebaseUser
 
 interface ISignupContract {
 
@@ -16,7 +17,7 @@ interface ISignupContract {
 
         fun showSignupError(error: String)
 
-        fun loginSuccessful()
+        fun loginSuccessful(firebaseUser: FirebaseUser)
 
     }
 

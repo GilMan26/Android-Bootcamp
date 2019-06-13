@@ -81,6 +81,7 @@ class AddImageFragment : BaseFragment(), IAddImage.IAddImageView {
 
     override fun uploadSuccess() {
         Log.d("success", "Success")
+        fragmentManager?.popBackStackImmediate()
         fragmentTransactionHandler.pushFullFragment(ImageListFragment.getInstance(albumRef))
     }
 

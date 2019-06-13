@@ -68,6 +68,7 @@ class AddAlbumFragment : BaseFragment(), IAddAlbum.IAddAlbumView {
 
     override fun createResponse(ack: String) {
         Toast.makeText(context, ack, Toast.LENGTH_LONG).show()
+        fragmentManager?.popBackStackImmediate()
         fragmentTransactionHandler.pushFragment(AlbumListFragment.getInstance())
     }
 

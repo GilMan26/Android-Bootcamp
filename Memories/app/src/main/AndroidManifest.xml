@@ -15,11 +15,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".afterlogin.Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -30,14 +25,20 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <activity android:name=".login.LoginActivity">
+        <activity
+            android:name=".login.LoginActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".afterlogin.MainActivity"></activity>
+        <activity
+            android:name=".afterlogin.MainActivity"
+            android:windowSoftInputMode="stateVisible|adjustResize">
+
+        </activity>
     </application>
 
 </manifest>

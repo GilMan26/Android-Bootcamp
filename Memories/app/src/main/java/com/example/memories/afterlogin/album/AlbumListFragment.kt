@@ -38,6 +38,11 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
         return binding.root
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.getAlbums()
+    }
+
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
@@ -46,7 +51,7 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
         adapter = AlbumAdapter(albums, this)
         presenter.getAlbums()
         binding.addFab.setOnClickListener {
-            fragmentTransactionHandler.pushFragment(AddAlbumFragment.getInstance())
+            fragmentTransactionHandler.pushFullFragment(AddAlbumFragment.getInstance())
         }
         binding.refreshAlbum.setOnRefreshListener {
             presenter.getAlbums()
@@ -70,8 +75,8 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
     }
 
     override fun loadAlbums(albums: ArrayList<Album>) {
-        if(albums.isEmpty())
-            fragmentTransactionHandler.pushFragment(ListEmptyFragment.getInstance())
+//        if(albums.isEmpty())
+//            fragmentTransactionHandler.pushFragment(ListEmptyFragment.getInstance())
         var albums = albums
         Log.d("tag", albums.toString())
         adapter.addList(albums)
