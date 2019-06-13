@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.example.memories.App
 import com.example.memories.BaseFragment
+import com.example.memories.R
 import com.example.memories.afterlogin.MainActivity
 import com.example.memories.databinding.FragmentLoginBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -42,6 +43,7 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        binding.loginToolbar.title="Login"
         loginPresenter = LoginPresenter(this)
         binding.btnLogin.setOnClickListener {
             loginPresenter.requestLogin(binding.userLoginET.text.toString(), binding.passLoginET.text.toString())

@@ -3,6 +3,7 @@ package com.example.memories.login
 
 import android.app.Activity
 import android.content.Intent
+import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.example.memories.BaseFragment
+import com.example.memories.R
 import com.example.memories.afterlogin.MainActivity
 import com.example.memories.databinding.FragmentSignUpBinding
 import com.example.memories.repository.User
@@ -36,6 +38,7 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        activity?.actionBar?.setDisplayHomeAsUpEnabled(true)
         binding = FragmentSignUpBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -43,8 +46,13 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         signUpPresenter = SignUpPresenter(this)
+        binding.signUpToolbar.title="Sign Up"
+        binding.signUpToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         binding.btnSignUp.setOnClickListener {
             signUpPresenter.requestSignup(binding.userSignET.text.toString(), binding.passSignET.text.toString(), binding.userNameET.text.toString(), bitmap)
+        }
+        binding.signUpToolbar.setNavigationOnClickListener{
+            fragmentManager?.popBackStackImmediate()
         }
 
         binding.userFormIV.setOnClickListener {
