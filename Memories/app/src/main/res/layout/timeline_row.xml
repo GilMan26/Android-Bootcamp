@@ -38,7 +38,7 @@
             android:shadowDx="6"
             android:shadowDy="6"
             android:shadowRadius="6"
-            android:textColor="#FFFFFF"
+            android:textColor="#FFF"
             app:layout_constraintBottom_toBottomOf="@+id/timelineIV"
             app:layout_constraintStart_toStartOf="@+id/timelineIV"
             tools:text="Title" />
@@ -48,7 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:textColor="#FFFFFF"
+            android:textColor="#FFF"
             app:layout_constraintEnd_toEndOf="@+id/timelineIV"
             app:layout_constraintTop_toTopOf="@+id/timelineIV"
             tools:text="Time" />

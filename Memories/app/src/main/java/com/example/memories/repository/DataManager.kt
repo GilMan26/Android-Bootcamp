@@ -30,6 +30,7 @@ object DataManager {
         }
     }
 
+
     fun addImage(image: Photo, albumRef: String, iAddImageCallBack: IAddImageCallBack) {
         Log.d("test", albumRef)
         val imageRef = database.getReference("/users/" + LoginHelper.firebaseUser.uid + "/albums/" + albumRef + "/photos")
@@ -166,6 +167,7 @@ object DataManager {
 
         })
     }
+
 
     fun getUser(iUserDataCallback: IUserDataCallback) {
         val userRef = database.getReference("users/" + LoginHelper.firebaseUser.uid)

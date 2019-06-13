@@ -36,7 +36,7 @@
         </activity>
         <activity
             android:name=".afterlogin.MainActivity"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+            android:windowSoftInputMode="stateVisible|adjustPan">
 
         </activity>
     </application>
