@@ -82,9 +82,9 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
 
     override fun logout() {
         var intent=Intent(context, LoginActivity::class.java)
-        intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TASK
-        intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
-        intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK
+//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK )
+//        Intent.FLAG_ACTIVITY_CLEAR_TASK
+//        intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         iTerminator.onLogout()
     }

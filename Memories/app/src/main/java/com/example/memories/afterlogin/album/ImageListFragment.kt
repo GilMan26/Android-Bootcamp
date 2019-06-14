@@ -2,11 +2,10 @@ package com.example.memories.afterlogin.album
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import com.example.memories.BaseFragment
 import com.example.memories.R
 import com.example.memories.repository.Photo
@@ -18,6 +17,11 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
     lateinit var albumRef: String
     lateinit var presenter: ImageListPresenter
     var photos = ArrayList<Photo>()
+    lateinit var gridLayoutManager1: GridLayoutManager
+    lateinit var gridLayoutManager2: GridLayoutManager
+    lateinit var gridLayoutManager3: GridLayoutManager
+    lateinit var currGridLayoutManager: GridLayoutManager
+
     lateinit var adapter: ImageAdapter
 
     companion object {
@@ -52,17 +56,57 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
         super.onActivityCreated(savedInstanceState)
         Log.d("data", savedInstanceState.toString())
         binding.imageListToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
-        binding.imageListToolbar.setNavigationOnClickListener{
+        binding.imageListToolbar.setNavigationOnClickListener {
             fragmentManager?.popBackStackImmediate()
         }
+        gridLayoutManager1 = GridLayoutManager(context, 1)
+        gridLayoutManager2 = GridLayoutManager(context, 2)
+        gridLayoutManager3 = GridLayoutManager(context, 2)
+        currGridLayoutManager = gridLayoutManager2
         presenter = ImageListPresenter(this)
         adapter = ImageAdapter(photos, this)
         presenter.getImages(albumRef)
-        binding.imageRecycler.adapter=adapter
-        binding.imageRecycler.layoutManager = StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+        binding.imageRecycler.adapter = adapter
+        binding.imageRecycler.layoutManager = GridLayoutManager(context, 2)
         binding.addImageFab.setOnClickListener {
             fragmentTransactionHandler.pushFullFragment(AddImageFragment.getInstance(albumRef))
         }
+
+        var mScaleGestureDetector = ScaleGestureDetector(context, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
+            override fun onScale(detector: ScaleGestureDetector?): Boolean {
+                if (detector?.getCurrentSpan()!! > 200 && detector.getTimeDelta() > 200) {
+                    if (detector.getCurrentSpan() - detector.getPreviousSpan() < -1) {
+                        if (currGridLayoutManager == gridLayoutManager1) {
+                            currGridLayoutManager = gridLayoutManager2;
+                            binding.imageRecycler.layoutManager = gridLayoutManager2
+                            return true
+                        } else if (currGridLayoutManager == gridLayoutManager2) {
+                            currGridLayoutManager = gridLayoutManager3
+                            binding.imageRecycler.layoutManager = gridLayoutManager3
+                            return true
+                        }
+                    } else if (detector.getCurrentSpan() - detector.getPreviousSpan() > 1) {
+                        if (currGridLayoutManager == gridLayoutManager2) {
+                            currGridLayoutManager = gridLayoutManager2
+                            binding.imageRecycler.layoutManager = gridLayoutManager2
+                            return true
+                        } else if (currGridLayoutManager == gridLayoutManager2) {
+                            currGridLayoutManager = gridLayoutManager1
+                            binding.imageRecycler.layoutManager = gridLayoutManager1
+                            return true
+                        }
+                    }
+                }
+                return false
+            }
+        })
+
+        binding.imageRecycler.setOnTouchListener(object : View.OnTouchListener {
+            override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                mScaleGestureDetector.onTouchEvent(event)
+                return false
+            }
+        })
 
         binding.refreshImages.setOnRefreshListener {
             presenter.getImages(albumRef)
@@ -73,17 +117,17 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
     override fun populateList(photos: ArrayList<Photo>) {
         this.photos = photos
         adapter.addImages(photos)
-        if(adapter.itemCount==0)
-            binding.imageListTV.visibility=View.VISIBLE
+        if (adapter.itemCount == 0)
+            binding.imageListTV.visibility = View.VISIBLE
         binding.refreshImages.setRefreshing(false)
     }
 
     override fun showProgress() {
-        binding.imageListProgress.visibility=View.VISIBLE
+        binding.imageListProgress.visibility = View.VISIBLE
     }
 
     override fun hideProgress() {
-        binding.imageListProgress.visibility=View.GONE
+        binding.imageListProgress.visibility = View.GONE
     }
 
     override fun onClick(url: String) {

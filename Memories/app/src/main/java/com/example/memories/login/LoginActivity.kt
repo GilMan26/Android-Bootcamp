@@ -1,6 +1,7 @@
 package com.example.memories.login
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
@@ -14,6 +15,8 @@ import android.support.design.widget.Snackbar
 import com.example.memories.NetworkReciever
 import android.content.pm.PackageManager
 import android.support.v4.app.ActivityCompat
+import android.util.AttributeSet
+import android.view.View
 
 
 class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
@@ -23,14 +26,21 @@ class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        Log.d("activity" , "login create")
         binding = DataBindingUtil.setContentView(this, com.example.memories.R.layout.activity_login)
         val loginFragment = LoginFragment()
         supportFragmentManager.beginTransaction().add(com.example.memories.R.id.loginFrame, loginFragment).commitAllowingStateLoss()
     }
 
 
+    override fun onCreateView(name: String?, context: Context?, attrs: AttributeSet?): View? {
+        return super.onCreateView(name, context, attrs)
+        Log.d("activity" , "login create view")
+    }
+
     override fun onStart() {
         super.onStart()
+        Log.d("acitivty", "login start")
         val currentUser = auth.currentUser
         if (currentUser != null)
             updateUI(currentUser)
@@ -39,13 +49,40 @@ class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
 //        }
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("activity", "login on resume")
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("activity", "login pause")
+
+    }
+
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("activity", "login on stop")
+
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("activity", "login destroy")
+
+    }
+
     fun updateUI(user: FirebaseUser?) {
         var intent = Intent(this, MainActivity::class.java)
         intent.putExtra("user", user)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TASK)
         Log.d("user", user.toString())
         startActivity(intent)
         this.finish()
+        return
     }
 
     override fun onNetworkStateChange(state: Boolean) {
