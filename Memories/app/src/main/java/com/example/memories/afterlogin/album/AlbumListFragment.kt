@@ -8,8 +8,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.memories.BaseFragment
-import com.example.memories.R
-import com.example.memories.afterlogin.ListEmptyFragment
 import com.example.memories.repository.Album
 import com.example.memories.databinding.FragmentAlbumsBinding
 
@@ -23,12 +21,9 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
 
     companion object {
 
-        private var BUNDLE_ARG = "key"
 
         fun getInstance(): AlbumListFragment {
             var fragment = AlbumListFragment()
-//            var bundle=Bundle()
-//            bundle.putString(BUNDLE_ARG, data)
             return fragment
         }
     }
@@ -75,11 +70,11 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
     }
 
     override fun loadAlbums(albums: ArrayList<Album>) {
-//        if(albums.isEmpty())
-//            fragmentTransactionHandler.pushFragment(ListEmptyFragment.getInstance())
         var albums = albums
         Log.d("tag", albums.toString())
         adapter.addList(albums)
+        if(adapter.itemCount==0)
+            binding.albumTV.visibility=View.VISIBLE
         binding.refreshAlbum.setRefreshing(false)
     }
 

@@ -2,17 +2,13 @@ package com.example.memories.afterlogin.album
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toolbar
 import com.example.memories.BaseFragment
 import com.example.memories.R
-import com.example.memories.afterlogin.ListEmptyFragment
-import com.example.memories.afterlogin.MainActivity
 import com.example.memories.repository.Photo
 import com.example.memories.databinding.FragmentImageListBinding
 
@@ -75,10 +71,10 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
     }
 
     override fun populateList(photos: ArrayList<Photo>) {
-        if(photos.isEmpty())
-            fragmentTransactionHandler.pushFragment(ListEmptyFragment.getInstance())
         this.photos = photos
         adapter.addImages(photos)
+        if(adapter.itemCount==0)
+            binding.imageListTV.visibility=View.VISIBLE
         binding.refreshImages.setRefreshing(false)
     }
 

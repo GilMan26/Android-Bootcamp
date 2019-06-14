@@ -1,25 +1,19 @@
 package com.example.memories.login
 
-import android.Manifest
 import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.util.Log
 import com.example.memories.BaseActivity
 import com.example.memories.afterlogin.MainActivity
 import com.example.memories.repository.LoginHelper.auth
 import com.example.memories.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseUser
-import android.Manifest.permission
-import android.Manifest.permission.READ_CONTACTS
-import butterknife.internal.Utils.arrayOf
-import android.R
+import android.support.design.widget.Snackbar
+import com.example.memories.NetworkReciever
 
 
-
-
-class LoginActivity : BaseActivity() {
+class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
 
     lateinit var binding: ActivityLoginBinding
 
@@ -46,6 +40,13 @@ class LoginActivity : BaseActivity() {
         Log.d("user", user.toString())
         startActivity(intent)
         this.finish()
+    }
+
+    override fun onNetworkStateChange(state: Boolean) {
+        if (state)
+            Snackbar.make(binding.loginFrame, "Back Online", Snackbar.LENGTH_LONG)
+        else
+            Snackbar.make(binding.loginFrame, "Network Disconnected", Snackbar.LENGTH_LONG)
     }
 
 }

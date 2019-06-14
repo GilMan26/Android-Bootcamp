@@ -1,6 +1,8 @@
 package com.example.memories
 
 import android.app.Application
+import android.content.Intent
+import android.content.IntentFilter
 import com.example.memories.repository.DataManager
 import com.example.memories.repository.LoginHelper
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -17,14 +19,16 @@ class App : Application() {
     lateinit var googleSignInClient: GoogleSignInClient
     lateinit var database: FirebaseDatabase
     lateinit var storage: FirebaseStorage
+    lateinit var reciever: NetworkReciever
 
     override fun onCreate() {
         super.onCreate()
         auth = FirebaseAuth.getInstance()
 //        auth.signOut()
+        reciever=NetworkReciever()
         if(auth.currentUser!=null)
             LoginHelper.firebaseUser= auth.currentUser!!
-
+        registerReceiver(reciever, IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"))
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
@@ -40,6 +44,5 @@ class App : Application() {
         DataManager.storage = storage
 
     }
-
 
 }

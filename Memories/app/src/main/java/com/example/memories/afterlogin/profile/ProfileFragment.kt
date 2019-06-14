@@ -18,7 +18,7 @@ import com.example.memories.repository.LoginHelper
 class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
     lateinit var binding:FragmentProfileBinding
     lateinit var presenter: ProfilePresenter
-
+    lateinit var iTerminator: ITerminator
     companion object{
         private var BUNDLE_ARG="key"
 
@@ -55,6 +55,10 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
         }
     }
 
+    fun setInstance(iTerminator: ITerminator){
+        this.iTerminator= iTerminator
+    }
+
     override fun requestChangeProfile() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -82,5 +86,12 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
         intent.flags=Intent.FLAG_ACTIVITY_CLEAR_TOP
         intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
+        iTerminator.onLogout()
+    }
+
+
+    interface ITerminator{
+
+        fun onLogout()
     }
 }

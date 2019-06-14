@@ -21,4 +21,5 @@ open class BaseActivity : AppCompatActivity(), FragmentTransactionHandler {
         supportFragmentManager.beginTransaction().setTransition(4099).replace(R.id.fullFrame, fragment).addToBackStack(fragment.toString()).commitAllowingStateLoss()
     }
 
+
 }
