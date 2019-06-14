@@ -24,13 +24,6 @@
             android:layout_height="match_parent"
             android:layout_below="@id/imageListToolbar">
 
-            <ProgressBar
-                android:id="@+id/imageListProgress"
-                style="?android:attr/progressBarStyle"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:foregroundGravity="center"
-                android:visibility="gone" />
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/parent_images"
@@ -81,6 +74,15 @@
                 android:text="@string/no_images_to_show"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
+
+            <ProgressBar
+                android:id="@+id/imageListProgress"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:foregroundGravity="center"
+                android:visibility="gone" />
+
 
         </FrameLayout>
     </RelativeLayout>

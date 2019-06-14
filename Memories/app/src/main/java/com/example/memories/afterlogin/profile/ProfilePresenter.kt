@@ -8,7 +8,7 @@ import com.example.memories.repository.User
 class ProfilePresenter(var iProfileView: IProfileContract.IProfileView): IProfileContract.IProfilePresenter{
 
     override fun changeProfile() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
 

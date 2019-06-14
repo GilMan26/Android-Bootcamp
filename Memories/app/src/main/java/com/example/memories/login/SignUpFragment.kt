@@ -1,13 +1,18 @@
 package com.example.memories.login
 
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.databinding.DataBindingUtil
 import android.graphics.Bitmap
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.support.v4.content.ContextCompat
+import android.support.v4.content.ContextCompat.checkSelfPermission
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -106,6 +111,8 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
             }
         }
     }
+
+
 
 
 }

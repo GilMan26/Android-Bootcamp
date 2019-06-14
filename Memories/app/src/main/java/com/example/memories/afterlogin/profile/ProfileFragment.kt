@@ -93,5 +93,6 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
     interface ITerminator{
 
         fun onLogout()
+
     }
 }

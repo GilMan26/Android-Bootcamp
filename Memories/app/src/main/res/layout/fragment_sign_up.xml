@@ -27,13 +27,7 @@
             android:orientation="vertical"
             tools:context=".login.SignUpFragment">
 
-            <ProgressBar
-                android:id="@+id/progress_circular"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:foregroundGravity="center"
-                android:visibility="gone" />
+
 
             <android.support.constraint.ConstraintLayout
                 android:id="@+id/loginConstraint"
@@ -112,6 +106,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/passSignET" />
 
             </android.support.constraint.ConstraintLayout>
+
+            <ProgressBar
+                android:id="@+id/progress_circular"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_gravity="center"
+                android:foregroundGravity="center"
+                android:visibility="gone" />
 
         </FrameLayout>
     </RelativeLayout>
