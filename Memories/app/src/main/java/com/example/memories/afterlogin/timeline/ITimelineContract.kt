@@ -6,17 +6,18 @@ import com.example.memories.repository.Photo
 interface ITimelineContract {
     interface ITimelineView : IBaseView {
 
-        fun imageSelect()
 
         fun populateList(list : ArrayList<Photo>)
 
+        override fun showProgress()
+
+        override fun hideProgress()
     }
 
     interface ITimelinePresenter{
 
         fun loadImages()
 
-        fun getImage()
 
 
 

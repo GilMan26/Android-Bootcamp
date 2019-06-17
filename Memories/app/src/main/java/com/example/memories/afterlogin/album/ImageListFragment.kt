@@ -74,10 +74,11 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
 
         var mScaleGestureDetector = ScaleGestureDetector(context, object : ScaleGestureDetector.SimpleOnScaleGestureListener() {
             override fun onScale(detector: ScaleGestureDetector?): Boolean {
+                Log.d("scale", detector.toString())
                 if (detector?.getCurrentSpan()!! > 200 && detector.getTimeDelta() > 200) {
                     if (detector.getCurrentSpan() - detector.getPreviousSpan() < -1) {
                         if (currGridLayoutManager == gridLayoutManager1) {
-                            currGridLayoutManager = gridLayoutManager2;
+                            currGridLayoutManager = gridLayoutManager2
                             binding.imageRecycler.layoutManager = gridLayoutManager2
                             return true
                         } else if (currGridLayoutManager == gridLayoutManager2) {
@@ -86,7 +87,7 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
                             return true
                         }
                     } else if (detector.getCurrentSpan() - detector.getPreviousSpan() > 1) {
-                        if (currGridLayoutManager == gridLayoutManager2) {
+                        if (currGridLayoutManager == gridLayoutManager3) {
                             currGridLayoutManager = gridLayoutManager2
                             binding.imageRecycler.layoutManager = gridLayoutManager2
                             return true
@@ -104,8 +105,9 @@ class ImageListFragment : BaseFragment(), IImageList.IImageListView, ImageAdapte
         binding.imageRecycler.setOnTouchListener(object : View.OnTouchListener {
             override fun onTouch(v: View?, event: MotionEvent?): Boolean {
                 mScaleGestureDetector.onTouchEvent(event)
-                return false
+                return true
             }
+
         })
 
         binding.refreshImages.setOnRefreshListener {

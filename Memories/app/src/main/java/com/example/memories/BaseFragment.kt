@@ -19,14 +19,4 @@ open class BaseFragment : Fragment() {
             fragmentTransactionHandler = context as FragmentTransactionHandler
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
-    fun initToolbar(context: Context) {
-        if (context != null)
-            toolbar = Toolbar(context)
-
-
-    }
 }

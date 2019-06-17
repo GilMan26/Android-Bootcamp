@@ -31,6 +31,7 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
     lateinit var bitmap: Bitmap
     lateinit var binding: FragmentSignUpBinding
     lateinit var signUpPresenter: SignUpPresenter
+    lateinit var iOnLoginSuccess: IOnLoginSuccess
     var user = User()
 
     companion object {
@@ -84,11 +85,16 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
         intent.putExtra("user", firebaseUser)
         Log.d("user", user.toString())
         startActivity(intent)
+        iOnLoginSuccess.onLogin()
         Toast.makeText(context, "SignUp Successful", Toast.LENGTH_LONG).show()
     }
 
     override fun hideProgress() {
         binding.progressCircular.visibility = View.GONE
+    }
+
+    fun setInstance(iOnLoginSuccess: SignUpFragment.IOnLoginSuccess){
+        this.iOnLoginSuccess=iOnLoginSuccess
     }
 
     private fun imageExtractor() {
@@ -110,6 +116,12 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
 
             }
         }
+    }
+
+    interface IOnLoginSuccess{
+
+        fun onLogin()
+
     }
 
 

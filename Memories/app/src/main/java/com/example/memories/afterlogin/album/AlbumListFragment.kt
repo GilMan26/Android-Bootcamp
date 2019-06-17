@@ -20,8 +20,6 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
     var albums = ArrayList<Album>()
 
     companion object {
-
-
         fun getInstance(): AlbumListFragment {
             var fragment = AlbumListFragment()
             return fragment

@@ -19,7 +19,7 @@ import android.util.AttributeSet
 import android.view.View
 
 
-class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
+class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener, SignUpFragment.IOnLoginSuccess {
 
     lateinit var binding: ActivityLoginBinding
     val REQUEST_PERMISSIONS_REQUEST_CODE = 991
@@ -29,6 +29,7 @@ class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
         Log.d("activity" , "login create")
         binding = DataBindingUtil.setContentView(this, com.example.memories.R.layout.activity_login)
         val loginFragment = LoginFragment()
+        loginFragment.setInstance(this)
         supportFragmentManager.beginTransaction().add(com.example.memories.R.id.loginFrame, loginFragment).commitAllowingStateLoss()
     }
 
@@ -44,9 +45,6 @@ class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
         val currentUser = auth.currentUser
         if (currentUser != null)
             updateUI(currentUser)
-//        if(!checkPermissions()){
-//            requestPermissions()
-//        }
     }
 
 
@@ -65,6 +63,7 @@ class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
 
     override fun onStop() {
         super.onStop()
+//        finish()
         Log.d("activity", "login on stop")
 
     }
@@ -75,13 +74,17 @@ class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
 
     }
 
+
     fun updateUI(user: FirebaseUser?) {
         var intent = Intent(this, MainActivity::class.java)
         intent.putExtra("user", user)
-//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK and Intent.FLAG_ACTIVITY_CLEAR_TASK)
         Log.d("user", user.toString())
         startActivity(intent)
-        this.finish()
+        return this.finish()
+    }
+
+    override fun onLogin() {
+        finish()
         return
     }
 
@@ -119,6 +122,10 @@ class LoginActivity : BaseActivity(), NetworkReciever.INetworkStateListener {
                 // Permission denied.
             }
         }
+    }
+
+    interface IOnLogin{
+        fun onLogin()
     }
 
 }

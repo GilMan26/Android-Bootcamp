@@ -21,6 +21,7 @@ import com.google.firebase.auth.FirebaseUser
 class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
 
     val REQUEST_CODE_GOOGLE=101
+    lateinit var iLoginSuccess: SignUpFragment.IOnLoginSuccess
 
 
     companion object{
@@ -39,6 +40,10 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
                               savedInstanceState: Bundle?): View? {
         binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
+    }
+
+    fun setInstance(iOnLoginSuccess: SignUpFragment.IOnLoginSuccess){
+        this.iLoginSuccess=iOnLoginSuccess
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -82,6 +87,7 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
         intent.putExtra("user", user)
         Log.d("user",user.toString())
         startActivity(intent)
+        iLoginSuccess.onLogin()
     }
 
     override fun googleLogin() {

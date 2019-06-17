@@ -44,15 +44,9 @@ class TimelineFragment : BaseFragment(), ITimelineContract.ITimelineView, TImeli
         binding.timelineRV.adapter = adapter
         binding.timelineRV.layoutManager = LinearLayoutManager(context)
         binding.refreshTimeline.setOnRefreshListener {
-
             presenter.loadImages()
-
         }
 
-    }
-
-    override fun imageSelect() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun hideProgress() {
