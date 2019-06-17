@@ -41,6 +41,8 @@ class AlbumAdapter(var albums: ArrayList<Album>, var clickHandler: IAlbumClickHa
     class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bindItems(album: Album) {
             itemView.titleTV.text=album.title
+            Log.d("album", album.photos.size.toString())
+            itemView.albumSizeTV.text="("+album.photos.size.toString()+")"
             val context = itemView.albumIV.context
             if (context != null) {
                 Glide.with(context!!)

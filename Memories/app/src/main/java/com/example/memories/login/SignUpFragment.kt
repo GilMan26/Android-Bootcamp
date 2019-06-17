@@ -31,7 +31,6 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
     lateinit var bitmap: Bitmap
     lateinit var binding: FragmentSignUpBinding
     lateinit var signUpPresenter: SignUpPresenter
-    lateinit var iOnLoginSuccess: IOnLoginSuccess
     var user = User()
 
     companion object {
@@ -52,12 +51,12 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         signUpPresenter = SignUpPresenter(this)
-        binding.signUpToolbar.title="Sign Up"
+        binding.signUpToolbar.title = "Sign Up"
         binding.signUpToolbar.setNavigationIcon(R.drawable.ic_arrow_back_white_24dp)
         binding.btnSignUp.setOnClickListener {
             signUpPresenter.requestSignup(binding.userSignET.text.toString(), binding.passSignET.text.toString(), binding.userNameET.text.toString(), bitmap)
         }
-        binding.signUpToolbar.setNavigationOnClickListener{
+        binding.signUpToolbar.setNavigationOnClickListener {
             fragmentManager?.popBackStackImmediate()
         }
 
@@ -85,16 +84,11 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
         intent.putExtra("user", firebaseUser)
         Log.d("user", user.toString())
         startActivity(intent)
-        iOnLoginSuccess.onLogin()
         Toast.makeText(context, "SignUp Successful", Toast.LENGTH_LONG).show()
     }
 
     override fun hideProgress() {
         binding.progressCircular.visibility = View.GONE
-    }
-
-    fun setInstance(iOnLoginSuccess: SignUpFragment.IOnLoginSuccess){
-        this.iOnLoginSuccess=iOnLoginSuccess
     }
 
     private fun imageExtractor() {
@@ -118,13 +112,11 @@ class SignUpFragment : BaseFragment(), ISignupContract.ISignUpView {
         }
     }
 
-    interface IOnLoginSuccess{
+    interface IOnLoginSuccess {
 
         fun onLogin()
 
     }
-
-
 
 
 }

@@ -1,11 +1,15 @@
 package com.example.memories.afterlogin.profile
 
+import android.app.AlertDialog
 import android.util.Log
 import com.example.memories.repository.DataManager
 import com.example.memories.repository.LoginHelper
 import com.example.memories.repository.User
+import java.nio.channels.AlreadyBoundException
 
 class ProfilePresenter(var iProfileView: IProfileContract.IProfileView): IProfileContract.IProfilePresenter{
+
+    lateinit var profile: String
 
     override fun changeProfile() {
 //        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -17,6 +21,7 @@ class ProfilePresenter(var iProfileView: IProfileContract.IProfileView): IProfil
         DataManager.getUser(object : DataManager.IUserDataCallback{
 
             override fun onSuccess(user: User) {
+                profile=user.url
                 iProfileView.inflateData(user.name, user.url)
                 iProfileView.hideProgress()
             }

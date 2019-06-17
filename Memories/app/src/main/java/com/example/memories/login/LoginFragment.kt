@@ -20,14 +20,14 @@ import com.google.firebase.auth.FirebaseUser
 
 class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
 
-    val REQUEST_CODE_GOOGLE=101
+    val REQUEST_CODE_GOOGLE = 101
     lateinit var iLoginSuccess: SignUpFragment.IOnLoginSuccess
 
 
-    companion object{
+    companion object {
 
-        fun getInstance(): LoginFragment{
-            var fragment=LoginFragment()
+        fun getInstance(): LoginFragment {
+            var fragment = LoginFragment()
             return fragment
         }
 
@@ -42,13 +42,13 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
         return binding.root
     }
 
-    fun setInstance(iOnLoginSuccess: SignUpFragment.IOnLoginSuccess){
-        this.iLoginSuccess=iOnLoginSuccess
+    fun setInstance(iOnLoginSuccess: SignUpFragment.IOnLoginSuccess) {
+        this.iLoginSuccess = iOnLoginSuccess
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.loginToolbar.title="Login"
+        binding.loginToolbar.title = "Login"
         loginPresenter = LoginPresenter(this)
         binding.btnLogin.setOnClickListener {
             loginPresenter.requestLogin(binding.userLoginET.text.toString(), binding.passLoginET.text.toString())
@@ -56,14 +56,10 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
         binding.googleSignButton.setOnClickListener {
             googleLogin()
         }
-        binding.textSignup.setOnClickListener{
+        binding.textSignup.setOnClickListener {
             fragmentTransactionHandler.pushFragment(SignUpFragment.getInstance())
         }
-
-
-
     }
-
 
 
     override fun showProgress() {
@@ -82,17 +78,17 @@ class LoginFragment : BaseFragment(), ILoginContract.ILoginView {
         Toast.makeText(context, string, Toast.LENGTH_LONG).show()
     }
 
-    override fun loginSuccessful(user:FirebaseUser) {
+    override fun loginSuccessful(user: FirebaseUser) {
         var intent = Intent(context, MainActivity::class.java)
         intent.putExtra("user", user)
-        Log.d("user",user.toString())
+        Log.d("user", user.toString())
         startActivity(intent)
         iLoginSuccess.onLogin()
     }
 
     override fun googleLogin() {
-        val app=activity?.application as App
-        val intent=app.googleSignInClient.signInIntent
+        val app = activity?.application as App
+        val intent = app.googleSignInClient.signInIntent
         startActivityForResult(intent, REQUEST_CODE_GOOGLE)
     }
 

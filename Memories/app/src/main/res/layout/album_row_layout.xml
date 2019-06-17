@@ -39,6 +39,8 @@
                     android:foreground="@drawable/bottom_top_fade"
                     android:scaleType="centerCrop" />
 
+
+
             </FrameLayout>
 
             <TextView
@@ -53,6 +55,18 @@
                 android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/frameLayout" />
+
+            <TextView
+                android:id="@+id/albumSizeTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="10dp"
+                android:textColor="#FFF"
+                android:text="Size"
+                android:textSize="10dp"
+                app:layout_constraintEnd_toEndOf="@+id/frameLayout"
+                app:layout_constraintTop_toTopOf="@+id/frameLayout" />
 
 
         </android.support.constraint.ConstraintLayout>

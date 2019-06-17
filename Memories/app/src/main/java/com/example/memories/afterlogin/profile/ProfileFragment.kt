@@ -1,7 +1,10 @@
 package com.example.memories.afterlogin.profile
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.databinding.DataBindingUtil
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -42,6 +45,7 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
         presenter= ProfilePresenter(this)
         presenter.getDetials()
         binding.profileToolbar.title="Profile"
+//        binding.profileToolbar.setLogo(R.drawable.ic_launcher_foreground)
         binding.logoutbtn.setOnClickListener{
             presenter.logout()
         }
@@ -53,6 +57,10 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
             presenter.changeProfile()
             return@setOnLongClickListener true
         }
+    }
+
+    override fun changeProfile(){
+        Log.d("profile", "change profile")
     }
 
     fun setInstance(iTerminator: ITerminator){
@@ -82,9 +90,6 @@ class ProfileFragment: BaseFragment(), IProfileContract.IProfileView{
 
     override fun logout() {
         var intent=Intent(context, LoginActivity::class.java)
-//        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK )
-//        Intent.FLAG_ACTIVITY_CLEAR_TASK
-//        intent.flags=Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         iTerminator.onLogout()
     }

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.memories.BaseFragment
+import com.example.memories.R
 import com.example.memories.repository.Album
 import com.example.memories.databinding.FragmentAlbumsBinding
 
@@ -46,6 +47,8 @@ class AlbumListFragment : BaseFragment(), IAlbumList.IAlbumListView, AlbumAdapte
         binding.addFab.setOnClickListener {
             fragmentTransactionHandler.pushFullFragment(AddAlbumFragment.getInstance())
         }
+//        binding.albumsToolbar.setLogo(R.drawable.ic_launcher_foreground)
+
         binding.refreshAlbum.setOnRefreshListener {
             presenter.getAlbums()
         }

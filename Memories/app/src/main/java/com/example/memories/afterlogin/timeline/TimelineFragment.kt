@@ -40,6 +40,8 @@ class TimelineFragment : BaseFragment(), ITimelineContract.ITimelineView, TImeli
         presenter = TimelinePresenter(this)
         presenter.loadImages()
         binding.timelineToolbar.title="Timeline"
+//        binding.timelineToolbar.setLogo(R.drawable.ic_launcher_foreground)
+
         adapter = TImelineAdapter(list, this)
         binding.timelineRV.adapter = adapter
         binding.timelineRV.layoutManager = LinearLayoutManager(context)
